@@ -93,4 +93,5 @@ for(int i = 1;i <= p;i++){
 }
 ```
 然后，~~果不其然~~……  
+![img1](https://cdn.luogu.com.cn/upload/image_hosting/66sn5cjp.png)
 最新更新时间：2025年11月29日21时
