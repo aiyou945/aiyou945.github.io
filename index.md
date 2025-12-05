@@ -93,5 +93,6 @@ for(int i = 1;i <= p;i++){
 }
 ```
 然后，~~果不其然~~……  
-![img1](https://cdn.luogu.com.cn/upload/image_hosting/66sn5cjp.png)
-最新更新时间：2025年11月29日21时
+![img1](https://aiyou945.github.io/image/img1.png)  
+想要看如何**解决这个问题**？~~等明天哎呦学会了再告诉你！~~  
+最新更新时间：2025年12月5日21时
