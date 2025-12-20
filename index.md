@@ -6,6 +6,7 @@
 ## 网页索引
 ·【那些让你崩溃的编程题】：见下方文段  
 ·【教你手搓热门游戏-骗子酒馆】：[点击我进入](https://aiyou945.github.io/teach/liar.html)  
+·【DIY一个属于自己的网站！】：[点击我查看教程](https://aiyou945.github.io/teach/html.html)  
 ·【图片仓库】：[点击我进入](https://aiyou945.github.io/image)  
 ## 精彩推荐-那些让你崩溃的编程题
 今天我们讨论的话题是———**那些让你崩溃的编程题**!  
