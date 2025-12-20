@@ -2,7 +2,7 @@
 <html lang="en-US">
   <head>
     <meta charset="UTF-8">
-    <title>游戏教程01-教你手搓骗子酒馆</title>
+    <title>游戏教程01-教你手搓骗子酒馆（上）</title>
     <meta name="generator" content="Jekyll v3.10.0" />
     <meta property="og:title" content="哎呦的个人主页" />
     <meta property="og:locale" content="en_US" />
@@ -24,15 +24,29 @@
 <body>
     <a id="skip-to-content" href="#content">Skip to the content.</a>
     <header class="page-header" role="banner">
-      <h1 class="project-name">游戏教程01：教你手搓骗子酒馆</h1>
+      <h1 class="project-name">游戏教程01：教你手搓骗子酒馆（上）</h1>
       <h2 class="project-tagline"></h2>
     </header>
-    <p>
-      相信无数的编程小白，都幻想过能用C++编程制作出一款“好玩到爆炸”的游戏，推广到同学哪里，<br />
-不得成为整个编程班的“高手”啊……那么这期，就由哎呦手把手教会大家，如何用C++编程制作出 <br />
-无数游戏主播都玩过的一款热门游戏——<font color="red">骗子酒馆！</font> <br />
-<font color="purple">注意：本教程仅供娱乐学习，版权和解释权归原作者所有，请勿用此代码进行商业宣传等活动！</font>
-    </p>
-    <p>更多内容敬请期待！>ge>
+    <main id="content" class="main-content" role="main">
+      <p>
+        相信无数的编程小白，都幻想过能用C++编程制作出一款“好玩到爆炸”的游戏，推广到同学哪里，<br />
+  不得成为整个编程班的“高手”啊……那么这期，就由哎呦手把手教会大家，如何用C++编程制作出 <br />
+  无数游戏主播都玩过的一款热门游戏——<font color="red">骗子酒馆！</font> <br />
+  <font color="purple">注意：本教程仅供娱乐学习，版权和解释权归原作者所有，请勿用此代码进行商业宣传等活动！</font>
+      </p>
+      <h3>1.1 回顾游戏内容</h3>
+      <p>首先，让我们回顾一下“骗子酒馆”这款游戏的内容吧。<br />
+游戏开局有四个人，每人发到五张牌<font color="blue">（牌型有A，Q，K，Joker）</font>，并且游戏开局还会指定一种牌型为系统牌<font color="blue">（Joker除外）</font>。
+每名玩家都有手枪，手枪里有6发子弹，其中有5发空弹，1发实弹，由系统随机分配。
+开始游戏后，将会由随机一名玩家进行出牌。该名玩家可以选择出1~3张牌，可以出与系统牌相符的真牌，也可以出与系统牌不相符的假牌。下家可以选择质疑：<font color="green">如果上家出的是真牌，则质疑失败，质疑的人开一枪；反之质疑成功，上家开一枪（每次开枪，都会重置手牌和系统牌）</font>。<br />
+若下家选择不质疑，则下家出牌，一直延续。如果有玩家出完了牌，则该玩家可以不参与后面的出牌。当场上一名玩家开枪并开到实弹后，该玩家出局，游戏继续；直到场上只剩一名玩家后，该玩家胜利。<br />
+<font color="red">（注意：如果场上只剩下两名玩家，当其中一方出完牌后，另一方必须开牌）</font>。<br />我们需要用编程，一步步模拟还原这些过程。
+      </p>
+      <h3>1.2 所需代码展示</h3>
+      <p>如果想让我们的游戏更加美观智能，需要用到不少的新代码块，首先就来介绍一下<strong>SetConsoleTextAttribute</strong>语句：</p>
+      <p>更多内容敬请期待！</p>
+      <h3>帖子信息</h3>
+      <p>最新更新时间：2025年12月20日21时</p>
+    </main> 
 </body>
 </html>
