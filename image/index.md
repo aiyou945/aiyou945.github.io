@@ -5,3 +5,11 @@
 ![img1](https://aiyou945.github.io/image/img1.png)
 ### l1
 ![l1](https://aiyou945.github.io/image/l1.png)
+### check
+![check](https://aiyou945.github.io/image/check.png)
+### store
+![store](https://aiyou945.github.io/image/store.png)
+### github
+![github](https://aiyou945.github.io/image/github.png)
+### index
+![index](https://aiyou945.github.io/image/index.png)
