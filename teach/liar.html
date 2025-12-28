@@ -44,10 +44,10 @@
       </p>
       <h3>1.2 所需代码展示</h3>
       <p>如果想让我们的游戏更加美观智能，需要用到不少的新代码块，首先就来介绍一下<strong>SetConsoleTextAttribute</strong>语句：</p>
-      <p><div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">SetConsoleTextAttribute</span></code></pre></div>(handle,COLOR);</div></p>
+      <p><div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">SetConsoleTextAttribute</span>(handle,COLOR);</code></pre></div></div></p>
       <p>这个语句可以改变字体的颜色，让我们的游戏变得引人注目，丰富多彩。至于具体的用法，下面会统一介绍。</p>
       <p>另外，我们的游戏不可能只有一个界面，所以我们还需要一个<font color="purple">可以清屏</font>的语句。另外，我们顺便再介绍一个实用的代码块，后面<font color="blue">可能会用到</font>...</p>
-      <p><div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">system</span></code></pre></div>("cls");</div></p>
+      <p><div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">system</span>("cls");</code></pre></div></div></p>
       <p>上面的代码就是用来清屏的语句，同理，在system的括号里填上pause，就可以在屏幕上显示“按下任意键继续”，按下任意键后即可继续执行代码。</p>
       <font color="red">注意：以上介绍的代码块都需要windows.h头文件才可以正常使用！</font>
       <h3>1.3 搭建主界面</h3>
