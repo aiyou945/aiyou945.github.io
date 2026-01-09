@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>P1828 香甜的黄油</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 20px;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, monospace;
+            color: #e74c3c;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>那些让你崩溃的编程题第一期！</h2>
+    <p><a href="https://aiyou945.github.io/problem/">返回帖子列表</a></p>
+    <p>大家好，各位！欢迎来到我们的新系列——<strong>那些让你崩溃的编程题！</strong>这个系列涵盖了哎呦刷一些题目时的过程与心得，不管你有没有学过编程，只要看了这篇帖子，~~那一定是被哎呦的“高超”编程技术震撼到了……~~好了，废话不多说………………那么，我们要谈论的第一道题，就是<strong>洛谷的第P1828题</strong>：香甜的黄油~</p>
+    <h2>P1828 香甜的黄油</h2>
+    <h3>题目描述</h3>
+    <p><a href="https://www.luogu.com.cn/problem/P1828">题目传送门</a>Farmer John 发现了做出全威斯康辛州最甜的黄油的方法：<strong>糖</strong>。把糖放在一片牧场上，他知道 n 只奶牛会过来舔它，这样就能做出~~能卖好价钱的超甜黄油~~。当然，他将付出额外的费用在<strong>奶牛</strong>上。奶牛：喂我花生......Farmer John 很狡猾。像以前的 Pavlov，他知道他可以训练这些奶牛，让它们在听到铃声时去一个特定的牧场。他打算将糖放在那里然后下午发出铃声，以至他可以在晚上挤奶。Farmer John 知道每只奶牛都在各自喜欢的牧场（一个牧场不一定只有一头牛）。给出各头牛在的牧场和牧场间的路线，找出使所有牛到达的路程和最短的牧场（他将把糖放在那）。</p>
+    <h3>输入格式</h3>
+    <p>第一行包含三个整数n,p,c，分别表示奶牛数、牧场数和牧场间道路数。第二行到第n+1行，每行一个整数，其中第i行的整数表示第i−1头奶牛所在的牧场号。第n+2行到第n+c+1行，每行包含三个整数A,B,D，表示牧场号为A和B的两个牧场之间有一条长度为D的双向道路相连。</p>
+    <h3>输出格式</h3>
+    <p>输出一行一个整数，表示奶牛必须行走的最小的距离和。</p>
+    <h3>样例</h3>
+    <p>*输入：*</p>
+    <pre><code>3 4 5
+2
+3
+4
+1 2 1
+1 3 1
+2 3 7
+2 4 3
+3 4 5</code></pre>
+    <p>*输出：*</p>
+    <pre><code>8</code></pre>
+    <h3>说明/提示</h3>
+    <p>对于所有数据，1≤n≤500，2≤p≤800，1≤A,B≤p，1≤c≤1450，1≤D≤255。</p>
+    <h3>样例解释</h3>
+    <pre><code>          P2  
+P1 @--1--@ C1
+         |
+         | 
+       5  7  3
+         |   
+         |     C3
+       C2 @--5--@
+          P3    P4</code></pre>
+    <p>把糖果放在4号牧场最优。</p>
+    <h3>题目分析+做题过程</h3>
+    <p>一开始哎呦还以为这就是一个简单的<strong>最短路</strong>问题，结果后面直接给整~~崩溃~~了……因为哎呦最新学习了SPFA最短路，所以哎呦干脆就<strong>直接套用模板</strong>写了一段代码：</p>
+    <pre><code>void spfa(int u){
+	for(int i = 1;i <= p;i++){ //初始化dis数组
+		dis[i] = inf;
+	}
+	memset(vis,0,sizeof(vis));
+	vis[u] = 1;
+	dis[u] = 0;
+	q.push(u);
+	while(!q.empty()){
+		int f = q.front(); q.pop(); //从队列中取出一项
+		vis[f] = 0;
+		//利用这个元素更新其他元素的最短路
+		for(int i = head[f];i != -1;i = nxt[i]){
+			int v = to[i]; //取出一个元素
+			if(dis[f] + w[i] < dis[v]){ //找到了更短的路径
+				dis[v] = dis[f] + w[i]; //更新最短路
+				if(vis[v] == 0){
+					q.push(v); //入队
+					vis[v] = 1; //标记，防止重复入队
+				}
+			}
+		}
+	}
+}</code></pre>
+    <p>（建边和输入代码肯定是有的，这里为了省空间，只放出来一部分）ps：代码的大致意思在注释里，实在想看完整解释的可以<strong>直接上网搜索</strong>这题的最短路部分并不是很复杂（毕竟也算是<strong>模板题</strong>），唯一让哎呦感到<strong>恶心</strong>的是如何选择放置<strong>糖果</strong>的位置看着身边的同学都~~胸有成竹~~地敲起了代码，哎呦~~几乎快要当场晕厥了~~这时，哎呦<strong>灵光一现</strong>，俗话都说<strong>暴力就是真神</strong>（你确定不是自己编的？），既然题目要求选择一个牧场作为<strong>最短路的终点</strong>，那我直接用一个数组记录<strong>每个牧场</strong>的位置，再~~暴力枚举~~简单搞搞，不就可以check这道题了吗？因为题目要求一共有p只牛，所以哎呦简单写了一个~~自己都不知道什么意思~~的循环……</p>
+    <pre><code>for(int i = 1;i <= p;i++){
+          int cnt = 0;
+          for(int j = 1;j <= n;j++){
+                    spfa(at[j]);
+                    cnt += dis[i];
+	}
+	if(cnt < ret) ret = cnt;
+}</code></pre>
+    <p>然后，~~果不其然~~……</p>
+    <img src="https://aiyou945.github.io/image/img1.png" alt="img1">
+    <p>该如何<strong>解决这个问题</strong>呢？哎呦苦苦思索了两周，终于想到一个办法：<strong>找一个~~大冤种~~同学借鉴答案！</strong>于是，哎呦打开提交记录，随便找了一个同学的答案~~借鉴~~起来：</p>
+    <img src="https://aiyou945.github.io/image/l1.png" alt="l1">
+    <p>广告推销：该同学建造的网站：<a href="https://piaoztsdy.cn">piaoztsdy's blog</a>经过深入研究，哎呦终于得出了答案：这个暴力不仅容易<strong>超时</strong>，在循环的时候~~居然连起点和终点都搞错了啊……~~简单描述一下<strong>代码的“高”效率</strong>：·原本只需要对每一个i跑1次SPFA（以<i>i</i>为起点），但哎呦当时可能~~一时激动~~，亿不小心就把O(pc)的时间复杂度飙到了<strong>O(npc)</strong>（你确定这个复杂度是认真的？）还有，哎呦一开始定义数组的时候写了这么一段代码：</p>
+    <pre><code>int dis[810],vis[2910]; //重点在这一行代码上
+int head[810],to[2920],nxt[2920],w[2920],at[2920]; //用来链表建边的数组</code></pre>
+    <p>已知一共只会有不到<strong>800</strong>个点的情况下，哎呦居然~~把vis数组直接开到了将近3000多……我说这不是我写的代码你信吗？~~终于，耗尽将近3周努力，哎呦写出了第一份修改版代码：</p>
+    <pre><code>for(int i = 1;i <= p;i++){ //枚举放置糖果的位置
+    spfa(i); //以i为起点，计算i到所有牧场的最短路
+    int cnt = 0;
+    for(int j = 1;j <= n;j++){
+        cnt += dis[at[j]]; //记录i到奶牛所在牧场at[j]的距离
+    }
+    if(cnt < ret) ret = cnt; //取最小值成为答案
+}</code></pre>
+    <p>哎呦用颤抖的手按下了“提交代码”按钮，然后……一秒，两秒，三秒……</p>
+    <img src="https://aiyou945.github.io/image/check.png" alt="check">
+    <p>成功了！哎呦已经猜到，很多小盆友正迫不及待地~~要答案……~~哎呦只有一句话：<strong>不可能！绝对不可能！</strong>虽然这道题对很多大佬来说只是一个简单的水题，没什么好说的……但哎呦还是很感谢~~能坚持到现在的你们……~~这篇帖子到这里就结束了，如果想查看更多帖子，可以前往网页索引查看。我们下一个系列<strong>不见不散！</strong></p>
+    <h3>帖子信息</h3>
+    <p>最新版本：2025-12-18-20:00<br>最新更新时间：2025年12月20日21时</p>
+</body>
+</html>
