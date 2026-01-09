@@ -2,7 +2,7 @@
 
 | 原题链接 | 题目名称 | 最新更新时间 | 点我查看 |
 | ----- | ----- | ----- | ----- |
-| [洛谷P1828](https://www.luogu.com.cn/problem/P1828) | 香甜的黄油 | 2025-12-20-21:00 | [P1828 香甜的黄油](https://aiyou945.github.io/problem/P1828.md) |
+| [洛谷P1828](https://www.luogu.com.cn/problem/P1828) | 香甜的黄油 | 2025-12-20-21:00 | [P1828 香甜的黄油](https://aiyou945.github.io/problem/P1828.html) |
 | [TouchFish OJ E1006](https://oj.piaoztsdy.cn/p/E1006) | 阶乘之比 | 2026-1-1-00:00 | 该文章正在编辑中，敬请期待 |
 | [洛谷P1194](https://www.luogu.com.cn/problem/P1194) | 买礼物 | 2026-1-1-00:00 | 该文章正在编辑中，敬请期待 |
 
