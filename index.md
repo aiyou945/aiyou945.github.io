@@ -4,8 +4,9 @@
 如果发现网站内容丢失请不要见怪^__^以下是网页索引，  
 大家可以点击链接观看想看的帖子~  
 ## 网页索引
-·【那些让你崩溃的编程题】：见下方文段（[点我进入索引](https://aiyou945.github.io/problem/)）  
-·【教你手搓热门游戏-骗子酒馆】：[点击我进入](https://aiyou945.github.io/teach/liar.html)  
+·【全新原创游戏！】[新·超坑小游戏 官网](https://aiyou945.github.io/ckg/down.html)  
+·【知识满满】那些让你崩溃的编程题：[点我进入帖子列表](https://aiyou945.github.io/problem/)  
+·【教程系列】教你手搓热门游戏-骗子酒馆：[点击我进入](https://aiyou945.github.io/teach/liar.html)  
 ·【DIY一个属于自己的网站！】：[点击我查看教程](https://aiyou945.github.io/teach/html.html)  
 ·【图片仓库】：[点击我进入](https://aiyou945.github.io/image)  
 ## 精彩推荐-那些让你崩溃的编程题
