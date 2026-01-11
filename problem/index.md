@@ -1,6 +1,5 @@
 ## 【那些让你让你崩溃的编程题】目录
 
-<!-- This table is single-line -->
 | 原题链接 | 题目名称 | 最新更新时间 | 点我查看 |
 | ----- | ----- | ----- | ----- |
 | [洛谷P1828](https://www.luogu.com.cn/problem/P1828) | 香甜的黄油 | 2025-12-20-21:00 | [P1828 香甜的黄油](https://aiyou945.github.io/problem/P1828/) |
