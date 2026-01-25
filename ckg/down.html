@@ -7,7 +7,8 @@
     <meta property="og:title" content="新·超坑小游戏 官网" />
     <meta property="og:locale" content="en_US" />
     <link rel="canonical" href="https://aiyou945.github.io/" />
-    <link rel="icon" href="https://aiyou945.github.io/ckg/favicon.ico" type="image/png">
+    <link rel="icon" href="https://aiyou945.github.io/ckg/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://aiyou945.github.io/ckg/favicon.ico" type="image/x-icon">
     <meta property="og:url" content="https://aiyou945.github.io/" />
     <meta property="og:site_name" content="aiyou945" />
     <meta property="og:type" content="website" />
@@ -43,6 +44,29 @@
       a:hover {
         background: #218838;
       }
+      .version-tabs {
+        margin: 20px 0 10px;
+        display: flex;
+        gap: 10px;
+      }
+      .version-tab {
+        padding: 10px 25px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+        background: #e9ecef;
+        color: #333;
+      }
+      .version-tab.active {
+        background: #157878;
+        color: white;
+      }
+      .version-tab:hover:not(.active) {
+        background: #dee2e6;
+      }
       .download-list {
         max-width: 1200px;
         margin: 20px 0;
@@ -72,6 +96,12 @@
       }
       .download-item:hover {
         background: #f8f9fa;
+      }
+      .download-item.beta {
+        display: none;
+      }
+      .download-item.release {
+        display: flex;
       }
       .version-info {
         display: flex;
@@ -137,39 +167,44 @@
       <video src="https://aiyou945.github.io/ckg/新·超坑小游戏 宣传片.mp4" controls>你的浏览器不支持HTML5视频播放，请升级浏览器。</video>
       
       <h3>4 游戏下载</h3>
+      <div class="version-tabs">
+        <button class="version-tab active" onclick="switchVersion('release')">正式版</button>
+        <button class="version-tab" onclick="switchVersion('beta')">预览版</button>
+      </div>
+
       <div class="download-list">
         <div class="download-header">版本列表</div>
-        <div class="download-item">
+        <div class="download-item beta">
           <div class="version-info">
-            <div class="version-name"><img src="https://aiyou945.github.io/ckg/favicon.ico" width="30" height="30" style="vertical-align: middle;">  v1.0.0-pre1 版本<font color="red">(测试版)</font></img></div>
+            <div class="version-name"><img src="https://aiyou945.github.io/ckg/favicon.ico" width="30" height="30" style="vertical-align: middle;">  v1.0.0-pre1 版本<font color="red">(测试版)</font></div>
             <div class="version-date">更新日期: 2026/1/24 18:42</div>
           </div>
           <a href="https://aiyou945.github.io/ckg/v1.0.0-pre1.zip" class="download-btn" download>下载</a>
         </div>
-        <div class="download-item">
+        <div class="download-item release">
           <div class="version-info">
-            <div class="version-name"><img src="https://aiyou945.github.io/ckg/dev.png" width="30" height="30" style="vertical-align: middle;">  v0.5 版本<font color="green">(稳定版)</font></img></div>
+            <div class="version-name"><img src="https://aiyou945.github.io/ckg/dev.png" width="30" height="30" style="vertical-align: middle;">  v0.5 版本<font color="green">(稳定版)</font></div>
             <div class="version-date">更新日期: 2026/1/18 12:33</div>
           </div>
           <a href="https://aiyou945.github.io/ckg/v0.5.zip" class="download-btn" download>下载</a>
         </div>
-        <div class="download-item">
+        <div class="download-item beta">
           <div class="version-info">
-            <div class="version-name"><img src="https://aiyou945.github.io/ckg/dev.png" width="30" height="30" style="vertical-align: middle;">  v0.5-cs2 版本<font color="red">(内测版)</font></img></div>
+            <div class="version-name"><img src="https://aiyou945.github.io/ckg/dev.png" width="30" height="30" style="vertical-align: middle;">  v0.5-cs2 版本<font color="red">(内测版)</font></div>
             <div class="version-date">更新日期: 2026/1/16 18:18</div>
           </div>
           <a href="https://aiyou945.github.io/ckg/v0.5-cs2.zip" class="download-btn" download>下载</a>
         </div>
-        <div class="download-item">
+        <div class="download-item release">
           <div class="version-info">
-            <div class="version-name"><img src="https://aiyou945.github.io/ckg/dev.png" width="30" height="30" style="vertical-align: middle;">  v0.4 版本</img></div>
+            <div class="version-name"><img src="https://aiyou945.github.io/ckg/dev.png" width="30" height="30" style="vertical-align: middle;">  v0.4 版本</div>
             <div class="version-date">更新日期: 2025/12/4 18:35</div>
           </div>
           <a href="https://aiyou945.github.io/ckg/v0.4.zip" class="download-btn" download>下载</a>
         </div>
-        <div class="download-item">
+        <div class="download-item release">
           <div class="version-info">
-            <div class="version-name"><img src="https://aiyou945.github.io/ckg/dev.png" width="30" height="30" style="vertical-align: middle;">  v0.3 版本</img></div>
+            <div class="version-name"><img src="https://aiyou945.github.io/ckg/dev.png" width="30" height="30" style="vertical-align: middle;">  v0.3 版本</div>
             <div class="version-date">更新日期: 2025/11/15 21:23</div>
           </div>
           <a href="https://aiyou945.github.io/ckg/v0.3.zip" class="download-btn" download>下载</a>
@@ -183,6 +218,25 @@
       <p style="color: #666; font-size: 14px; margin-top: 10px;">
         版权：©哎呦@2026  v1.0.0版本正在制作中，敬请期待！
       </p>
-    </main> 
+    </main>
+
+    <script>
+      function switchVersion(type) {
+        const tabs = document.querySelectorAll('.version-tab');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        event.target.classList.add('active');
+
+        const releaseItems = document.querySelectorAll('.download-item.release');
+        const betaItems = document.querySelectorAll('.download-item.beta');
+        
+        if (type === 'release') {
+          releaseItems.forEach(item => item.style.display = 'flex');
+          betaItems.forEach(item => item.style.display = 'none');
+        } else if (type === 'beta') {
+          releaseItems.forEach(item => item.style.display = 'none');
+          betaItems.forEach(item => item.style.display = 'flex');
+        }
+      }
+    </script>
   </body>
 </html>
