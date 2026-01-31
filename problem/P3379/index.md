@@ -114,7 +114,7 @@ for(int i = 22;i >= 0;i--){
 好了，现在整个题是讲完了，那么，哎呦到底是哪里崩溃了呢？请看图片：  
 **The first try:** 被自己调试用的代码送走  
 ![P3379-3](https://aiyou945.github.io/image/P3379-3.png)  
-**The second try:** 数组越界
+**The second try:** 数组越界  
 ![P3379-4](https://aiyou945.github.io/image/P3379-4.png)  
 **The third try:** 被无向图的双向边单杀  
 **The fourth try:** ......  
