@@ -37,32 +37,35 @@
         left: 50%;
         transform: translate(-50%, -50%);
         background: #fff;
-        padding: 20px;
+        padding: 30px;
         border-radius: 8px;
         box-shadow: 0 0 20px rgba(0,0,0,0.5);
         z-index: 9999;
-        max-width: 80%;
-        max-height: 80%;
+        width: 90%;
+        max-width: 1000px;
+        max-height: 85%;
         overflow: auto;
+        display: none;
       }
       .code-modal pre {
         margin: 0;
         font-family: Consolas, Monaco, monospace;
-        font-size: 14px;
-        line-height: 1.5;
-        white-space: pre-wrap;
-        word-wrap: break-word;
+        font-size: 16px;
+        line-height: 1.6;
+        white-space: pre;
+        overflow-x: auto;
       }
       .close-btn {
         position: absolute;
         top: 10px;
         right: 10px;
-        padding: 5px 10px;
+        padding: 8px 15px;
         background: #ff4444;
         color: #fff;
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        font-size: 14px;
       }
     </style>
   </head>
@@ -172,10 +175,16 @@
         modal.style.display = 'none';
       }
 
-      if (window.location.hash === '#code1') {
-        window.onload = showCodeModal;
+      function checkHash() {
+        if (window.location.hash === '#code1') {
+          showCodeModal();
+        } else {
+          hideCodeModal();
+        }
       }
 
+      window.addEventListener('load', checkHash);
+      window.addEventListener('hashchange', checkHash);
       closeBtn.addEventListener('click', hideCodeModal);
       overlay.addEventListener('click', hideCodeModal);
     </script>
