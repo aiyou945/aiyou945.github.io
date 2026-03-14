@@ -2,7 +2,7 @@
 <html lang="en-US">
   <head>
     <meta charset="UTF-8">
-    <title>游戏教程01-教你手搓骗子酒馆（上）</title>
+    <title>【游戏教程】教你手搓骗子酒馆（上）</title>
     <meta name="generator" content="Jekyll v3.10.0" />
     <meta property="og:title" content="哎呦的个人主页" />
     <meta property="og:locale" content="en_US" />
@@ -54,6 +54,9 @@
         line-height: 1.6;
         white-space: pre;
         overflow-x: auto;
+        background: #f5f5f5;
+        padding: 20px;
+        border-radius: 4px;
       }
       .close-btn {
         position: absolute;
@@ -127,42 +130,42 @@
       const closeBtn = document.getElementById('closeBtn');
       const codeContent = document.getElementById('codeContent');
       const targetCode = `srand(time(0));
-	HANDLE handle;
-	handle = GetStdHandle(STD_OUTPUT_HANDLE); //调用Handle时必写
-  /*这里再深入给大家讲讲Handle设置颜色的用法：
-  1表示蓝色
-  2表示绿色
-  4表示红色
-  其他的所有颜色都可以通过这三种颜色表示出来，比如黄色就可以表示为6或2 | 4
-  而灰色比较特殊，它可以用8表示，用8加上任何一个字符都会变成亮色，
-  比如亮紫色就是1 | 4 | 8
-  这个知识点对我们后面写代码特别有效
-  */
-	while (true) {
-		system("cls");
-		SetConsoleTextAttribute(handle,1); //这里的配色是aiyou喜欢的，你们也可以用自己喜欢的
-		cout << "骗";
-		SetConsoleTextAttribute(handle,2);
-		cout << "子";
-		SetConsoleTextAttribute(handle,4);
-		cout << "8+1";
-		SetConsoleTextAttribute(handle,2 | 4);
-		cout << "馆" << endl;
-		colorclear(handle);
-		cout << "版本号:" << vertion << endl;
-		cout << "编译环境:" << envir << "  编译器:" << compile << endl; //定义几个常量方便修改
-		SetConsoleTextAttribute(handle,8);
-		cout << "请选择游戏模式" << endl;
-		colorclear(handle);
-		cout << "1.双人模式" << endl; //这里的几个模式是我们以后需要攻破的功能
-		cout << "2.三人模式" << endl;
-		cout << "3.迭代日志+游戏规则" << endl;
-		SetConsoleTextAttribute(handle,2 | 4);
-		cout << "注意:按下数字9即可进入控制台" << endl; //我们也可以设置一个控制台，方便玩家修改参数
+    HANDLE handle;
+    handle = GetStdHandle(STD_OUTPUT_HANDLE); //调用Handle时必写
+    /*这里再深入给大家讲讲Handle设置颜色的用法：
+    1表示蓝色
+    2表示绿色
+    4表示红色
+    其他的所有颜色都可以通过这三种颜色表示出来，比如黄色就可以表示为6或2 | 4
+    而灰色比较特殊，它可以用8表示，用8加上任何一个字符都会变成亮色，
+    比如亮紫色就是1 | 4 | 8
+    这个知识点对我们后面写代码特别有效
+    */
+    while (true) {
+        system("cls");
+        SetConsoleTextAttribute(handle,1); //这里的配色是aiyou喜欢的，你们也可以用自己喜欢的
+        cout << "骗";
+        SetConsoleTextAttribute(handle,2);
+        cout << "子";
+        SetConsoleTextAttribute(handle,4);
+        cout << "8+1";
+        SetConsoleTextAttribute(handle,2 | 4);
+        cout << "馆" << endl;
+        colorclear(handle);
+        cout << "版本号:" << vertion << endl;
+        cout << "编译环境:" << envir << "  编译器:" << compile << endl; //定义几个常量方便修改
+        SetConsoleTextAttribute(handle,8);
+        cout << "请选择游戏模式" << endl;
+        colorclear(handle);
+        cout << "1.双人模式" << endl; //这里的几个模式是我们以后需要攻破的功能
+        cout << "2.三人模式" << endl;
+        cout << "3.迭代日志+游戏规则" << endl;
+        SetConsoleTextAttribute(handle,2 | 4);
+        cout << "注意:按下数字9即可进入控制台" << endl; //我们也可以设置一个控制台，方便玩家修改参数
        
-		cout << endl;
-		system("pause");
-	}`;
+        cout << endl;
+        system("pause");
+    }`;
 
       function showCodeModal() {
         codeContent.textContent = targetCode;
@@ -173,6 +176,9 @@
       function hideCodeModal() {
         overlay.style.display = 'none';
         modal.style.display = 'none';
+        if (window.location.hash === '#code1') {
+          history.replaceState(null, document.title, window.location.pathname + window.location.search);
+        }
       }
 
       function checkHash() {
