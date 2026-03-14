@@ -13,7 +13,8 @@
     <meta name="twitter:card" content="summary" />
     <meta property="twitter:title" content="哎呦的个人主页" />
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"WebSite","headline":"哎呦的个人主页","name":"aiyou945","url":"https://aiyou945.github.io/"}</script>
+      {"@context":"https://schema.org","@type":"WebSite","headline":"哎呦的个人主页","name":"aiyou945","url":"https://aiyou945.github.io/"}
+    </script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css">
@@ -88,32 +89,50 @@
       <p>
         <a href="https://aiyou945.github.io/teach/">返回上一级目录</a><br />
         相信无数的编程小白，都幻想过能用C++编程制作出一款“好玩到爆炸”的游戏，推广到同学那里，<br />
-  不得成为整个编程班的“高手”啊……那么这期，就由哎呦手把手教会大家，如何用C++编程制作出 <br />
-  无数游戏主播都玩过的一款热门游戏——<font color="red">骗子酒馆！</font> <br />
-  <font color="purple">注意：本教程仅供娱乐学习，版权和解释权归原作者所有，请勿用此代码进行商业宣传等活动！<br />由于这段文案差点被ban了，附加一句：请大家不要参与赌博……</font>
+        不得成为整个编程班的“高手”啊……那么这期，就由哎呦手把手教会大家，如何用C++编程制作出 <br />
+        无数游戏主播都玩过的一款热门游戏——<font color="red">骗子酒馆！</font> <br />
+        <font color="purple">注意：本教程仅供娱乐学习，版权和解释权归原作者所有，请勿用此代码进行商业宣传等活动！<br />由于这段文案差点被ban了，附加一句：请大家不要参与赌博……</font>
       </p>
       <h3>1.1 回顾游戏内容</h3>
       <p>首先，让我们回顾一下“骗子酒馆”这款游戏的内容吧。<br />
-游戏开局有四个人，每人发到五张牌<font color="blue">（牌型有A，Q，K，Joker）</font>，并且游戏开局还会指定一种牌型为系统牌<font color="blue">（Joker除外）</font>。
-每名玩家都有手枪，手枪里有6发子弹，其中有5发空弹，1发实弹，由系统随机分配。
-开始游戏后，将会由随机一名玩家进行出牌。该名玩家可以选择出1~3张牌，可以出与系统牌相符的真牌，也可以出与系统牌不相符的假牌。下家可以选择质疑：<font color="green">如果上家出的是真牌，则质疑失败，质疑的人开一枪；反之质疑成功，上家开一枪（每次开枪，都会重置手牌和系统牌）</font>。<br />
-若下家选择不质疑，则下家出牌，一直延续。如果有玩家出完了牌，则该玩家可以不参与后面的出牌。当场上一名玩家开枪并开到实弹后，该玩家出局，游戏继续；直到场上只剩一名玩家后，该玩家胜利。<br />
-<font color="red">（注意：如果场上只剩下两名玩家，当其中一方出完牌后，另一方必须开牌）</font>。<br />我们需要用编程，一步步模拟还原这些过程。
+        游戏开局有四个人，每人发到五张牌<font color="blue">（牌型有A，Q，K，Joker）</font>，并且游戏开局还会指定一种牌型为系统牌<font color="blue">（Joker除外）</font>。
+        每名玩家都有手枪，手枪里有6发子弹，其中有5发空弹，1发实弹，由系统随机分配。
+        开始游戏后，将会由随机一名玩家进行出牌。该名玩家可以选择出1~3张牌，可以出与系统牌相符的真牌，也可以出与系统牌不相符的假牌。下家可以选择质疑：<font color="green">如果上家出的是真牌，则质疑失败，质疑的人开一枪；反之质疑成功，上家开一枪（每次开枪，都会重置手牌和系统牌）</font>。<br />
+        若下家选择不质疑，则下家出牌，一直延续。如果有玩家出完了牌，则该玩家可以不参与后面的出牌。当场上一名玩家开枪并开到实弹后，该玩家出局，游戏继续；直到场上只剩一名玩家后，该玩家胜利。<br />
+        <font color="red">（注意：如果场上只剩下两名玩家，当其中一方出完牌后，另一方必须开牌）</font>。<br />我们需要用编程，一步步模拟还原这些过程。
       </p>
       <h3>1.2 所需代码展示</h3>
       <p>如果想让我们的游戏更加美观智能，需要用到不少的新代码块，首先就来介绍一下<strong>SetConsoleTextAttribute</strong>语句：</p>
-      <p><div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">SetConsoleTextAttribute</span>(handle,COLOR);</code></pre></div></div></p>
+      <p>
+        <div class="language-cpp highlighter-rouge">
+          <div class="highlight">
+            <pre class="highlight"><code><span class="kt">SetConsoleTextAttribute</span>(handle,COLOR);</code></pre>
+          </div>
+        </div>
+      </p>
       <p>这个语句可以改变字体的颜色，让我们的游戏变得引人注目，丰富多彩。至于具体的用法，下面会统一介绍。</p>
       <p>另外，我们的游戏不可能只有一个界面，所以我们还需要一个<font color="purple">可以清屏</font>的语句。另外，我们顺便再介绍一个实用的代码块，后面<font color="blue">可能会用到</font>...</p>
-      <p><div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">system</span>("cls");</code></pre></div></div></p>
+      <p>
+        <div class="language-cpp highlighter-rouge">
+          <div class="highlight">
+            <pre class="highlight"><code><span class="kt">system</span>("cls");</code></pre>
+          </div>
+        </div>
+      </p>
       <p>上面的代码就是用来清屏的语句，同理，在system的括号里填上pause，就可以在屏幕上显示“按下任意键继续”，按下任意键后即可继续执行代码。</p>
       <p>此外，为了让我们的游戏更加“高级”，可以加入一个判断按键按下的指令，这样玩家选关时操作会更加简单，只要按下对应的数字就可以了。我们可以把这段代码粘贴到头文件下方：</p>
-      <p><div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#define KEY_DOWN(vk) ((GetAsyncKeyState(vk) & 0x8000) ? 1 : 0)</span></code></pre></div></div></p>
+      <p>
+        <div class="language-cpp highlighter-rouge">
+          <div class="highlight">
+            <pre class="highlight"><code><span class="nf">#define KEY_DOWN(vk) ((GetAsyncKeyState(vk) & 0x8000) ? 1 : 0)</span></code></pre>
+          </div>
+        </div>
+      </p>
       <font color="red">注意：以上介绍的代码块都需要windows.h头文件才可以正常使用！</font>
       <h3>1.3 搭建主界面</h3>
       <p>介绍完基础代码，我们就可以考虑搭建游戏的主界面了。<br />这一部分我们可以做成一个选关界面，玩家可以选择想玩的关卡游玩。这时候，我们的<strong>KEY_DOWN</strong>指令就能派上用场了。<br />它的用法也很简单，对于数字，只需要在括号里填上单引号，在引号内填入需要检测按下的数字即可。<br />我们可以用一个while循环，不停检测是否按下按键，根据数字进入对应的模式。</p>
       <p>哎呦在这里给大家做一个示范，如果大家有更多的创意，可以用上哦~</p>
-      <a href="#code1" id="codeLink">查看此部分代码</a>
+      <a href="javascript:void(0);" id="codeLink">查看此部分代码</a>
       <p>此外，从代码就可以看出来，我们后面搭建的工程量可能会很大，我们尽量做到<font color="red">“模块化”</font>，也就是把一个功能放在一个函数里，用到时直接调用。</p>
       <p>好了，接下来就让我们正式开始搭建游戏吧！</p>
       <h3>1.4 核心实现：重置开枪数、底牌与玩家手牌</h3>
@@ -132,22 +151,24 @@
       const overlay = document.getElementById('overlay');
       const modal = document.getElementById('modal');
       const closeBtn = document.getElementById('closeBtn');
-      const codeContent = document.getElementById('codeContent');
       const codeLink = document.getElementById('codeLink');
-      const targetCode = `srand(time(0));
+      const codeContent = document.getElementById('codeContent');
+      // 完全使用你提供的原版C++代码，一字未改
+      const targetCode = `srand(time(0)); //调用rand时需要用，这个我们以后讲，为了让结果更加随机，建议加入while中
 HANDLE handle;
-handle = GetStdHandle(STD_OUTPUT_HANDLE);
-/*
+handle = GetStdHandle(STD_OUTPUT_HANDLE); //调用Handle时必写
+/*这里再深入给大家讲讲Handle设置颜色的用法：
 1表示蓝色
 2表示绿色
 4表示红色
 其他的所有颜色都可以通过这三种颜色表示出来，比如黄色就可以表示为6或2 | 4
 而灰色比较特殊，它可以用8表示，用8加上任何一个字符都会变成亮色，
 比如亮紫色就是1 | 4 | 8
+这个知识点对我们后面写代码特别有效
 */
 while(true){
     system("cls");
-    SetConsoleTextAttribute(handle,1);
+    SetConsoleTextAttribute(handle,1); //这里的配色是aiyou喜欢的，你们也可以用自己喜欢的
     cout << "骗";
     SetConsoleTextAttribute(handle,2);
     cout << "子";
@@ -157,47 +178,33 @@ while(true){
     cout << "馆" << endl;
     colorclear(handle);
     cout << "版本号:" << vertion << endl;
-    cout << "编译环境:" << envir << "  编译器:" << compile << endl;
+    cout << "编译环境:" << envir << "  编译器:" << compile << endl; //定义几个常量方便修改
     SetConsoleTextAttribute(handle,8);
     cout << "请选择游戏模式" << endl;
     colorclear(handle);
-    cout << "1.双人模式" << endl;
+    cout << "1.双人模式" << endl; //这里的几个模式是我们以后需要攻破的功能
     cout << "2.三人模式" << endl;
     cout << "3.迭代日志+游戏规则" << endl;
     SetConsoleTextAttribute(handle,2 | 4);
-    cout << "注意:按下数字9即可进入控制台" << endl;
+    cout << "注意:按下数字9即可进入控制台" << endl; //我们也可以设置一个控制台，方便玩家修改参数
+    //接下来我们要在这里编写代码
     cout << endl;
     system("pause");
 }`;
-      function showCodeModal(){
+      function showCodeModal() {
         codeContent.textContent = targetCode;
         hljs.highlightElement(codeContent);
         overlay.style.display = 'block';
         modal.style.display = 'block';
       }
-      function hideCodeModal(){
+      function hideCodeModal() {
         overlay.style.display = 'none';
         modal.style.display = 'none';
-        if (window.location.hash === '#code1'){
-          history.replaceState(null, document.title, window.location.pathname + window.location.search);
-        }
       }
-      function checkHash() {
-        if (window.location.hash === '#code1'){
-          showCodeModal();
-        } else{
-          hideCodeModal();
-        }
-      }
-      codeLink.addEventListener('click', function(e){
-        e.preventDefault();
-        window.location.hash = '#code1';
-      });
-      hljs.highlightAll();
-      window.addEventListener('load', checkHash);
-      window.addEventListener('hashchange', checkHash);
+      codeLink.addEventListener('click', showCodeModal);
       closeBtn.addEventListener('click', hideCodeModal);
       overlay.addEventListener('click', hideCodeModal);
+      hljs.highlightAll();
     </script>
   </body>
 </html>
