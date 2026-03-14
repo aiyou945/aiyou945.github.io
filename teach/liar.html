@@ -132,7 +132,7 @@
       <h3>1.3 搭建主界面</h3>
       <p>介绍完基础代码，我们就可以考虑搭建游戏的主界面了。<br />这一部分我们可以做成一个选关界面，玩家可以选择想玩的关卡游玩。这时候，我们的<strong>KEY_DOWN</strong>指令就能派上用场了。<br />它的用法也很简单，对于数字，只需要在括号里填上单引号，在引号内填入需要检测按下的数字即可。<br />我们可以用一个while循环，不停检测是否按下按键，根据数字进入对应的模式。</p>
       <p>哎呦在这里给大家做一个示范，如果大家有更多的创意，可以用上哦~</p>
-      <a href="javascript:void(0);" id="codeLink">查看此部分代码</a>
+      <a href="#code1" id="codeLink">查看此部分代码</a>
       <p>此外，从代码就可以看出来，我们后面搭建的工程量可能会很大，我们尽量做到<font color="red">“模块化”</font>，也就是把一个功能放在一个函数里，用到时直接调用。</p>
       <p>好了，接下来就让我们正式开始搭建游戏吧！</p>
       <h3>1.4 核心实现：重置开枪数、底牌与玩家手牌</h3>
@@ -142,6 +142,7 @@
       <h3>帖子信息</h3>
       <p>最新更新时间：2026年3月14日20时</p>
     </main>
+    <div id="code1"></div>
     <div class="code-overlay" id="overlay"></div>
     <div class="code-modal" id="modal">
       <button class="close-btn" id="closeBtn">关闭</button>
@@ -153,7 +154,6 @@
       const closeBtn = document.getElementById('closeBtn');
       const codeLink = document.getElementById('codeLink');
       const codeContent = document.getElementById('codeContent');
-      // 完全使用你提供的原版C++代码，一字未改
       const targetCode = `srand(time(0)); //调用rand时需要用，这个我们以后讲，为了让结果更加随机，建议加入while中
 HANDLE handle;
 handle = GetStdHandle(STD_OUTPUT_HANDLE); //调用Handle时必写
@@ -200,10 +200,25 @@ while(true){
       function hideCodeModal() {
         overlay.style.display = 'none';
         modal.style.display = 'none';
+        if (window.location.hash === '#code1') {
+          history.replaceState(null, document.title, window.location.pathname + window.location.search);
+        }
       }
-      codeLink.addEventListener('click', showCodeModal);
+      function checkHash() {
+        if (window.location.hash === '#code1') {
+          showCodeModal();
+        } else {
+          hideCodeModal();
+        }
+      }
+      codeLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.hash = '#code1';
+      });
       closeBtn.addEventListener('click', hideCodeModal);
       overlay.addEventListener('click', hideCodeModal);
+      window.addEventListener('hashchange', checkHash);
+      window.addEventListener('load', checkHash);
       hljs.highlightAll();
     </script>
   </body>
