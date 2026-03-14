@@ -8,11 +8,11 @@
 ·【知识满满】那些让你崩溃的编程题：[点我进入帖子列表](https://aiyou945.github.io/problem/)  
 ·【教程系列】各种冷门的C++小妙招：[点击我进入](https://aiyou945.github.io/teach/)  
 ## 商业推销
-·【朋友的网站】
-  -> [<呆头机哥>的个人主页](https://daitoujige.github.io/)
-  -> [Piaoztsdy Blog](https://piaoztsdy.cn)
-  -> [TouchFish OJ](https://oj.piaoztsdy.cn)
-  -> [细数繁星的博客](https://touchfish.xin/blog)
+·【朋友的网站】  
+  -> [<呆头机哥>的个人主页](https://daitoujige.github.io/)  
+  -> [Piaoztsdy Blog](https://piaoztsdy.cn)  
+  -> [TouchFish OJ](https://oj.piaoztsdy.cn)  
+  -> [细数繁星的博客](https://touchfish.xin/blog)  
 ## 精彩推荐-那些让你崩溃的编程题
 今天我们讨论的话题是———**那些让你崩溃的编程题**!  
 那么，我们要谈论的第一道题，就是**洛谷的第P1828题**：香甜的黄油~  
