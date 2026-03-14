@@ -16,7 +16,6 @@
     {"@context":"https://schema.org","@type":"WebSite","headline":"哎呦的个人主页","name":"aiyou945","url":"https://aiyou945.github.io/"}</script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
-    <!-- 引入highlight.js样式和核心库 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css">
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/languages/cpp.min.js"></script>
@@ -114,7 +113,7 @@
       <h3>1.3 搭建主界面</h3>
       <p>介绍完基础代码，我们就可以考虑搭建游戏的主界面了。<br />这一部分我们可以做成一个选关界面，玩家可以选择想玩的关卡游玩。这时候，我们的<strong>KEY_DOWN</strong>指令就能派上用场了。<br />它的用法也很简单，对于数字，只需要在括号里填上单引号，在引号内填入需要检测按下的数字即可。<br />我们可以用一个while循环，不停检测是否按下按键，根据数字进入对应的模式。</p>
       <p>哎呦在这里给大家做一个示范，如果大家有更多的创意，可以用上哦~</p>
-      <a href="https://aiyou945.github.io/teach/liar.html#code1">查看此部分代码</a>
+      <a href="#code1" id="codeLink">查看此部分代码</a>
       <p>此外，从代码就可以看出来，我们后面搭建的工程量可能会很大，我们尽量做到<font color="red">“模块化”</font>，也就是把一个功能放在一个函数里，用到时直接调用。</p>
       <p>好了，接下来就让我们正式开始搭建游戏吧！</p>
       <h3>1.4 核心实现：重置开枪数、底牌与玩家手牌</h3>
@@ -127,7 +126,6 @@
     <div class="code-overlay" id="overlay"></div>
     <div class="code-modal" id="modal">
       <button class="close-btn" id="closeBtn">关闭</button>
-      <!-- 新增code标签包裹，用于高亮 -->
       <pre><code id="codeContent" class="language-cpp"></code></pre>
     </div>
     <script>
@@ -135,21 +133,21 @@
       const modal = document.getElementById('modal');
       const closeBtn = document.getElementById('closeBtn');
       const codeContent = document.getElementById('codeContent');
-      const targetCode = `srand(time(0)); //调用rand时需要用，这个我们以后讲，为了让结果更加随机，建议加入while中
+      const codeLink = document.getElementById('codeLink');
+      const targetCode = `srand(time(0));
 HANDLE handle;
-handle = GetStdHandle(STD_OUTPUT_HANDLE); //调用Handle时必写
-/*这里再深入给大家讲讲Handle设置颜色的用法：
+handle = GetStdHandle(STD_OUTPUT_HANDLE);
+/*
 1表示蓝色
 2表示绿色
 4表示红色
 其他的所有颜色都可以通过这三种颜色表示出来，比如黄色就可以表示为6或2 | 4
 而灰色比较特殊，它可以用8表示，用8加上任何一个字符都会变成亮色，
 比如亮紫色就是1 | 4 | 8
-这个知识点对我们后面写代码特别有效
 */
 while(true){
     system("cls");
-    SetConsoleTextAttribute(handle,1); //这里的配色是aiyou喜欢的，你们也可以用自己喜欢的
+    SetConsoleTextAttribute(handle,1);
     cout << "骗";
     SetConsoleTextAttribute(handle,2);
     cout << "子";
@@ -159,20 +157,18 @@ while(true){
     cout << "馆" << endl;
     colorclear(handle);
     cout << "版本号:" << vertion << endl;
-    cout << "编译环境:" << envir << "  编译器:" << compile << endl; //定义几个常量方便修改
+    cout << "编译环境:" << envir << "  编译器:" << compile << endl;
     SetConsoleTextAttribute(handle,8);
     cout << "请选择游戏模式" << endl;
     colorclear(handle);
-    cout << "1.双人模式" << endl; //这里的几个模式是我们以后需要攻破的功能
+    cout << "1.双人模式" << endl;
     cout << "2.三人模式" << endl;
     cout << "3.迭代日志+游戏规则" << endl;
     SetConsoleTextAttribute(handle,2 | 4);
-    cout << "注意:按下数字9即可进入控制台" << endl; //我们也可以设置一个控制台，方便玩家修改参数
-    //接下来我们要在这里编写代码
+    cout << "注意:按下数字9即可进入控制台" << endl;
     cout << endl;
     system("pause");
 }`;
-
       function showCodeModal(){
         codeContent.textContent = targetCode;
         hljs.highlightElement(codeContent);
@@ -193,6 +189,10 @@ while(true){
           hideCodeModal();
         }
       }
+      codeLink.addEventListener('click', function(e){
+        e.preventDefault();
+        window.location.hash = '#code1';
+      });
       hljs.highlightAll();
       window.addEventListener('load', checkHash);
       window.addEventListener('hashchange', checkHash);
