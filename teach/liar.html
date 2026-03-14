@@ -16,6 +16,10 @@
     {"@context":"https://schema.org","@type":"WebSite","headline":"哎呦的个人主页","name":"aiyou945","url":"https://aiyou945.github.io/"}</script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
+    <!-- 引入highlight.js样式和核心库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/languages/cpp.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -54,9 +58,12 @@
         line-height: 1.6;
         white-space: pre;
         overflow-x: auto;
-        background: #f5f5f5;
+        background: #282c34;
         padding: 20px;
         border-radius: 4px;
+      }
+      .code-modal code {
+        color: #abb2bf;
       }
       .close-btn {
         position: absolute;
@@ -80,11 +87,11 @@
     </header>
     <main id="content" class="main-content" role="main">
       <p>
-        <a href="https://aiyou945.github.io/teach/">返回上一级目录</a>
+        <a href="https://aiyou945.github.io/teach/">返回上一级目录</a><br />
         相信无数的编程小白，都幻想过能用C++编程制作出一款“好玩到爆炸”的游戏，推广到同学那里，<br />
   不得成为整个编程班的“高手”啊……那么这期，就由哎呦手把手教会大家，如何用C++编程制作出 <br />
   无数游戏主播都玩过的一款热门游戏——<font color="red">骗子酒馆！</font> <br />
-  <font color="purple">注意：本教程仅供娱乐学习，版权和解释权归原作者所有，请勿用此代码进行商业宣传等活动！</font>
+  <font color="purple">注意：本教程仅供娱乐学习，版权和解释权归原作者所有，请勿用此代码进行商业宣传等活动！<br />由于这段文案差点被ban了，附加一句：请大家不要参与赌博……</font>
       </p>
       <h3>1.1 回顾游戏内容</h3>
       <p>首先，让我们回顾一下“骗子酒馆”这款游戏的内容吧。<br />
@@ -117,78 +124,76 @@
       <h3>帖子信息</h3>
       <p>最新更新时间：2026年3月14日20时</p>
     </main>
-
     <div class="code-overlay" id="overlay"></div>
     <div class="code-modal" id="modal">
       <button class="close-btn" id="closeBtn">关闭</button>
-      <pre id="codeContent"></pre>
+      <!-- 新增code标签包裹，用于高亮 -->
+      <pre><code id="codeContent" class="language-cpp"></code></pre>
     </div>
-
     <script>
       const overlay = document.getElementById('overlay');
       const modal = document.getElementById('modal');
       const closeBtn = document.getElementById('closeBtn');
       const codeContent = document.getElementById('codeContent');
-      const targetCode = `srand(time(0));
-    HANDLE handle;
-    handle = GetStdHandle(STD_OUTPUT_HANDLE); //调用Handle时必写
-    /*这里再深入给大家讲讲Handle设置颜色的用法：
-    1表示蓝色
-    2表示绿色
-    4表示红色
-    其他的所有颜色都可以通过这三种颜色表示出来，比如黄色就可以表示为6或2 | 4
-    而灰色比较特殊，它可以用8表示，用8加上任何一个字符都会变成亮色，
-    比如亮紫色就是1 | 4 | 8
-    这个知识点对我们后面写代码特别有效
-    */
-    while (true) {
-        system("cls");
-        SetConsoleTextAttribute(handle,1); //这里的配色是aiyou喜欢的，你们也可以用自己喜欢的
-        cout << "骗";
-        SetConsoleTextAttribute(handle,2);
-        cout << "子";
-        SetConsoleTextAttribute(handle,4);
-        cout << "8+1";
-        SetConsoleTextAttribute(handle,2 | 4);
-        cout << "馆" << endl;
-        colorclear(handle);
-        cout << "版本号:" << vertion << endl;
-        cout << "编译环境:" << envir << "  编译器:" << compile << endl; //定义几个常量方便修改
-        SetConsoleTextAttribute(handle,8);
-        cout << "请选择游戏模式" << endl;
-        colorclear(handle);
-        cout << "1.双人模式" << endl; //这里的几个模式是我们以后需要攻破的功能
-        cout << "2.三人模式" << endl;
-        cout << "3.迭代日志+游戏规则" << endl;
-        SetConsoleTextAttribute(handle,2 | 4);
-        cout << "注意:按下数字9即可进入控制台" << endl; //我们也可以设置一个控制台，方便玩家修改参数
-       
-        cout << endl;
-        system("pause");
-    }`;
+      const targetCode = `srand(time(0)); //调用rand时需要用，这个我们以后讲，为了让结果更加随机，建议加入while中
+HANDLE handle;
+handle = GetStdHandle(STD_OUTPUT_HANDLE); //调用Handle时必写
+/*这里再深入给大家讲讲Handle设置颜色的用法：
+1表示蓝色
+2表示绿色
+4表示红色
+其他的所有颜色都可以通过这三种颜色表示出来，比如黄色就可以表示为6或2 | 4
+而灰色比较特殊，它可以用8表示，用8加上任何一个字符都会变成亮色，
+比如亮紫色就是1 | 4 | 8
+这个知识点对我们后面写代码特别有效
+*/
+while(true){
+    system("cls");
+    SetConsoleTextAttribute(handle,1); //这里的配色是aiyou喜欢的，你们也可以用自己喜欢的
+    cout << "骗";
+    SetConsoleTextAttribute(handle,2);
+    cout << "子";
+    SetConsoleTextAttribute(handle,4);
+    cout << "8+1";
+    SetConsoleTextAttribute(handle,2 | 4);
+    cout << "馆" << endl;
+    colorclear(handle);
+    cout << "版本号:" << vertion << endl;
+    cout << "编译环境:" << envir << "  编译器:" << compile << endl; //定义几个常量方便修改
+    SetConsoleTextAttribute(handle,8);
+    cout << "请选择游戏模式" << endl;
+    colorclear(handle);
+    cout << "1.双人模式" << endl; //这里的几个模式是我们以后需要攻破的功能
+    cout << "2.三人模式" << endl;
+    cout << "3.迭代日志+游戏规则" << endl;
+    SetConsoleTextAttribute(handle,2 | 4);
+    cout << "注意:按下数字9即可进入控制台" << endl; //我们也可以设置一个控制台，方便玩家修改参数
+    //接下来我们要在这里编写代码
+    cout << endl;
+    system("pause");
+}`;
 
-      function showCodeModal() {
+      function showCodeModal(){
         codeContent.textContent = targetCode;
+        hljs.highlightElement(codeContent);
         overlay.style.display = 'block';
         modal.style.display = 'block';
       }
-
-      function hideCodeModal() {
+      function hideCodeModal(){
         overlay.style.display = 'none';
         modal.style.display = 'none';
-        if (window.location.hash === '#code1') {
+        if (window.location.hash === '#code1'){
           history.replaceState(null, document.title, window.location.pathname + window.location.search);
         }
       }
-
       function checkHash() {
-        if (window.location.hash === '#code1') {
+        if (window.location.hash === '#code1'){
           showCodeModal();
-        } else {
+        } else{
           hideCodeModal();
         }
       }
-
+      hljs.highlightAll();
       window.addEventListener('load', checkHash);
       window.addEventListener('hashchange', checkHash);
       closeBtn.addEventListener('click', hideCodeModal);
