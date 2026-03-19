@@ -2,7 +2,7 @@
 <html lang="en-US">
   <head>
     <meta charset="UTF-8">
-    <title>【游戏教程】教你手搓骗子酒馆（上）</title>
+    <title>游戏教程01-教你手搓骗子酒馆（上）</title>
     <meta name="generator" content="Jekyll v3.10.0" />
     <meta property="og:title" content="哎呦的个人主页" />
     <meta property="og:locale" content="en_US" />
@@ -13,13 +13,9 @@
     <meta name="twitter:card" content="summary" />
     <meta property="twitter:title" content="哎呦的个人主页" />
     <script type="application/ld+json">
-      {"@context":"https://schema.org","@type":"WebSite","headline":"哎呦的个人主页","name":"aiyou945","url":"https://aiyou945.github.io/"}
-    </script>
+    {"@context":"https://schema.org","@type":"WebSite","headline":"哎呦的个人主页","name":"aiyou945","url":"https://aiyou945.github.io/"}</script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/languages/cpp.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -58,12 +54,9 @@
         line-height: 1.6;
         white-space: pre;
         overflow-x: auto;
-        background: #282c34;
+        background: #f5f5f5;
         padding: 20px;
         border-radius: 4px;
-      }
-      .code-modal code {
-        color: #abb2bf;
       }
       .close-btn {
         position: absolute;
@@ -87,52 +80,34 @@
     </header>
     <main id="content" class="main-content" role="main">
       <p>
-        <a href="https://aiyou945.github.io/teach/">返回上一级目录</a><br />
+        <a href="https://aiyou945.github.io/teach/">返回上一级目录</a>
         相信无数的编程小白，都幻想过能用C++编程制作出一款“好玩到爆炸”的游戏，推广到同学那里，<br />
-        不得成为整个编程班的“高手”啊……那么这期，就由哎呦手把手教会大家，如何用C++编程制作出 <br />
-        无数游戏主播都玩过的一款热门游戏——<font color="red">骗子酒馆！</font> <br />
-        <font color="purple">注意：本教程仅供娱乐学习，版权和解释权归原作者所有，请勿用此代码进行商业宣传等活动！<br />由于这段文案差点被ban了，附加一句：请大家不要参与赌博……</font>
+  不得成为整个编程班的“高手”啊……那么这期，就由哎呦手把手教会大家，如何用C++编程制作出 <br />
+  无数游戏主播都玩过的一款热门游戏——<font color="red">骗子酒馆！</font> <br />
+  <font color="purple">注意：本教程仅供娱乐学习，版权和解释权归原作者所有，请勿用此代码进行商业宣传等活动！</font>
       </p>
       <h3>1.1 回顾游戏内容</h3>
       <p>首先，让我们回顾一下“骗子酒馆”这款游戏的内容吧。<br />
-        游戏开局有四个人，每人发到五张牌<font color="blue">（牌型有A，Q，K，Joker）</font>，并且游戏开局还会指定一种牌型为系统牌<font color="blue">（Joker除外）</font>。
-        每名玩家都有手枪，手枪里有6发子弹，其中有5发空弹，1发实弹，由系统随机分配。
-        开始游戏后，将会由随机一名玩家进行出牌。该名玩家可以选择出1~3张牌，可以出与系统牌相符的真牌，也可以出与系统牌不相符的假牌。下家可以选择质疑：<font color="green">如果上家出的是真牌，则质疑失败，质疑的人开一枪；反之质疑成功，上家开一枪（每次开枪，都会重置手牌和系统牌）</font>。<br />
-        若下家选择不质疑，则下家出牌，一直延续。如果有玩家出完了牌，则该玩家可以不参与后面的出牌。当场上一名玩家开枪并开到实弹后，该玩家出局，游戏继续；直到场上只剩一名玩家后，该玩家胜利。<br />
-        <font color="red">（注意：如果场上只剩下两名玩家，当其中一方出完牌后，另一方必须开牌）</font>。<br />我们需要用编程，一步步模拟还原这些过程。
+游戏开局有四个人，每人发到五张牌<font color="blue">（牌型有A，Q，K，Joker）</font>，并且游戏开局还会指定一种牌型为系统牌<font color="blue">（Joker除外）</font>。
+每名玩家都有手枪，手枪里有6发子弹，其中有5发空弹，1发实弹，由系统随机分配。
+开始游戏后，将会由随机一名玩家进行出牌。该名玩家可以选择出1~3张牌，可以出与系统牌相符的真牌，也可以出与系统牌不相符的假牌。下家可以选择质疑：<font color="green">如果上家出的是真牌，则质疑失败，质疑的人开一枪；反之质疑成功，上家开一枪（每次开枪，都会重置手牌和系统牌）</font>。<br />
+若下家选择不质疑，则下家出牌，一直延续。如果有玩家出完了牌，则该玩家可以不参与后面的出牌。当场上一名玩家开枪并开到实弹后，该玩家出局，游戏继续；直到场上只剩一名玩家后，该玩家胜利。<br />
+<font color="red">（注意：如果场上只剩下两名玩家，当其中一方出完牌后，另一方必须开牌）</font>。<br />我们需要用编程，一步步模拟还原这些过程。
       </p>
       <h3>1.2 所需代码展示</h3>
       <p>如果想让我们的游戏更加美观智能，需要用到不少的新代码块，首先就来介绍一下<strong>SetConsoleTextAttribute</strong>语句：</p>
-      <p>
-        <div class="language-cpp highlighter-rouge">
-          <div class="highlight">
-            <pre class="highlight"><code><span class="kt">SetConsoleTextAttribute</span>(handle,COLOR);</code></pre>
-          </div>
-        </div>
-      </p>
+      <p><div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">SetConsoleTextAttribute</span>(handle,COLOR);</code></pre></div></div></p>
       <p>这个语句可以改变字体的颜色，让我们的游戏变得引人注目，丰富多彩。至于具体的用法，下面会统一介绍。</p>
       <p>另外，我们的游戏不可能只有一个界面，所以我们还需要一个<font color="purple">可以清屏</font>的语句。另外，我们顺便再介绍一个实用的代码块，后面<font color="blue">可能会用到</font>...</p>
-      <p>
-        <div class="language-cpp highlighter-rouge">
-          <div class="highlight">
-            <pre class="highlight"><code><span class="kt">system</span>("cls");</code></pre>
-          </div>
-        </div>
-      </p>
+      <p><div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">system</span>("cls");</code></pre></div></div></p>
       <p>上面的代码就是用来清屏的语句，同理，在system的括号里填上pause，就可以在屏幕上显示“按下任意键继续”，按下任意键后即可继续执行代码。</p>
       <p>此外，为了让我们的游戏更加“高级”，可以加入一个判断按键按下的指令，这样玩家选关时操作会更加简单，只要按下对应的数字就可以了。我们可以把这段代码粘贴到头文件下方：</p>
-      <p>
-        <div class="language-cpp highlighter-rouge">
-          <div class="highlight">
-            <pre class="highlight"><code><span class="nf">#define KEY_DOWN(vk) ((GetAsyncKeyState(vk) & 0x8000) ? 1 : 0)</span></code></pre>
-          </div>
-        </div>
-      </p>
+      <p><div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#define KEY_DOWN(vk) ((GetAsyncKeyState(vk) & 0x8000) ? 1 : 0)</span></code></pre></div></div></p>
       <font color="red">注意：以上介绍的代码块都需要windows.h头文件才可以正常使用！</font>
       <h3>1.3 搭建主界面</h3>
       <p>介绍完基础代码，我们就可以考虑搭建游戏的主界面了。<br />这一部分我们可以做成一个选关界面，玩家可以选择想玩的关卡游玩。这时候，我们的<strong>KEY_DOWN</strong>指令就能派上用场了。<br />它的用法也很简单，对于数字，只需要在括号里填上单引号，在引号内填入需要检测按下的数字即可。<br />我们可以用一个while循环，不停检测是否按下按键，根据数字进入对应的模式。</p>
       <p>哎呦在这里给大家做一个示范，如果大家有更多的创意，可以用上哦~</p>
-      <a href="#code1" id="codeLink">查看此部分代码</a>
+      <a href="https://aiyou945.github.io/teach/liar.html#code1">查看此部分代码</a>
       <p>此外，从代码就可以看出来，我们后面搭建的工程量可能会很大，我们尽量做到<font color="red">“模块化”</font>，也就是把一个功能放在一个函数里，用到时直接调用。</p>
       <p>好了，接下来就让我们正式开始搭建游戏吧！</p>
       <h3>1.4 核心实现：重置开枪数、底牌与玩家手牌</h3>
@@ -140,21 +115,21 @@
       <p>根据游戏内容，玩家初始有5张手牌，每张手牌可能是Ace,Queen,King和Joker中的一种，还可能是恶魔牌（一局游戏中只会出现一张）。<br />对于这种情况，就可以用上rand语句了……</p>
       <p>（敬请期待）</p>
       <h3>帖子信息</h3>
-      <p>最新更新时间：2026年3月14日20时</p>
+      <p>最新更新时间：2026年3月19日20时</p>
     </main>
-    <div id="code1"></div>
+
     <div class="code-overlay" id="overlay"></div>
     <div class="code-modal" id="modal">
       <button class="close-btn" id="closeBtn">关闭</button>
-      <pre><code id="codeContent" class="language-cpp"></code></pre>
+      <pre id="codeContent"></pre>
     </div>
+
     <script>
       const overlay = document.getElementById('overlay');
       const modal = document.getElementById('modal');
       const closeBtn = document.getElementById('closeBtn');
-      const codeLink = document.getElementById('codeLink');
       const codeContent = document.getElementById('codeContent');
-      const targetCode = `srand(time(0)); //调用rand时需要用，这个我们以后讲，为了让结果更加随机，建议加入while中
+      const targetCode = `srand(time(0));
 HANDLE handle;
 handle = GetStdHandle(STD_OUTPUT_HANDLE); //调用Handle时必写
 /*这里再深入给大家讲讲Handle设置颜色的用法：
@@ -187,16 +162,18 @@ while(true){
     cout << "3.迭代日志+游戏规则" << endl;
     SetConsoleTextAttribute(handle,2 | 4);
     cout << "注意:按下数字9即可进入控制台" << endl; //我们也可以设置一个控制台，方便玩家修改参数
-    //接下来我们要在这里编写代码
+    //以后我们可以在这里添加更多的功能，比如选择模式界面等等
+    
     cout << endl;
     system("pause");
 }`;
+
       function showCodeModal() {
         codeContent.textContent = targetCode;
-        hljs.highlightElement(codeContent);
         overlay.style.display = 'block';
         modal.style.display = 'block';
       }
+
       function hideCodeModal() {
         overlay.style.display = 'none';
         modal.style.display = 'none';
@@ -204,6 +181,7 @@ while(true){
           history.replaceState(null, document.title, window.location.pathname + window.location.search);
         }
       }
+
       function checkHash() {
         if (window.location.hash === '#code1') {
           showCodeModal();
@@ -211,15 +189,11 @@ while(true){
           hideCodeModal();
         }
       }
-      codeLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.location.hash = '#code1';
-      });
+
+      window.addEventListener('load', checkHash);
+      window.addEventListener('hashchange', checkHash);
       closeBtn.addEventListener('click', hideCodeModal);
       overlay.addEventListener('click', hideCodeModal);
-      window.addEventListener('hashchange', checkHash);
-      window.addEventListener('load', checkHash);
-      hljs.highlightAll();
     </script>
   </body>
 </html>
