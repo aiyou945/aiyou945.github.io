@@ -9,7 +9,7 @@
 ·【教程系列】各种冷门的C++小妙招：[点击我进入](https://aiyou945.github.io/teach/)  
 ## 商业推销
 【快捷链接】  
-- [<呆头机哥>的个人主页](https://daitoujige.github.io/)  
+- [呆头机哥的个人主页](https://daitoujige.github.io/)  
 - [Piaoztsdy Blog](https://piaoztsdy.cn)  
 - [TouchFish OJ](https://oj.piaoztsdy.cn)
 - [一本通](http://ybt.ssoier.cn:8088/)
