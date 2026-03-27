@@ -20,6 +20,7 @@
       max-width: 1000px;
       margin: 0 auto;
       padding: 30px 20px;
+      display: none;
     }
     .header {
       text-align: center;
@@ -61,9 +62,22 @@
       <p>珍藏六年时光 · 留存美好回忆</p>
     </div>
     <div class="content">
-      <h2>同学签名图片</h2>
-      <p>该网页正在开发中，敬请期待！</p>
+      <h2>测试网站功能</h2>
+      <p>如果你能看到这篇帖子，那么恭喜你，你已经成功来到了六年(2)班的同学回忆录……（点击下方按钮查看详情）</p>
+      <a href="https://aiyou945.github.io/602/test/">查看详情</a>
     </div>
   </div>
+
+  <script>
+    function checkPassword() {
+      let password = prompt("请输入密码以打开回忆录！");
+      if (password === "202002") {
+        document.querySelector(".container").style.display = "block";
+      } else {
+        checkPassword();
+      }
+    }
+    checkPassword();
+  </script>
 </body>
 </html>
