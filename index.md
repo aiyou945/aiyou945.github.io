@@ -10,12 +10,14 @@
 ## 商业推销
 【快捷链接】  
 - [呆头机哥的个人主页](https://daitoujige.github.io/)  
-- [Piaoztsdy Blog](https://piaoztsdy.cn)  
-- [TouchFish OJ](https://oj.piaoztsdy.cn)
+- [Piaoztsdy Blog](https://piaoztsdy.cn/)  
+- [TouchFish OJ](https://oj.piaoztsdy.cn/)
+- [Sleeping Cup](https://scg3.piaoztsdy.cn/)
 - [一本通](http://ybt.ssoier.cn:8088/)
 - [洛谷](https://luogu.com.cn)
 - 可能还会有更新，敬请期待！
-## 精彩推荐-那些让你崩溃的编程题
+
+## 【知识满满】编程题系列首篇
 今天我们讨论的话题是———**那些让你崩溃的编程题**!  
 那么，我们要谈论的第一道题，就是**洛谷的第P1828题**：香甜的黄油~  
 ## P1828 香甜的黄油
