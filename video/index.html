@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>帮助他人模范.mp4</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:微软雅黑,sans-serif}
+        body{background:#f5faff;min-height:100vh}
+        #fullOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('./data/yellow.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 9999;
+            display: none;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+            animation: gasWave 3s infinite linear;
+        }
+        @keyframes gasWave {
+            0% { background-position: 0 0; }
+            50% { background-position: 10px 8px; }
+            100% { background-position: 0 0; }
+        }
+        .menu{position:fixed;top:15px;left:15px;z-index:99}
+        .menu-btn{
+            background:#165DFF;
+            color:#fff;
+            border:none;
+            padding:8px 18px;
+            border-radius:6px;
+            font-size:15px;
+            cursor:pointer;
+        }
+        .menu-btn:hover{background:#0e42c9}
+
+        .page{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;padding:20px}
+        .hide{display:none}
+
+        .title{font-size:24px;color:#165DFF;margin-bottom:20px}
+        .media{width:380px;height:380px;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 4px 12px #00000010}
+        .media video{width:100%;height:100%;object-fit:cover}
+
+        .start-btn{margin-top:24px;padding:12px 32px;border:none;border-radius:50px;background:#165DFF;color:#fff;font-size:16px;cursor:pointer}
+        .tip{margin-top:16px;font-size:18px;color:#00b42a}
+
+        .list-box{width:90%;max-width:460px;background:#fff;border-radius:16px;box-shadow:0 4px 12px #00000010;padding:24px}
+        .list-title{text-align:center;font-size:20px;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid #eee}
+        .item{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:#f7fafc;border-radius:12px;margin-bottom:12px}
+        .enter-btn{padding:6px 16px;border:none;border-radius:8px;background:#00b42a;color:#fff;cursor:pointer}
+    </style>
+</head>
+<body>
+    <div id="fullOverlay"></div>
+
+    <div class="menu">
+        <button class="menu-btn" onclick="showList()">播放列表</button>
+    </div>
+
+    <div class="page" id="main">
+        <div class="title" id="pageTitle">街道空气净化</div>
+        <div class="media">
+            <video src="./data/video/fps.mp4" id="video"></video>
+        </div>
+        <button class="start-btn" id="actionBtn" onclick="startPlay()">开始净化空气</button>
+        <div class="tip" id="tip"></div>
+    </div>
+
+    <div class="page hide" id="list">
+        <div class="list-box">
+            <div class="list-title"><strong>《好人好事》播放列表</strong></div>
+            <div class="item">
+                <span>地铁放香屁</span>
+                <button class="enter-btn" onclick="ditie()">进入</button>
+            </div>
+            <div class="item">
+                <span>会展中心见义勇为（1）</span>
+                <button class="enter-btn" onclick="huizhan()">进入</button>
+            </div>
+            <div class="item">
+                <span>为你打开驱蚊香薰</span>
+                <button class="enter-btn" onclick="goAromatherapy()">进入</button>
+            </div>
+            <div class="item">
+                <span>净化街道空气</span>
+                <button class="enter-btn" onclick="goPurify()">进入</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const main=document.getElementById('main');
+        const list=document.getElementById('list');
+        const pageTitle=document.getElementById('pageTitle');
+        const video=document.getElementById('video');
+        const actionBtn=document.getElementById('actionBtn');
+        const tip=document.getElementById('tip');
+        const fullOverlay=document.getElementById('fullOverlay');
+
+        let gasShowed = false;
+
+        function resetPage(){
+            video.pause();
+            video.currentTime = 0;
+            tip.innerText='';
+            fullOverlay.style.display = 'none';
+            fullOverlay.style.opacity = 0;
+            gasShowed = false;
+        }
+
+        function showList(){
+            main.classList.add('hide');
+            list.classList.remove('hide');
+        }
+
+        function ditie(){
+            resetPage();
+            pageTitle.innerText='地铁放香屁';
+            actionBtn.innerText='助力乘客睡得更香';
+            video.src='./data/video/met.mp4';
+            list.classList.add('hide');
+            main.classList.remove('hide');
+        }
+
+        function huizhan(){
+            resetPage();
+            pageTitle.innerText='会展中心见义勇为01';
+            actionBtn.innerText='学习良好精神';
+            video.src='./data/video/pre/huizhan.mp4';
+            list.classList.add('hide');
+            main.classList.remove('hide');
+        }
+
+        function goPurify(){
+            resetPage();
+            pageTitle.innerText='街道空气净化';
+            actionBtn.innerText='开始净化空气';
+            video.src='./data/video/fps.mp4';
+            list.classList.add('hide');
+            main.classList.remove('hide');
+        }
+
+        function goAromatherapy(){
+            resetPage();
+            pageTitle.innerText='点击按钮为你进行香薰';
+            actionBtn.innerText='我准备好了！';
+            video.src='./data/video/vivi.mp4';
+            list.classList.add('hide');
+            main.classList.remove('hide');
+        }
+
+        function startPlay(){
+            resetPage();
+            video.play();
+            tip.innerText='';
+        }
+
+        video.ontimeupdate = function(){
+            if(!pageTitle.innerText.includes('香薰')) return;
+            if(gasShowed) return;
+            
+            const remaining = video.duration - video.currentTime;
+            if(remaining > 0 && remaining <= 2){
+                gasShowed = true;
+                fullOverlay.style.display = 'block';
+                setTimeout(()=>{
+                    fullOverlay.style.opacity = 1;
+                },50);
+            }
+        };
+
+        video.onended=()=>{
+            if(pageTitle.innerText.includes('香薰')){
+                setTimeout(() => {
+                    fullOverlay.style.opacity = 0;
+                    setTimeout(() => {
+                        fullOverlay.style.display = 'none';
+                        tip.innerText='香薰开启成功，实测效果香味扑鼻，蚊子全部die了！';
+                    }, 1200);
+                }, 3000);
+            }
+            else if(pageTitle.innerText.includes('会展中心')){
+                tip.innerText='学习完毕，见义勇为精神值得弘扬！';
+            }
+            else if(pageTitle.innerText.includes('地铁')){
+                tip.innerText='乘客全部睡的很香，地铁车厢也被净化，perfect！';
+            }
+            else {
+                tip.innerText='净化空气成功，街道成功被净化！';
+            }
+        };
+    </script>
+</body>
+</html>
