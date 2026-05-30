@@ -37,7 +37,7 @@
       max-width: 1000px;
       margin: 0 auto;
       padding: 30px 20px;
-      display: none;
+      /* 这里修复：去掉 display: none，默认显示 */
     }
     .header {
       text-align: center;
@@ -63,16 +63,7 @@
   </style>
 </head>
 <body>
-  <!-- 使用说明：
-  1. .container 是页面主容器，所有内容建议放在这个容器内
-  2. .header 是标题区域，可修改h1和p标签里的文字
-  3. .content 是内容区域，可以在这里添加：
-     - 同学照片：<img src="照片路径" alt="描述">
-     - 文字内容：<p>回忆文字</p>
-     - 班级名单：<ul><li>姓名</li></ul>
-     - 毕业寄语：<div>寄语内容</div>
-  4. 可重复添加多个<div class="content">来分模块展示不同内容
-  -->
+
   <div class="container">
     <div class="header">
       <h1>六年(2)班同学回忆册</h1>
@@ -84,5 +75,16 @@
       <a href="https://aiyou945.github.io/602">返回</a>
     </div>
   </div>
+
+  <!-- 登录验证 JS（已加上，自动跳转到登录页，登录后回来） -->
+  <script>
+    (function checkLogin() {
+      let logined = sessionStorage.getItem('logined');
+      if (!logined) {
+        sessionStorage.setItem('backUrl', location.href);
+        location.href = '/602/login.html';
+      }
+    })();
+  </script>
 </body>
 </html>
