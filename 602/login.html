@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录 - 西峰小学六年(2)班回忆册</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+    body {
+      background: linear-gradient(120deg, #f5f7fa, #e4eaf5);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-box {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    .login-box h2 {
+      color: #2c5282;
+      margin-bottom: 25px;
+    }
+    input {
+      width: 100%;
+      height: 44px;
+      padding: 0 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      outline: none;
+    }
+    input:focus {
+      border-color: #2c5282;
+    }
+    button {
+      width: 100%;
+      height: 44px;
+      background: #2c5282;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #1a3b5d;
+    }
+    .tip {
+      margin-top: 15px;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>六年(2)班回忆册 登录</h2>
+    <input type="password" id="pwd" placeholder="请输入访问密码" autocomplete="off">
+    <button onclick="login()">登录</button>
+    <div class="tip">密码：202002</div>
+  </div>
+
+  <script>
+    function login() {
+      let password = document.getElementById('pwd').value;
+      // 正确密码
+      if (password === '202002') {
+        // 记录登录状态（浏览器关闭就清空）
+        sessionStorage.setItem('logined', 'true');
+
+        // 获取之前想访问的页面，没有就返回首页
+        let backUrl = sessionStorage.getItem('backUrl') || '/602/';
+        location.href = backUrl;
+      } else {
+        alert('密码错误，请重新输入！');
+      }
+    }
+
+    // 按回车也能登录
+    document.getElementById('pwd').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') login();
+    });
+  </script>
+</body>
+</html>
