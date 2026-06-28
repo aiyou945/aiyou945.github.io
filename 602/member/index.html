@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>西峰小学六年(2)班同学回忆册</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+    body {
+      background: linear-gradient(120deg, #f5f7fa, #e4eaf5);
+      min-height: 100vh;
+      color: #333;
+    }
+    .back a {
+      background: blue;
+      display: inline-block;
+      width: 100px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      text-decoration: none;
+      border-radius: 8px;
+      color: white;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+    }
+    a:hover {
+      transform: scale(1.1);
+      background: darkblue;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+    .back {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+    .header {
+      text-align: center;
+      padding: 40px 0;
+      color: #2c5282;
+    }
+    .header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+    .content {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      padding: 30px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>六年(2)班同学回忆册</h1>
+      <p>珍藏六年时光 · 留存美好回忆</p>
+    </div>
+    
+    <div class="content">
+      <h2>全体同学名单</h2>
+      <p>本篇帖子涵盖了六(2)全体同学的名单，包含转学或所有新来的同学，包含大家担任的职位，其中蓝色的字体可以点开查看详细信息，该名单按座号顺序排列：<br /></p>
+      <li><p><strong>1 号：</strong>郑欢宸</p></li>
+      <li><p><strong>2 号：</strong>曾楷惟<font color="green">(语文组长)</font></p></li>
+      <li><p><strong>3 号：</strong>王石骁<font color="blue">(值日班长)</font><font color="red">(大队长)</font></p></li>
+      <li><p><strong>4 号：</strong>郑羿森</p></li>
+      <li><p><strong>5 号：</strong>谢星辰</p></li>
+      <li><p><strong>6 号：</strong>廖发俊</p></li>
+      <li><p><strong>7 号：</strong>肖宇琛</p><font color="gray">(公认外号：能大)</font></li>
+      <li><p><strong>8 号：</strong>黄启哲</p><font color="gray">(公认外号：大运)</font></li>
+      <li>（未完待续，敬请期待）</li>
+      <div class="back">
+        <a href="https://aiyou945.github.io/602/">返回首页</a>
+      </div>
+    </div>
+  
+  <script>
+    (function checkLogin() {
+      let logined = sessionStorage.getItem('logined');
+      if (!logined) {
+        sessionStorage.setItem('backUrl', location.href);
+        location.href = '/602/login.html';
+      }
+    })();
+  </script>
+</body>
+</html>
