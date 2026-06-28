@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>西峰小学六年(2)班同学回忆册</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+    body {
+      background: linear-gradient(120deg, #f5f7fa, #e4eaf5);
+      min-height: 100vh;
+      color: #333;
+    }
+    a {
+      background: blue;
+      display: inline-block;
+      width: 100px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      text-decoration: none;
+      border-radius: 8px;
+      color: white;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+    }
+    a:hover {
+      transform: scale(1.1);
+      background: darkblue;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      /* 这里修复：去掉 display: none，默认显示 */
+    }
+    .header {
+      text-align: center;
+      padding: 40px 0;
+      color: #2c5282;
+    }
+    .header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+    .content {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      padding: 30px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>六年(2)班同学回忆册</h1>
+      <p>测试网站功能</p>
+    </div>
+    <div class="content">
+      <h2>测试网站功能-第2页</h2>
+      <p>如果你看到这段文字，说明翻页功能没有问题，请点击下方按钮返回：</p>
+      <a href="https://aiyou945.github.io/602/test/">返回</a>
+    </div>
+  </div>
+
+  <!-- 登录验证 JS（已加上，自动跳转到登录页，登录后回来） -->
+  <script>
+    (function checkLogin() {
+      let logined = sessionStorage.getItem('logined');
+      if (!logined) {
+        sessionStorage.setItem('backUrl', location.href);
+        location.href = '/602/login.html';
+      }
+    })();
+  </script>
+</body>
+</html>
