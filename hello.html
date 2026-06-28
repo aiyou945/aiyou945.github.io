@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <!-- 社交元信息精简优化 -->
     <meta property="og:title" content="哎呦的个人主页" />
     <meta property="og:locale" content="zh_CN" />
     <link rel="canonical" href="https://aiyou945.github.io/" />
@@ -18,7 +17,6 @@
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"WebSite","headline":"哎呦的个人主页","name":"aiyou945","url":"https://aiyou945.github.io/"}
     </script>
-    <!-- 字体优化 -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preload" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:400,700&display=swap" as="style" type="text/css" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:400,700&display=swap">
@@ -50,7 +48,6 @@
             border-bottom: 3px solid #157878;
             color: #0f5c5c;
         }
-        /* 卡片容器 */
         .card-wrap {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -90,7 +87,6 @@
         .card a:hover {
             background: #0f5c5c;
         }
-        /* 联系方式模块 */
         .contact-item {
             background: #fff;
             padding: 16px 22px;
@@ -119,7 +115,6 @@
         .friend-link a:hover {
             text-decoration: underline;
         }
-        /* 你原有弹窗样式保留优化 */
         .code-overlay {
             position: fixed;
             top: 0;
@@ -169,7 +164,6 @@
             cursor: pointer;
             font-size: 14px;
         }
-        /* 适配手机 */
         @media (max-width: 600px) {
             h1 {
                 font-size: 1.6rem;
@@ -182,23 +176,18 @@
 </head>
 <body>
     <h1>欢迎来到哎呦的个人主页！</h1>
-
-    <!-- 第一部分：站点导航 -->
     <h2 class="section-title">站点导航</h2>
     <div class="card-wrap">
-        <!-- 编程日常 -->
         <div class="card">
             <h3>编程日常</h3>
             <p>哎呦的编程日常，被无数题目坑到的瞬间……</p>
             <a href="https://aiyou945.github.io" target="_blank">进入站点</a>
         </div>
-        <!-- 超坑小游戏官网 -->
         <div class="card">
             <h3>新·超坑小游戏官网</h3>
             <p>哎呦自制的控制台小游戏！不停更新中！快来试试</p>
             <a href="https://aiyou945.github.io/602/" target="_blank">进入官网</a>
         </div>
-        <!-- 洛谷团队 -->
         <div class="card">
             <h3>洛谷团队</h3>
             <p>哎呦的洛谷团队，有超多成员，还有月赛可以练手！</p>
@@ -206,7 +195,6 @@
         </div>
     </div>
 
-    <!-- 第二部分：联系方式 -->
     <h2 class="section-title">联系方式</h2>
     <div class="contact-item">
         <span class="copy-qq" id="qqText">QQ：2235894707</span>
@@ -217,8 +205,7 @@
         <p style="margin:8px 0;"><a href="https://piaoztsdy.cn" target="_blank">Piaoztsdy's Blog</a></p>
         <p><a href="https://daitoujige.github.io" target="_blank">呆头机哥的个人主页</a></p>
     </div>
-
-    <!-- 保留原有弹窗模块 -->
+    
     <div class="code-overlay"></div>
     <div class="code-modal">
         <button class="close-btn">关闭</button>
@@ -226,7 +213,6 @@
     </div>
 
     <script>
-        // 1. QQ一键复制功能
         const qqText = document.getElementById('qqText');
         const tip = document.getElementById('tip');
         qqText.addEventListener('click', async () => {
@@ -235,17 +221,11 @@
             tip.style.opacity = '1';
             setTimeout(() => tip.style.opacity = '0', 1500);
         });
-
-        // 2. 会话存储逻辑：同浏览器打开一次后，本次会话不再进入首页
-        // sessionStorage 关闭浏览器自动清空，localStorage永久保存；这里用sessionStorage完美匹配你的需求
         (function(){
             const key = 'homepage_visited';
-            // 判断当前会话是否访问过
             if(sessionStorage.getItem(key)){
-                // 已访问过，直接跳转编程日常页面
-                window.location.href = "https://aiyou945.github.io";
+                window.location.href = "/#content";
             }else{
-                // 首次打开，标记已访问，展示当前首页
                 sessionStorage.setItem(key, '1');
             }
         })();
