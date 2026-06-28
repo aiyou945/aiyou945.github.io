@@ -12,8 +12,8 @@
       font-family: "Microsoft YaHei", sans-serif;
     }
     body {
-      /* 原暖浅蓝渐变微调，增加怀旧暖调，不改变整体风格 */
-      background: linear-gradient(120deg, #f7f9fd, #e8effc);
+      /* 暖调+浅黄渐变 */
+      background: linear-gradient(120deg, #fff9e6, #fff1d2, #e8effc);
       min-height: 100vh;
       color: #333;
     }
@@ -49,7 +49,6 @@
       text-align: center;
       padding: 40px 0;
       color: #2c5282;
-      /* 毕业金色下装饰线 */
       border-bottom: 2px solid #e6c878;
       margin-bottom: 30px;
       position: relative;
@@ -58,7 +57,6 @@
       font-size: 2.2rem;
       margin-bottom: 10px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-      /* 标题点缀暖金色 */
       background: linear-gradient(90deg, #2c5282, #b8860b);
       -webkit-background-clip: text;
       color: transparent;
@@ -69,12 +67,11 @@
       letter-spacing: 2px;
     }
     .content {
-      background: #fffefb; /* 轻微米白纸张质感，毕业纪念册感觉 */
+      background: #fffef8;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.08);
       padding: 35px;
       margin-bottom: 20px;
-      /* 细微纸张纹理氛围感 */
       border-top: 6px solid #e6c878;
     }
     .content h2 {
@@ -89,13 +86,12 @@
       margin-bottom: 25px;
       font-size: 1.02rem;
     }
-    /* 名单列表规范化美化，毕业整齐排版 */
     .content li {
       list-style: none;
       padding: 9px 12px;
       margin: 8px 0;
       border-radius: 6px;
-      background: #f8fafe;
+      background: #fcf8ef;
       line-height: 1.6;
     }
     .content li:last-of-type {
@@ -104,7 +100,37 @@
       color: #666;
       font-style: italic;
     }
-    /* 职位标签微调柔和一点，保留原有颜色 */
+    /* 性别标签 */
+    .boy-tag {
+      display: inline-block;
+      background: #4285f4;
+      color: #fff;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-right: 6px;
+      font-size: 0.9rem;
+    }
+    .girl-tag {
+      display: inline-block;
+      background: #ff82b2;
+      color: #fff;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-right: 6px;
+      font-size: 0.9rem;
+    }
+    /* MC命名牌样式 外号同行 */
+    .nickname-tag {
+      display: inline-block;
+      background: #d4b886;
+      color: #222;
+      border: 2px solid #886a47;
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-left: 8px;
+      font-size: 0.9rem;
+    }
+    /* 职位标签美化 */
     font[color="green"] {
       background: #e7f9e7;
       padding: 2px 6px;
@@ -120,47 +146,41 @@
       padding: 2px 6px;
       border-radius: 4px;
     }
-    font[color="gray"] {
-      background: #f0f0f0;
-      padding: 2px 6px;
-      border-radius: 4px;
-    }
   </style>
 </head>
 <body>
+<div class="container">
+  <div class="header">
+    <h1>六年(2)班同学回忆册</h1>
+    <p>珍藏六年时光 · 留存美好回忆</p>
+  </div>
 
-  <div class="container">
-    <div class="header">
-      <h1>六年(2)班同学回忆册</h1>
-      <p>珍藏六年时光 · 留存美好回忆</p>
-    </div>
-    
-    <div class="content">
-      <h2>全体同学名单</h2>
-      <p>本篇帖子涵盖了六(2)全体同学的名单，包含转学或所有新来的同学，包含大家担任的职位，其中蓝色的字体可以点开查看详细信息，该名单按座号顺序排列：<br /></p>
-      <li><p><strong>1 号：</strong>郑欢宸</p></li>
-      <li><p><strong>2 号：</strong>曾楷惟<font color="green">(语文组长)</font></p></li>
-      <li><p><strong>3 号：</strong>王石骁<font color="blue">(值日班长)</font><font color="red">(大队长)</font></p></li>
-      <li><p><strong>4 号：</strong>郑羿森</p></li>
-      <li><p><strong>5 号：</strong>谢星辰</p></li>
-      <li><p><strong>6 号：</strong>廖发俊</p></li>
-      <li><p><strong>7 号：</strong>肖宇琛</p><font color="gray">(公认外号：能大)</font></li>
-      <li><p><strong>8 号：</strong>黄启哲</p><font color="gray">(公认外号：大运)</font></li>
-      <li>（未完待续，敬请期待）</li>
-      <div class="back">
-        <a href="https://aiyou945.github.io/602/">返回首页</a>
-      </div>
+  <div class="content">
+    <h2>全体同学名单</h2>
+    <p>本篇帖子涵盖了六(2)全体同学的名单，包含转学或所有新来的同学，包含大家担任的职位，其中蓝色的字体可以点开查看详细信息，该名单按座号顺序排列：<br /></p>
+    <li><span class="boy-tag">男</span><p><strong>1 号：</strong>郑欢宸</p></li>
+    <li><span class="boy-tag">男</span><p><strong>2 号：</strong>曾楷惟<font color="green">【语文组长】</font></p></li>
+    <li><span class="boy-tag">男</span><p><strong>3 号：</strong>王石骁<font color="blue">【值日班长】</font><font color="red">≡【大队长】</font></p></li>
+    <li><span class="boy-tag">男</span><p><strong>4 号：</strong>郑羿森</p></li>
+    <li><span class="boy-tag">男</span><p><strong>5 号：</strong>谢星辰</p></li>
+    <li><span class="boy-tag">男</span><p><strong>6 号：</strong>廖发俊</p></li>
+    <li><span class="boy-tag">男</span><p><strong>7 号：</strong>肖宇琛<span class="nickname-tag">外号：能大</span></p></li>
+    <li><span class="boy-tag">男</span><p><strong>8 号：</strong>黄启哲<span class="nickname-tag">外号：大运</span></p></li>
+    <li><span class="boy-tag">男</span><p><strong>9 号：</strong>朱一骏</p><font color="green">【语文组长】</font></li>
+    <div class="back">
+      <a href="https://aiyou945.github.io/602/">返回首页</a>
     </div>
   </div>
-  
-  <script>
-    (function checkLogin() {
-      let logined = sessionStorage.getItem('logined');
-      if (!logined) {
-        sessionStorage.setItem('backUrl', location.href);
-        location.href = '/602/login.html';
-      }
-    })();
-  </script>
+</div>
+
+<script>
+  (function checkLogin() {
+    let logined = sessionStorage.getItem('logined');
+    if (!logined) {
+      sessionStorage.setItem('backUrl', location.href);
+      location.href = '/602/login.html';
+    }
+  })();
+</script>
 </body>
 </html>
