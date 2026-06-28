@@ -223,9 +223,11 @@
         });
         (function(){
             const key = 'homepage_visited';
+            // 如果本次会话已经来过，直接跳主站
             if(sessionStorage.getItem(key)){
-                window.location.href = "/#content";
+                window.location.href = "/";
             }else{
+                // 第一次进来，打上访问标记，停留在当前hello导航页
                 sessionStorage.setItem(key, '1');
             }
         })();
