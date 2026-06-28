@@ -186,7 +186,7 @@
         <div class="card">
             <h3>新·超坑小游戏官网</h3>
             <p>哎呦自制的控制台小游戏！不停更新中！快来试试</p>
-            <a href="https://aiyou945.github.io/602/" target="_blank">进入官网</a>
+            <a href="https://aiyou945.github.io/ckg/down.html" target="_blank">进入官网</a>
         </div>
         <div class="card">
             <h3>洛谷团队</h3>
@@ -223,11 +223,9 @@
         });
         (function(){
             const key = 'homepage_visited';
-            // 如果本次会话已经来过，直接跳主站
             if(sessionStorage.getItem(key)){
                 window.location.href = "/";
             }else{
-                // 第一次进来，打上访问标记，停留在当前hello导航页
                 sessionStorage.setItem(key, '1');
             }
         })();
