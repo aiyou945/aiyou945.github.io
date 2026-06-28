@@ -12,12 +12,13 @@
       font-family: "Microsoft YaHei", sans-serif;
     }
     body {
-      background: linear-gradient(120deg, #f5f7fa, #e4eaf5);
+      /* 原暖浅蓝渐变微调，增加怀旧暖调，不改变整体风格 */
+      background: linear-gradient(120deg, #f7f9fd, #e8effc);
       min-height: 100vh;
       color: #333;
     }
     .back a {
-      background: blue;
+      background: #255ed9;
       display: inline-block;
       width: 100px;
       height: 40px;
@@ -29,9 +30,9 @@
       margin-top: 10px;
       transition: all 0.3s ease;
     }
-    a:hover {
+    .back a:hover {
       transform: scale(1.1);
-      background: darkblue;
+      background: #0f3b94;
     }
     .container {
       max-width: 1000px;
@@ -40,29 +41,89 @@
     }
     .back {
       max-width: 1000px;
-      margin: 0 auto;
-      padding: 30px 20px;
+      margin: 20px auto 0;
+      padding: 0 20px;
+      text-align: center;
     }
     .header {
       text-align: center;
       padding: 40px 0;
       color: #2c5282;
+      /* 毕业金色下装饰线 */
+      border-bottom: 2px solid #e6c878;
+      margin-bottom: 30px;
+      position: relative;
     }
     .header h1 {
       font-size: 2.2rem;
       margin-bottom: 10px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+      /* 标题点缀暖金色 */
+      background: linear-gradient(90deg, #2c5282, #b8860b);
+      -webkit-background-clip: text;
+      color: transparent;
     }
     .header p {
       font-size: 1.1rem;
       opacity: 0.8;
+      letter-spacing: 2px;
     }
     .content {
-      background: white;
+      background: #fffefb; /* 轻微米白纸张质感，毕业纪念册感觉 */
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      padding: 30px;
+      padding: 35px;
       margin-bottom: 20px;
+      /* 细微纸张纹理氛围感 */
+      border-top: 6px solid #e6c878;
+    }
+    .content h2 {
+      color: #2c5282;
+      border-left: 4px solid #d4af37;
+      padding-left: 12px;
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+    .content > p {
+      line-height: 1.7;
+      margin-bottom: 25px;
+      font-size: 1.02rem;
+    }
+    /* 名单列表规范化美化，毕业整齐排版 */
+    .content li {
+      list-style: none;
+      padding: 9px 12px;
+      margin: 8px 0;
+      border-radius: 6px;
+      background: #f8fafe;
+      line-height: 1.6;
+    }
+    .content li:last-of-type {
+      text-align: center;
+      margin-top: 18px;
+      color: #666;
+      font-style: italic;
+    }
+    /* 职位标签微调柔和一点，保留原有颜色 */
+    font[color="green"] {
+      background: #e7f9e7;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    font[color="blue"] {
+      background: #e7f0ff;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    font[color="red"] {
+      background: #ffe9e9;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    font[color="gray"] {
+      background: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -90,6 +151,7 @@
         <a href="https://aiyou945.github.io/602/">返回首页</a>
       </div>
     </div>
+  </div>
   
   <script>
     (function checkLogin() {
