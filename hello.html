@@ -2,233 +2,448 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>欢迎来到哎呦的个人主页！</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#157878">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta property="og:title" content="哎呦的个人主页" />
-    <meta property="og:locale" content="zh_CN" />
-    <link rel="canonical" href="https://aiyou945.github.io/" />
-    <meta property="og:url" content="https://aiyou945.github.io/" />
-    <meta property="og:site_name" content="aiyou945" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary" />
-    <meta property="twitter:title" content="哎呦的个人主页" />
-    <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"WebSite","headline":"哎呦的个人主页","name":"aiyou945","url":"https://aiyou945.github.io/"}
-    </script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="preload" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:400,700&display=swap" as="style" type="text/css" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:400,700&display=swap">
-    <link rel="stylesheet" href="/assets/css/style.css?v=d7c4bef01387bbb1b5d194e5b808087c23670135">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哎呦的个人主页</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Noto Sans SC", "Open Sans", sans-serif;
         }
         body {
-            background-color: #f0f7f7;
-            color: #222;
-            padding: 40px 20px;
+            background: linear-gradient(145deg, #ebf8f0 0%, #d4eee2 100%);
+            font-family: 'Noto Sans SC', 'Segoe UI', system-ui, sans-serif;
+            color: #1d3b3b;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .page-wrap {
             max-width: 1200px;
-            margin: 0 auto;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(2px);
+            border-radius: 48px 48px 32px 32px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 20px 40px -12px rgba(21, 120, 120, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
         h1 {
             text-align: center;
-            color: #157878;
-            margin-bottom: 50px;
-            font-size: 2.2rem;
+            font-weight: 700;
+            font-size: 2.8rem;
+            letter-spacing: 2px;
+            color: #0b5e5e;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 12px rgba(21, 120, 120, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        h1 small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #2d7a7a;
+            background: rgba(21, 120, 120, 0.10);
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            letter-spacing: 0.5px;
+        }
+        .subhead {
+            text-align: center;
+            color: #2d6b6b;
+            margin-bottom: 2.8rem;
+            font-size: 1.05rem;
+            border-bottom: 2px dashed #8bc9c9;
+            padding-bottom: 0.8rem;
+            opacity: 0.85;
         }
         .section-title {
-            font-size: 1.5rem;
-            margin: 40px 0 20px;
-            padding-bottom: 8px;
-            border-bottom: 3px solid #157878;
-            color: #0f5c5c;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #0d5c5c;
+            margin: 2.8rem 0 1.5rem 0;
+            padding-left: 0.8rem;
+            border-left: 7px solid #2b9e9e;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .card-wrap {
+        .section-title span {
+            background: #1d7a7a;
+            color: white;
+            font-size: 0.9rem;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 400;
+        }
+        .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
         }
         .card {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 3px 12px rgba(21, 120, 120, 0.15);
-            transition: all 0.25s ease;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            padding: 1.8rem 1.6rem;
+            box-shadow: 0 8px 22px rgba(21, 100, 100, 0.08);
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+            border: 1px solid rgba(90, 160, 140, 0.25);
+            display: flex;
+            flex-direction: column;
         }
         .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 6px 20px rgba(21, 120, 120, 0.22);
+            transform: translateY(-8px);
+            background: #ffffff;
+            box-shadow: 0 20px 32px -8px rgba(21, 120, 120, 0.25);
+            border-color: #52b3a3;
         }
         .card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 10px;
-            color: #157878;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #136b6b;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card h3 .emoji-badge {
+            font-size: 1.3rem;
         }
         .card p {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 16px;
+            color: #2f5555;
+            line-height: 1.7;
+            margin: 0.5rem 0 1.4rem 0;
+            flex: 1;
+            font-size: 0.98rem;
         }
-        .card a {
-            display: inline-block;
-            padding: 9px 18px;
-            background: #157878;
-            color: #fff;
+        .card .btn {
+            align-self: flex-start;
+            background: #187a7a;
+            padding: 0.6rem 1.8rem;
+            border-radius: 60px;
+            color: white;
+            font-weight: 500;
             text-decoration: none;
-            border-radius: 6px;
-            transition: background 0.2s;
+            transition: 0.2s;
+            border: 1px solid transparent;
+            letter-spacing: 0.3px;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 8px rgba(21, 120, 120, 0.2);
+            cursor: pointer;
         }
-        .card a:hover {
-            background: #0f5c5c;
+        .card .btn:hover {
+            background: #0d5f5f;
+            transform: scale(1.02);
+            box-shadow: 0 8px 14px rgba(21, 120, 120, 0.3);
+            border-color: #41a38f;
+        }
+        .contact-block {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            padding: 1.8rem 2.2rem;
+            border: 1px solid rgba(90, 160, 140, 0.25);
+            box-shadow: 0 6px 18px rgba(21, 100, 100, 0.06);
+            margin-top: 0.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px 30px;
         }
         .contact-item {
-            background: #fff;
-            padding: 16px 22px;
-            border-radius: 10px;
-            margin: 12px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
         }
         .copy-qq {
+            background: #e6f3ef;
+            padding: 0.5rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #0d5c5c;
             cursor: pointer;
-            color: #157878;
-            font-weight: bold;
+            transition: 0.2s;
+            border: 1px solid #b5dbd1;
             user-select: none;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .copy-qq:hover {
+            background: #c7e6de;
+            border-color: #58a394;
+            transform: scale(1.02);
         }
         .copy-tip {
-            font-size: 0.85rem;
-            color: #28a745;
-            margin-left: 12px;
+            color: #1b8a5a;
+            font-weight: 500;
+            font-size: 0.9rem;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s ease;
+            background: #d8f0e6;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
         }
-        .friend-link a {
-            color: #157878;
+        .friend-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 24px;
+        }
+        .friend-links a {
+            color: #176b6b;
             text-decoration: none;
             font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            padding: 0.2rem 0;
+            display: inline-block;
         }
-        .friend-link a:hover {
-            text-decoration: underline;
+        .friend-links a:hover {
+            border-bottom-color: #2b9e9e;
+            color: #0a4a4a;
+        }
+        .friend-links .link-icon {
+            margin-right: 4px;
+        }
+        .friend-links .divider {
+            color: #8dbdbd;
+            font-weight: 300;
+        }
+        .footer-note {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #3b7272;
+            border-top: 1px solid rgba(60, 130, 120, 0.15);
+            padding-top: 1.8rem;
+            letter-spacing: 0.4px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-note a {
+            color: #0f6b6b;
+            text-decoration: none;
+            border-bottom: 1px dotted #89bfb5;
+            cursor: pointer;
+        }
+        .footer-note a:hover {
+            color: #044a4a;
         }
         .code-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 40, 40, 0.6);
+            backdrop-filter: blur(6px);
             z-index: 9998;
             display: none;
         }
         .code-modal {
             position: fixed;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            background: #f6fcf9;
+            padding: 30px 25px 25px;
+            border-radius: 36px;
+            box-shadow: 0 40px 80px rgba(0, 30, 30, 0.6);
             z-index: 9999;
             width: 90%;
-            max-width: 1000px;
-            max-height: 85%;
-            overflow: auto;
+            max-width: 920px;
+            max-height: 85vh;
             display: none;
+            overflow: hidden;
+            border: 1px solid rgba(80, 180, 160, 0.3);
+        }
+        .code-modal .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #c1e0d6;
+        }
+        .code-modal .modal-header span {
+            font-weight: 600;
+            color: #0a5a5a;
+            font-size: 1.2rem;
         }
         .code-modal pre {
             margin: 0;
-            font-family: Consolas, Monaco, monospace;
-            font-size: 16px;
-            line-height: 1.6;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 15px;
+            line-height: 1.7;
             white-space: pre;
-            overflow-x: auto;
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 4px;
+            overflow: auto;
+            background: #ecf6f0;
+            padding: 20px 22px;
+            border-radius: 24px;
+            border: 1px solid #c6e0d6;
+            max-height: 58vh;
+            color: #144d4d;
         }
         .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 8px 15px;
-            background: #ff4444;
-            color: #fff;
+            background: #d7ede6;
             border: none;
-            border-radius: 4px;
+            padding: 0.4rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #0b5555;
             cursor: pointer;
-            font-size: 14px;
+            transition: 0.2s;
+            font-size: 0.95rem;
+            border: 1px solid #9acfc0;
+        }
+        .close-btn:hover {
+            background: #b7dbcf;
+            transform: scale(0.97);
         }
         @media (max-width: 600px) {
-            h1 {
-                font-size: 1.6rem;
-            }
-            .card-wrap {
-                grid-template-columns: 1fr;
-            }
+            .page-wrap { padding: 1.5rem 1rem; }
+            h1 { font-size: 2.1rem; }
+            .section-title { font-size: 1.5rem; }
+            .contact-block { flex-direction: column; align-items: stretch; }
+            .friend-links { justify-content: center; }
         }
     </style>
 </head>
 <body>
+<div class="page-wrap">
     <h1>欢迎来到哎呦的个人主页！</h1>
-    <h2 class="section-title">站点导航</h2>
-    <div class="card-wrap">
+    <div class="subhead">
+        ⛅ 保持好奇 · 保持折腾 · 保持绿意
+    </div>
+
+    <div class="section-title">
+        🧭 站点导航 <span>探索</span>
+    </div>
+    <div class="card-grid">
         <div class="card">
-            <h3>编程日常</h3>
-            <p>哎呦的编程日常，被无数题目坑到的瞬间……</p>
-            <a href="javascript:location.reload()">进入站点</a>
+            <h3><span class="emoji-badge">⌨️</span> 编程日常</h3>
+            <p>哎呦的编程日常，被无数题目坑到的瞬间…… 记录 bug 与顿悟。</p>
+            <a href="javascript:location.reload()" class="btn">🌿 进入站点</a>
         </div>
         <div class="card">
-            <h3>新·超坑小游戏官网</h3>
-            <p>哎呦自制的控制台小游戏！不停更新中！快来试试</p>
-            <a href="https://aiyou945.github.io/ckg/down.html" target="_blank">进入官网</a>
+            <h3><span class="emoji-badge">🎮</span> 新·超坑小游戏官网</h3>
+            <p>哎呦自制的控制台小游戏！不停更新中！坑到就是赚到，快来试试。</p>
+            <a href="https://aiyou945.github.io/ckg/down.html" target="_blank" class="btn">🎲 进入官网</a>
         </div>
         <div class="card">
-            <h3>洛谷团队</h3>
-            <p>哎呦的洛谷团队，有超多成员，还有月赛可以练手！</p>
-            <a href="https://www.luogu.com.cn/team/105278/" target="_blank">前往团队</a>
+            <h3><span class="emoji-badge">🏆</span> 洛谷团队</h3>
+            <p>哎呦的洛谷团队，超多成员，月赛练手，一起刷题上分！</p>
+            <a href="https://www.luogu.com.cn/team/105278/" target="_blank" class="btn">🚀 前往团队</a>
         </div>
     </div>
 
-    <h2 class="section-title">联系方式</h2>
-    <div class="contact-item">
-        <span class="copy-qq" id="qqText">QQ：2235894707</span>
-        <span class="copy-tip" id="tip">已复制！</span>
+    <div class="section-title" style="margin-top: 3rem;">
+        📬 联系方式 <span>find me</span>
     </div>
-    <div class="contact-item friend-link">
-        <p>好友主页：</p>
-        <p style="margin:8px 0;"><a href="https://piaoztsdy.cn" target="_blank">Piaoztsdy's Blog</a></p>
-        <p><a href="https://daitoujige.github.io" target="_blank">呆头机哥的个人主页</a></p>
-    </div>
-    
-    <div class="code-overlay"></div>
-    <div class="code-modal">
-        <button class="close-btn">关闭</button>
-        <pre></pre>
+    <div class="contact-block">
+        <div class="contact-item">
+            <span class="copy-qq" id="qqText">💬 QQ：2235894707</span>
+            <span class="copy-tip" id="tip">✔️ 已复制</span>
+        </div>
+        <div class="friend-links">
+            <span style="color:#2b7a6a; font-weight:500;">🤝 好友主页</span>
+            <a href="https://piaoztsdy.cn" target="_blank"><span class="link-icon">📘</span> Piaoztsdy's Blog</a>
+            <span class="divider">·</span>
+            <a href="https://daitoujige.github.io" target="_blank"><span class="link-icon">🧩</span> 呆头机哥的个人主页</a>
+        </div>
     </div>
 
-    <script>
-        const qqText = document.getElementById('qqText');
-        const tip = document.getElementById('tip');
-        qqText.addEventListener('click', async () => {
-            const text = '2235894707';
-            await navigator.clipboard.writeText(text);
-            tip.style.opacity = '1';
-            setTimeout(() => tip.style.opacity = '0', 1500);
-        });
-        (function(){
-            const key = 'homepage_visited';
-            if(sessionStorage.getItem(key)){
-                window.location.href = "/";
-            }else{
-                sessionStorage.setItem(key, '1');
+    <div class="footer-note">
+        <span>🌳 保持绿意 · 自在编程</span>
+        <a id="showCodeBtn">📜 查看页面源码</a>
+        <span>✧ 哎呦 2026</span>
+    </div>
+</div>
+
+<div class="code-overlay" id="codeOverlay"></div>
+<div class="code-modal" id="codeModal">
+    <div class="modal-header">
+        <span>📄 页面源码</span>
+        <button class="close-btn" id="closeModalBtn">✕ 关闭</button>
+    </div>
+    <pre id="codeDisplay"></pre>
+</div>
+
+<script>
+    (function() {
+        var qqEl = document.getElementById('qqText');
+        var tipEl = document.getElementById('tip');
+        qqEl.addEventListener('click', async function() {
+            var qqNumber = '2235894707';
+            try {
+                await navigator.clipboard.writeText(qqNumber);
+                tipEl.style.opacity = '1';
+                setTimeout(function() { tipEl.style.opacity = '0'; }, 1800);
+            } catch {
+                var ta = document.createElement('textarea');
+                ta.value = qqNumber;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                ta.remove();
+                tipEl.style.opacity = '1';
+                setTimeout(function() { tipEl.style.opacity = '0'; }, 1800);
             }
-        })();
-    </script>
+        });
+
+        var key = 'homepage_visited';
+        if (!sessionStorage.getItem(key)) {
+            sessionStorage.setItem(key, '1');
+            window.location.href = "/";
+        }
+
+        var overlay = document.getElementById('codeOverlay');
+        var modal = document.getElementById('codeModal');
+        var codeDisplay = document.getElementById('codeDisplay');
+        var showBtn = document.getElementById('showCodeBtn');
+        var closeBtn = document.getElementById('closeModalBtn');
+
+        function getPageSource() {
+            var doctype = '<!DOCTYPE html>\n';
+            var html = document.documentElement.outerHTML;
+            return doctype + html;
+        }
+
+        showBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            var source = getPageSource();
+            codeDisplay.textContent = source;
+            overlay.style.display = 'block';
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+
+        function closeModal() {
+            overlay.style.display = 'none';
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        overlay.addEventListener('click', closeModal);
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (modal.style.display === 'block') closeModal();
+            }
+        });
+    })();
+</script>
 </body>
 </html>
