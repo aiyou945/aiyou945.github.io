@@ -174,9 +174,11 @@
       font-size: 1.05rem;
     }
     .badge {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       font-size: 0.8rem;
-      padding: 2px 10px;
+      padding: 2px 10px 2px 6px;
       border-radius: 30px;
       background: #eef3fa;
       color: #1f3a5f;
@@ -184,6 +186,12 @@
       border: 1px solid #d0dbe8;
       line-height: 1.5;
       white-space: nowrap;
+    }
+    .badge img {
+      width: 16px;
+      height: 16px;
+      vertical-align: middle;
+      display: inline-block;
     }
     .badge-green {
       background: #e1f3e1;
@@ -206,10 +214,12 @@
       color: #7d6427;
     }
     .nickname-tag {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       background: #e7dcc8;
       border: 2px solid #a58b68;
-      padding: 0 12px;
+      padding: 0 12px 0 8px;
       border-radius: 30px;
       font-size: 0.8rem;
       margin-left: 6px;
@@ -217,17 +227,11 @@
       line-height: 1.8;
       font-weight: 500;
     }
-    .nickname-icon {
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      background-image: url('https://aiyou945.github.io/602/member/nametag.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
+    .nickname-tag img {
+      width: 16px;
+      height: 16px;
       vertical-align: middle;
-      margin-right: 4px;
-      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+      display: inline-block;
     }
     .feature-tag {
       display: inline-block;
@@ -239,6 +243,16 @@
       color: #5f4400;
       margin-left: 6px;
       font-style: italic;
+    }
+    .remark-tag {
+      display: inline-block;
+      background: #e8f0fe;
+      border: 1px solid #b6cceb;
+      border-radius: 30px;
+      padding: 0 12px;
+      font-size: 0.8rem;
+      color: #1f3a7a;
+      margin-left: 6px;
     }
     .student-item .extra-info {
       display: flex;
@@ -267,27 +281,43 @@
     <p>本篇帖子涵盖了六(2)全体同学的名单，包含转学或所有新来的同学，包含大家担任的职位，其中蓝色的字体可以点开查看详细信息，该名单按座号顺序排列：</p>
     <div class="student-list">
       <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>1 号：</strong>郑欢宸</span></div></div>
-      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>2 号：</strong>曾楷惟</span><span class="badge badge-green">语文组长</span></div></div>
-      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>3 号：</strong>王石骁</span><span class="badge badge-blue">值日班长</span><span class="badge badge-red">大队长</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>2 号：</strong>曾楷惟</span><span class="badge badge-green"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">语文组长</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>3 号：</strong>王石骁</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">值日班长</span><span class="badge badge-red"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">大队长</span><span class="nickname-tag"><img src="https://aiyou945.github.io/602/member/nametag.png" alt="">外号：王老吉</span><span class="nickname-tag"><img src="https://aiyou945.github.io/602/member/nametag.png" alt="">外号：老王</span></div></div>
       <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>4 号：</strong>郑羿森</span></div></div>
       <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>5 号：</strong>谢星辰</span></div></div>
       <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>6 号：</strong>廖发俊</span></div></div>
-      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>7 号：</strong>肖宇琛</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：能大</span></div></div>
-      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>8 号：</strong>黄启哲</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：大运</span><span class="badge badge-blue">执勤队员</span></div></div>
-      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>9 号：</strong>朱一骏</span><span class="badge badge-green">语文组长</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：pig</span><span class="badge badge-blue">值日班长</span><span class="badge badge-blue">英语组长</span></div></div>
-      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>10 号：</strong>张凌浩</span><span class="badge badge-green">数学组长</span><span class="badge badge-green">数学课代表</span><span class="badge badge-blue">值日班长</span><span class="badge badge-blue">英语组长</span></div></div>
-      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>11 号：</strong>侯和潇</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：猴子</span></div></div>
-      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>12 号：</strong>黄拓</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：臭黄拓</span><span style="font-size:0.75rem;color:#7a5d3a;background:#f2e6d2;padding:0 8px;border-radius:30px;margin-left:6px;">（由语文老师亲自命名）</span></div></div>
-      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>13 号：</strong>倪政曜</span><span class="badge badge-blue">值日班长</span><span class="badge badge-green">语文组长</span><span class="badge badge-green">语文课代表</span><span class="feature-tag">📚 语文成绩爆表</span></div></div>
-      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>14 号：</strong>郭良泓</span><span class="badge badge-blue">执勤队员</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>7 号：</strong>肖宇琛</span><span class="nickname-tag"><img src="https://aiyou945.github.io/602/member/nametag.png" alt="">外号：能大</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>8 号：</strong>黄启哲</span><span class="nickname-tag"><img src="https://aiyou945.github.io/602/member/nametag.png" alt="">外号：大运</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">执勤队员</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>9 号：</strong>朱一骏</span><span class="badge badge-green"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">语文组长</span><span class="nickname-tag"><img src="https://aiyou945.github.io/602/member/nametag.png" alt="">外号：pig</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">值日班长</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">英语组长</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>10 号：</strong>张凌浩</span><span class="badge badge-green"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">数学组长</span><span class="badge badge-green"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">数学课代表</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">值日班长</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">英语组长</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>11 号：</strong>侯和潇</span><span class="nickname-tag"><img src="https://aiyou945.github.io/602/member/nametag.png" alt="">外号：猴子</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>12 号：</strong>黄拓</span><span class="nickname-tag"><img src="https://aiyou945.github.io/602/member/nametag.png" alt="">外号：臭黄拓</span><span style="font-size:0.75rem;color:#7a5d3a;background:#f2e6d2;padding:0 8px;border-radius:30px;margin-left:6px;">（由语文老师亲自命名）</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>13 号：</strong>倪政曜</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">值日班长</span><span class="badge badge-green"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">语文组长</span><span class="badge badge-green"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">语文课代表</span><span class="feature-tag">📚 语文成绩爆表</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>14 号：</strong>郭良泓</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">执勤队员</span></div></div>
       <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>15 号：</strong>黄抒宏</span></div></div>
-      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>16 号：</strong>杨亦霖</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：小杨</span><span class="badge badge-blue">英语组长</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>16 号：</strong>杨亦霖</span><span class="nickname-tag"><img src="https://aiyou945.github.io/602/member/nametag.png" alt="">外号：小杨</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">英语组长</span></div></div>
       <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>17 号：</strong>林经昊</span></div></div>
-      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>18 号：</strong>黄伟宸</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：伟神</span><span class="badge badge-green">数学组长</span><span class="badge badge-blue">英语组长</span><span class="badge badge-blue">值日班长</span></div></div>
-      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>19 号：</strong>卓浚睿</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：睿宝</span><span class="feature-tag">⚡ 曾被称作班级“四大金刚”之一</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>18 号：</strong>黄伟宸</span><span class="nickname-tag"><img src="https://aiyou945.github.io/602/member/nametag.png" alt="">外号：伟神</span><span class="badge badge-green"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">数学组长</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">英语组长</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">值日班长</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>19 号：</strong>卓浚睿</span><span class="nickname-tag"><img src="https://aiyou945.github.io/602/member/nametag.png" alt="">外号：睿宝</span><span class="feature-tag">⚡ 曾被称作班级“四大金刚”之一</span></div></div>
       <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>20 号：</strong>张书航</span></div></div>
       <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>21 号：</strong>董梓睿</span></div></div>
       <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>22 号：</strong>梁烨鑫</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>旧23 号：</strong>施煋格</span><span class="remark-tag">二年级转学离开，不确定名字是否有错别字</span></div></div>
+      <div class="student-item"><span class="gender">女</span><div class="main-info"><span class="name"><strong>23 号：</strong>吴佳馨</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>24 号：</strong>林笑羽</span><span class="nickname-tag"><img src="https://aiyou945.github.io/602/member/nametag.png" alt="">外号：奶龙</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>25 号：</strong>张谦涵</span></div></div>
+      <div class="student-item"><span class="gender">女</span><div class="main-info"><span class="name"><strong>26 号：</strong>黎靖桐</span></div></div>
+      <div class="student-item"><span class="gender">女</span><div class="main-info"><span class="name"><strong>27 号：</strong>高允萱</span><span class="badge badge-green"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">数学组长</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">英语组长</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">值日班长</span><span class="remark-tag">品行A+！</span></div></div>
+      <div class="student-item"><span class="gender">女</span><div class="main-info"><span class="name"><strong>28 号：</strong>吴悠悠</span></div></div>
+      <div class="student-item"><span class="gender">女</span><div class="main-info"><span class="name"><strong>29 号：</strong>张圣欣</span><span class="remark-tag">🏀 篮球队</span></div></div>
+      <div class="student-item"><span class="gender">女</span><div class="main-info"><span class="name"><strong>30 号：</strong>高睿涵</span></div></div>
+      <div class="student-item"><span class="gender">女</span><div class="main-info"><span class="name"><strong>31 号：</strong>蔡一畅</span></div></div>
+      <div class="student-item"><span class="gender">女</span><div class="main-info"><span class="name"><strong>32 号：</strong>黄梓惟</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">执勤队员</span></div></div>
+      <div class="student-item"><span class="gender">女</span><div class="main-info"><span class="name"><strong>33 号：</strong>蔡蕾晞</span></div></div>
+      <div class="student-item"><span class="gender">女</span><div class="main-info"><span class="name"><strong>34 号：</strong>张昀鑫</span></div></div>
+      <div class="student-item"><span class="gender">女</span><div class="main-info"><span class="name"><strong>35 号：</strong>谢景研</span></div></div>
+      <div class="student-item"><span class="gender">女</span><div class="main-info"><span class="name"><strong>36 号：</strong>王玥辰</span></div></div>
+      <div class="student-item"><span class="gender">女</span><div class="main-info"><span class="name"><strong>37 号：</strong>蔡熙雯</span><span class="badge badge-green"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">数学组长</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">英语组长</span><span class="badge badge-blue"><img src="https://aiyou945.github.io/602/member/crafting_table.png" alt="">值日班长</span></div></div>
     </div>
 
     <div class="back" style="margin-top: 30px;">
