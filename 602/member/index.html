@@ -9,142 +9,249 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Microsoft YaHei", sans-serif;
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
     }
     body {
-      /* 暖调+浅黄渐变 */
-      background: linear-gradient(120deg, #fff9e6, #fff1d2, #e8effc);
+      background: linear-gradient(145deg, #fbf3e8 0%, #f8eddb 40%, #eaf0fa 100%);
       min-height: 100vh;
-      color: #333;
-    }
-    .back a {
-      background: #255ed9;
-      display: inline-block;
-      width: 100px;
-      height: 40px;
-      text-align: center;
-      line-height: 40px;
-      text-decoration: none;
-      border-radius: 8px;
-      color: white;
-      margin-top: 10px;
-      transition: all 0.3s ease;
-    }
-    .back a:hover {
-      transform: scale(1.1);
-      background: #0f3b94;
+      color: #2d2a24;
+      padding: 20px 0;
     }
     .container {
-      max-width: 1000px;
+      max-width: 1050px;
       margin: 0 auto;
-      padding: 30px 20px;
+      padding: 0 20px;
     }
     .back {
-      max-width: 1000px;
+      max-width: 1050px;
       margin: 20px auto 0;
       padding: 0 20px;
       text-align: center;
     }
+    .back a {
+      background: #2c5282;
+      display: inline-block;
+      width: 120px;
+      height: 44px;
+      text-align: center;
+      line-height: 44px;
+      text-decoration: none;
+      border-radius: 40px;
+      color: white;
+      font-weight: 500;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(44, 82, 130, 0.25);
+      transition: all 0.25s ease;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .back a:hover {
+      transform: scale(1.05);
+      background: #1a3f6a;
+      box-shadow: 0 8px 18px rgba(44, 82, 130, 0.35);
+    }
     .header {
       text-align: center;
-      padding: 40px 0;
+      padding: 40px 20px 30px;
       color: #2c5282;
-      border-bottom: 2px solid #e6c878;
+      border-bottom: 3px double #dac292;
       margin-bottom: 30px;
       position: relative;
+      background: rgba(255, 252, 245, 0.6);
+      border-radius: 60px 60px 20px 20px;
+      backdrop-filter: blur(2px);
     }
     .header h1 {
-      font-size: 2.2rem;
-      margin-bottom: 10px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-      background: linear-gradient(90deg, #2c5282, #b8860b);
+      font-size: 2.6rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      background: linear-gradient(135deg, #1f3a5f, #b8860b);
       -webkit-background-clip: text;
+      background-clip: text;
       color: transparent;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
     .header p {
-      font-size: 1.1rem;
-      opacity: 0.8;
-      letter-spacing: 2px;
+      font-size: 1.15rem;
+      color: #5f4e34;
+      letter-spacing: 4px;
+      font-weight: 300;
+      border-top: 1px solid #e3d3b5;
+      display: inline-block;
+      padding-top: 8px;
     }
     .content {
-      background: #fffef8;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      padding: 35px;
-      margin-bottom: 20px;
-      border-top: 6px solid #e6c878;
+      background: #fffcfa;
+      border-radius: 28px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06), 0 4px 10px rgba(184, 134, 11, 0.08);
+      padding: 40px 35px;
+      margin-bottom: 30px;
+      border: 1px solid #f3e9d8;
+      backdrop-filter: blur(2px);
+      transition: box-shadow 0.2s;
     }
     .content h2 {
       color: #2c5282;
-      border-left: 4px solid #d4af37;
-      padding-left: 12px;
-      margin-bottom: 20px;
-      font-size: 1.4rem;
+      border-left: 6px solid #d4af37;
+      padding-left: 18px;
+      margin-bottom: 28px;
+      font-size: 1.7rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .content h2::after {
+      content: "✦";
+      color: #b8860b;
+      font-size: 1.6rem;
+      margin-left: auto;
+      opacity: 0.5;
     }
     .content > p {
-      line-height: 1.7;
+      line-height: 1.8;
       margin-bottom: 25px;
-      font-size: 1.02rem;
+      font-size: 1.05rem;
+      color: #3d3529;
+      background: #f9f3e9;
+      padding: 14px 20px;
+      border-radius: 40px;
+      border-left: 4px solid #d4af37;
     }
-    .content li {
-      list-style: none;
-      padding: 9px 12px;
-      margin: 8px 0;
-      border-radius: 6px;
-      background: #fcf8ef;
+    .student-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .student-item {
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 12px 16px;
+      margin: 4px 0;
+      border-radius: 16px;
+      background: #fcf8f0;
+      border: 1px solid #efe6d6;
+      transition: background 0.15s, border-color 0.15s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.02);
       line-height: 1.6;
     }
-    .content li:last-of-type {
-      text-align: center;
-      margin-top: 18px;
-      color: #666;
-      font-style: italic;
+    .student-item:hover {
+      background: #fffcf3;
+      border-color: #dac292;
     }
-    /* 性别标签 */
-    .boy-tag {
+    .student-item .gender {
       display: inline-block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 2px 10px;
+      border-radius: 30px;
+      margin-right: 8px;
+      letter-spacing: 0.5px;
       background: #4285f4;
-      color: #fff;
-      padding: 2px 7px;
-      border-radius: 4px;
-      margin-right: 6px;
-      font-size: 0.9rem;
+      color: white;
+      flex-shrink: 0;
     }
-    .girl-tag {
-      display: inline-block;
+    .student-item .gender.female {
       background: #ff82b2;
-      color: #fff;
-      padding: 2px 7px;
-      border-radius: 4px;
-      margin-right: 6px;
-      font-size: 0.9rem;
     }
-    /* MC命名牌样式 外号同行 */
+    .student-item .main-info {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 4px 10px;
+    }
+    .student-item .main-info strong {
+      font-weight: 700;
+      color: #1f3a5f;
+      font-size: 1.05rem;
+    }
+    .student-item .main-info .name {
+      font-weight: 700;
+      color: #1f3a5f;
+      font-size: 1.05rem;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      padding: 2px 10px;
+      border-radius: 30px;
+      background: #eef3fa;
+      color: #1f3a5f;
+      margin: 2px 4px 2px 0;
+      border: 1px solid #d0dbe8;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+    .badge-green {
+      background: #e1f3e1;
+      border-color: #b6d7b6;
+      color: #1d5b1d;
+    }
+    .badge-blue {
+      background: #e2edff;
+      border-color: #b6cceb;
+      color: #1f3a7a;
+    }
+    .badge-red {
+      background: #ffebeb;
+      border-color: #f5c2c2;
+      color: #a13d3d;
+    }
+    .badge-gold {
+      background: #f7efd0;
+      border-color: #decb94;
+      color: #7d6427;
+    }
     .nickname-tag {
       display: inline-block;
-      background: #d4b886;
-      color: #222;
-      border: 2px solid #886a47;
-      padding: 1px 6px;
-      border-radius: 3px;
-      margin-left: 8px;
-      font-size: 0.9rem;
+      background: #e7dcc8;
+      border: 2px solid #a58b68;
+      padding: 0 12px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      margin-left: 6px;
+      color: #3d2e1a;
+      line-height: 1.8;
+      font-weight: 500;
     }
-    /* 职位标签美化 */
-    font[color="green"] {
-      background: #e7f9e7;
-      padding: 2px 6px;
-      border-radius: 4px;
+    .nickname-icon {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background-image: url('https://aiyou945.github.io/602/member/nametag.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      vertical-align: middle;
+      margin-right: 4px;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
     }
-    font[color="blue"] {
-      background: #e7f0ff;
-      padding: 2px 6px;
-      border-radius: 4px;
+    .feature-tag {
+      display: inline-block;
+      background: #ffedc9;
+      border: 1px dashed #b8860b;
+      border-radius: 30px;
+      padding: 0 12px;
+      font-size: 0.8rem;
+      color: #5f4400;
+      margin-left: 6px;
+      font-style: italic;
     }
-    font[color="red"] {
-      background: #ffe9e9;
-      padding: 2px 6px;
-      border-radius: 4px;
+    .student-item .extra-info {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px 8px;
+      margin-top: 4px;
+      width: 100%;
+    }
+    @media (max-width: 600px) {
+      .content { padding: 20px 15px; }
+      .header h1 { font-size: 1.9rem; }
+      .student-item { padding: 10px 12px; }
     }
   </style>
 </head>
@@ -157,17 +264,33 @@
 
   <div class="content">
     <h2>全体同学名单</h2>
-    <p>本篇帖子涵盖了六(2)全体同学的名单，包含转学或所有新来的同学，包含大家担任的职位，其中蓝色的字体可以点开查看详细信息，该名单按座号顺序排列：<br /></p>
-    <li><span class="boy-tag">男</span><p><strong>1 号：</strong>郑欢宸</p></li>
-    <li><span class="boy-tag">男</span><p><strong>2 号：</strong>曾楷惟<font color="green">【语文组长】</font></p></li>
-    <li><span class="boy-tag">男</span><p><strong>3 号：</strong>王石骁<font color="blue">【值日班长】</font><font color="red">≡【大队长】</font></p></li>
-    <li><span class="boy-tag">男</span><p><strong>4 号：</strong>郑羿森</p></li>
-    <li><span class="boy-tag">男</span><p><strong>5 号：</strong>谢星辰</p></li>
-    <li><span class="boy-tag">男</span><p><strong>6 号：</strong>廖发俊</p></li>
-    <li><span class="boy-tag">男</span><p><strong>7 号：</strong>肖宇琛<span class="nickname-tag">外号：能大</span></p></li>
-    <li><span class="boy-tag">男</span><p><strong>8 号：</strong>黄启哲<span class="nickname-tag">外号：大运</span></p></li>
-    <li><span class="boy-tag">男</span><p><strong>9 号：</strong>朱一骏</p><font color="green">【语文组长】</font></li>
-    <div class="back">
+    <p>本篇帖子涵盖了六(2)全体同学的名单，包含转学或所有新来的同学，包含大家担任的职位，其中蓝色的字体可以点开查看详细信息，该名单按座号顺序排列：</p>
+    <div class="student-list">
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>1 号：</strong>郑欢宸</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>2 号：</strong>曾楷惟</span><span class="badge badge-green">语文组长</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>3 号：</strong>王石骁</span><span class="badge badge-blue">值日班长</span><span class="badge badge-red">大队长</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>4 号：</strong>郑羿森</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>5 号：</strong>谢星辰</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>6 号：</strong>廖发俊</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>7 号：</strong>肖宇琛</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：能大</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>8 号：</strong>黄启哲</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：大运</span><span class="badge badge-blue">执勤队员</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>9 号：</strong>朱一骏</span><span class="badge badge-green">语文组长</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：pig</span><span class="badge badge-blue">值日班长</span><span class="badge badge-blue">英语组长</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>10 号：</strong>张凌浩</span><span class="badge badge-green">数学组长</span><span class="badge badge-green">数学课代表</span><span class="badge badge-blue">值日班长</span><span class="badge badge-blue">英语组长</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>11 号：</strong>侯和潇</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：猴子</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>12 号：</strong>黄拓</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：臭黄拓</span><span style="font-size:0.75rem;color:#7a5d3a;background:#f2e6d2;padding:0 8px;border-radius:30px;margin-left:6px;">（由语文老师亲自命名）</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>13 号：</strong>倪政曜</span><span class="badge badge-blue">值日班长</span><span class="badge badge-green">语文组长</span><span class="badge badge-green">语文课代表</span><span class="feature-tag">📚 语文成绩爆表</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>14 号：</strong>郭良泓</span><span class="badge badge-blue">执勤队员</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>15 号：</strong>黄抒宏</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>16 号：</strong>杨亦霖</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：小杨</span><span class="badge badge-blue">英语组长</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>17 号：</strong>林经昊</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>18 号：</strong>黄伟宸</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：伟神</span><span class="badge badge-green">数学组长</span><span class="badge badge-blue">英语组长</span><span class="badge badge-blue">值日班长</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>19 号：</strong>卓浚睿</span><span class="nickname-tag"><span class="nickname-icon"></span>外号：睿宝</span><span class="feature-tag">⚡ 曾被称作班级“四大金刚”之一</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>20 号：</strong>张书航</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>21 号：</strong>董梓睿</span></div></div>
+      <div class="student-item"><span class="gender">男</span><div class="main-info"><span class="name"><strong>22 号：</strong>梁烨鑫</span></div></div>
+    </div>
+
+    <div class="back" style="margin-top: 30px;">
       <a href="https://aiyou945.github.io/602/">返回首页</a>
     </div>
   </div>
