@@ -9,55 +9,166 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Microsoft YaHei", sans-serif;
+      font-family: "Microsoft YaHei", "PingFang SC", -apple-system, sans-serif;
     }
+
     body {
-      background: linear-gradient(120deg, #f5f7fa, #e4eaf5);
+      background: linear-gradient(135deg, #f0f4fa 0%, #d9e2ef 100%);
       min-height: 100vh;
-      color: #333;
-    }
-    a {
-      background: blue;
-      display: inline-block;
-      width: 100px;
-      height: 40px;
-      text-align: center;
-      line-height: 40px;
-      text-decoration: none;
-      border-radius: 8px;
-      color: white;
-      margin-top: 10px;
-      transition: all 0.3s ease;
-    }
-    a:hover {
-      transform: scale(1.1);
-      background: darkblue;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 30px 20px;
     }
+
+    .container {
+      max-width: 820px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
     .header {
       text-align: center;
-      padding: 40px 0;
-      color: #2c5282;
+      padding: 40px 30px 30px;
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 40px 40px 24px 24px;
+      box-shadow: 0 12px 30px rgba(44, 82, 130, 0.10);
+      margin-bottom: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: box-shadow 0.25s;
     }
+
     .header h1 {
-      font-size: 2.2rem;
-      margin-bottom: 10px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+      font-size: 2.6rem;
+      font-weight: 700;
+      background: linear-gradient(145deg, #1f3a6b, #b8860b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
     }
+
     .header p {
-      font-size: 1.1rem;
-      opacity: 0.8;
+      font-size: 1.2rem;
+      color: #4a5b6e;
+      letter-spacing: 6px;
+      font-weight: 300;
+      border-top: 2px solid #d4c5a6;
+      display: inline-block;
+      padding-top: 10px;
+      padding-left: 12px;
+      padding-right: 12px;
     }
-    .content {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      padding: 30px;
-      margin-bottom: 20px;
+
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 28px;
+      padding: 32px 34px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(44, 82, 130, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: transform 0.15s ease, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 14px 32px rgba(44, 82, 130, 0.10);
+    }
+
+    .card h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #1f3a5f;
+      border-left: 6px solid #d4af37;
+      padding-left: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card h2::after {
+      content: "✦";
+      color: #b8860b;
+      font-size: 1.4rem;
+      margin-left: auto;
+      opacity: 0.4;
+    }
+
+    .card p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #2d3a4b;
+      margin-bottom: 18px;
+    }
+
+    .card p .gray-meta {
+      color: #7a8a9e;
+      font-size: 0.95rem;
+      background: #f0f4fa;
+      padding: 2px 12px;
+      border-radius: 40px;
+      display: inline-block;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #1f3a6b;
+      color: white;
+      padding: 10px 30px;
+      border-radius: 60px;
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 1px;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(31, 58, 107, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .btn:hover {
+      background: #0f2a50;
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(31, 58, 107, 0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #1f3a6b;
+      border: 2px solid #1f3a6b;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: #1f3a6b;
+      color: white;
+    }
+
+    .flex-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px 20px;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 2.0rem;
+      }
+      .card {
+        padding: 24px 18px;
+      }
+      .card h2 {
+        font-size: 1.3rem;
+      }
     }
   </style>
 </head>
@@ -69,18 +180,26 @@
       <p>珍藏六年时光 · 留存美好回忆</p>
     </div>
     
-    <div class="content">
+    <div class="card">
       <h2>全体同学名单</h2>
-      <p>本篇帖子涵盖了六(2)全体同学的名单！<br /><font color="gray">创建时间：2026-6-28 17:31</font><br /></p>
-      <a href="https://aiyou945.github.io/602/member-no-data/">查看详情</a>
-      <br />
-      <font color="red">wrong：此帖正在编辑中，暂时无法查看！</font>
+      <p>
+        本篇帖子涵盖了六(2)全体同学的名单！<br />
+        <span class="gray-meta">创建时间：2026-7-26 17:38</span>
+      </p>
+      <div class="flex-actions">
+        <a href="https://aiyou945.github.io/602/member/" class="btn">查看详情</a>
+      </div>
     </div>
     
-    <div class="content">
+    <div class="card">
       <h2>测试网站功能</h2>
-      <p>如果你能看到这篇帖子，那么恭喜你，你已经成功来到了六年(2)班的同学回忆录！请点开下面的按钮测试网页功能吧！<br /></p>
-      <a href="https://aiyou945.github.io/602/test/">查看详情</a>
+      <p>
+        如果你能看到这篇帖子，那么恭喜你，你已经成功来到了六年(2)班的同学回忆录！请点开下面的按钮测试网页功能吧！<br />
+        <span class="gray-meta">创建时间：2026-6</span>
+      </p>
+      <div class="flex-actions">
+        <a href="https://aiyou945.github.io/602/test/" class="btn btn-outline">查看详情</a>
+      </div>
     </div>
   </div>
   
