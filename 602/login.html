@@ -41,7 +41,7 @@
         for (var i = 0; i < password.length; i++) {
           hashed = (hashed * 31 + password.charCodeAt(i)) & 0xFFFFFFFF;
         }
-        if (hashed === 1213380246) {
+        if (hashed === 1477323774) {
           sessionStorage.setItem('logined', 'true');
           var backUrl = sessionStorage.getItem('backUrl') || '/602/';
           location.href = backUrl;
