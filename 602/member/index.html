@@ -280,6 +280,46 @@
       margin-top: 4px;
       width: 100%;
     }
+    .loading-box {
+      text-align: center;
+      padding: 30px;
+      color: #999;
+    }
+    .loading-box .main-text {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .loading-box .sub-text {
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+    .loading-box .link-text {
+      font-size: 0.85rem;
+      color: #ccc;
+      margin-top: 8px;
+    }
+    .loading-box .link-text a {
+      color: #2c5282;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .btn-download {
+      display: inline-block;
+      background: #27ae60;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 6px;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s;
+    }
+    .btn-download:hover {
+      background: #1e8449;
+    }
     @media (max-width: 600px) {
       .content { padding: 20px 15px; }
       .header h1 { font-size: 1.9rem; }
@@ -297,12 +337,18 @@
   <div class="content" id="mainContent">
     <h2>全体同学名单</h2>
     <div class="notice">
-      📢 可能有漏统计的职位或个别错别字，欢迎纠正！也欢迎投稿更多内容！<br>
+      📢 可能有漏统计的部分，欢迎纠正！也欢迎投稿更多内容！<br>
       📧 联系方式：QQ <span class="qq">2235894707</span>
     </div>
     <p>本篇帖子涵盖了六(2)全体同学的名单，包含转学或所有新来的同学，包含大家担任的职位，其中蓝色的字体可以点开查看详细信息，该名单按座号顺序排列：</p>
     <div class="student-list" id="studentList">
-      <div style="text-align:center;padding:30px;color:#999;">加载中...</div>
+      <div class="loading-box">
+        <div class="main-text">⏳ 加载中...</div>
+        <div class="sub-text">如果长时间未加载，请尝试刷新页面或检查网络连接</div>
+        <div class="link-text">
+          如仍无法加载，可点击此按钮下载 <a href="javascript:void(0)" onclick="downloadTxt()">同学录文档版</a> 进行查看！
+        </div>
+      </div>
     </div>
 
     <div class="back" style="margin-top: 30px;">
@@ -311,17 +357,31 @@
   </div>
 </div>
 
-<!--
 <script>
   document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'F12' || (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J'))) {
+    if(e.key === 'F12' || (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J'))){
       e.preventDefault();
       return false;
     }
   });
+  (function checkLogin(){
+    let logined = sessionStorage.getItem('logined');
+    if(!logined){
+      sessionStorage.setItem('backUrl', location.href);
+      location.href = '/602/login.html';
+    }
+  })();
+
+  function downloadTxt() {
+    var link = document.createElement('a');
+    link.href = '/602/member/602.txt';
+    link.download = '602.txt';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 </script>
--->
 <script src="/602/member/loading.js"></script>
 </body>
 </html>
