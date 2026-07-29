@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【那些让你崩溃的编程题】目录 · 哎呦</title>
+  <meta name="description" content="哎呦的编程日常 · 崩溃题集">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f7f9fc;
+      color: #1e293b;
+      line-height: 1.6;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 1100px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+      margin: 2.5rem auto;
+      padding: 2.5rem 2.8rem;
+      transition: all 0.2s ease;
+    }
+
+    .page-header {
+      background: linear-gradient(145deg, #1e2b3c, #0f1a2b);
+      color: white;
+      padding: 2.5rem 2.8rem;
+      border-radius: 24px;
+      margin-bottom: 2.8rem;
+      box-shadow: 0 8px 24px rgba(0, 20, 40, 0.12);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::after {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -10%;
+      width: 280px;
+      height: 280px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .page-header h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.35rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-header h1 small {
+      font-weight: 400;
+      opacity: 0.8;
+      font-size: 0.5em;
+      display: inline-block;
+      margin-left: 0.3rem;
+    }
+
+    .page-header .project-tagline {
+      font-size: 1.2rem;
+      font-weight: 400;
+      opacity: 0.85;
+      letter-spacing: 0.3px;
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 0.8rem;
+      display: inline-block;
+      margin-top: 0.4rem;
+    }
+
+    .section-title {
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-top: 0.2rem;
+      margin-bottom: 1.8rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid #eef2f6;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title span {
+      background: #d0d9e6;
+      color: #1e2b3c;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.15rem 0.9rem;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 18px;
+      border: 1px solid #eef2f6;
+      background: #fbfcfe;
+      margin-bottom: 2.2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.96rem;
+      min-width: 620px;
+    }
+
+    thead {
+      background: #f1f4f9;
+      border-bottom: 2px solid #dce2ec;
+    }
+
+    th {
+      text-align: center;
+      padding: 1rem 0.8rem;
+      font-weight: 600;
+      color: #1e2b3c;
+      letter-spacing: 0.3px;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    td {
+      padding: 1rem 0.7rem;
+      text-align: center;
+      border-bottom: 1px solid #edf2f7;
+      vertical-align: middle;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: #f4f7fc;
+      transition: background 0.15s ease;
+    }
+
+    /* --- 按钮样式 (a 标签) --- */
+    a {
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    /* 表格内的链接按钮 */
+    .table-link {
+      display: inline-block;
+      background: #eef2f6;
+      color: #1e2b3c;
+      padding: 0.35rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      border: 1px solid transparent;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+
+    .table-link:hover {
+      background: #dce2ec;
+      color: #0f1a2b;
+      border-color: #c8d2df;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    /* 原题链接 (表格内左侧) 也变为按钮风格，但稍弱化 */
+    .source-link {
+      display: inline-block;
+      background: #f1f4f9;
+      color: #1f5f9e;
+      padding: 0.25rem 1rem;
+      border-radius: 30px;
+      font-weight: 500;
+      border: 1px solid #e2e8f0;
+    }
+
+    .source-link:hover {
+      background: #e2eaf5;
+      border-color: #b6cae0;
+      color: #0d3b6b;
+    }
+
+    /* 底部导航按钮 */
+    .footer-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #f1f5f9;
+      padding: 0.5rem 1.6rem;
+      border-radius: 60px;
+      font-weight: 500;
+      color: #1e2b3c;
+      border: 1px solid #e2e8f0;
+      transition: all 0.2s;
+    }
+
+    .footer-btn:hover {
+      background: #dce2ec;
+      border-color: #bcc9db;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
+    }
+
+    .footer-btn img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .badge-wip {
+      background: #eef2f6;
+      color: #475569;
+      padding: 0.2rem 0.9rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    .ps-block {
+      background: #f1f5f9;
+      padding: 1.5rem 2rem;
+      border-radius: 20px;
+      margin: 2rem 0 1.2rem 0;
+      border-left: 4px solid #8ba0bb;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #1e2b3c;
+    }
+
+    .ps-block strong {
+      font-weight: 600;
+      color: #0f1a2b;
+    }
+
+    .ps-block a {
+      font-weight: 500;
+      display: inline-block;
+      background: #e2eaf5;
+      padding: 0.1rem 1rem;
+      border-radius: 30px;
+      color: #1f5f9e;
+      border: 1px solid #d0dcec;
+      transition: all 0.2s;
+    }
+
+    .ps-block a:hover {
+      background: #d0dcec;
+      border-color: #a9bdd6;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.8rem;
+      margin-top: 2.2rem;
+      padding-top: 1.8rem;
+      border-top: 2px solid #eef2f6;
+    }
+
+    .site-footer {
+      text-align: center;
+      margin-top: 1.8rem;
+      padding-top: 1rem;
+      color: #6b7a8f;
+      font-size: 0.9rem;
+      border-top: 1px solid #eef2f6;
+    }
+
+    .site-footer a {
+      display: inline-block;
+      background: #eef2f6;
+      padding: 0.1rem 1.2rem;
+      border-radius: 30px;
+      color: #3d5a78;
+      border: 1px solid #dfe6ef;
+      transition: all 0.2s;
+    }
+
+    .site-footer a:hover {
+      background: #dce2ec;
+      border-color: #c2cedd;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        padding: 1.5rem 1.2rem;
+        margin: 1.2rem auto;
+        border-radius: 20px;
+      }
+      .page-header {
+        padding: 1.8rem 1.5rem;
+        border-radius: 20px;
+      }
+      .page-header h1 {
+        font-size: 1.8rem;
+      }
+      .page-header .project-tagline {
+        font-size: 1rem;
+      }
+      .section-title {
+        font-size: 1.5rem;
+      }
+      td, th {
+        padding: 0.7rem 0.4rem;
+        font-size: 0.88rem;
+      }
+      .ps-block {
+        padding: 1rem 1.2rem;
+      }
+      .footer-links {
+        gap: 1rem;
+      }
+      .footer-btn {
+        padding: 0.4rem 1.2rem;
+        font-size: 0.9rem;
+      }
+      .footer-btn img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0 0.8rem;
+      }
+      .container {
+        padding: 1rem 0.8rem;
+      }
+      .page-header h1 {
+        font-size: 1.5rem;
+      }
+      .page-header .project-tagline {
+        font-size: 0.9rem;
+      }
+      table {
+        min-width: 480px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header class="page-header" role="banner">
+    <h1>【那些让你让你崩溃的编程题】<small>目录</small></h1>
+    <div class="project-tagline">哎呦的编程日常</div>
+  </header>
+
+  <main id="content" role="main">
+    <h2 class="section-title">
+      <span>📋</span> 那些让你让你崩溃的编程题 · 目录
+    </h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>原题链接</th>
+            <th>题目名称</th>
+            <th>最新更新时间</th>
+            <th>点我查看</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://www.luogu.com.cn/problem/P1828" class="source-link">洛谷P1828</a></td>
+            <td>香甜的黄油</td>
+            <td>2025-12-20-21:00</td>
+            <td><a href="https://aiyou945.github.io/problem/P1828/" class="table-link">P1828</a></td>
+          </tr>
+          <tr>
+            <td><a href="https://www.luogu.com.cn/problem/P3379" class="source-link">洛谷P3379</a></td>
+            <td>最近公共祖先(LCA)</td>
+            <td>2026-1-31-22:30</td>
+            <td><a href="https://aiyou945.github.io/problem/P3379" class="table-link">P3379</a></td>
+          </tr>
+          <tr>
+            <td><a href="https://oj.piaoztsdy.cn/p/E1006" class="source-link">TouchFish OJ E1006</a></td>
+            <td>阶乘之比</td>
+            <td>2026-2-1-18:00</td>
+            <td><a href="https://aiyou945.github.io/problem/E1006" class="table-link">E1006</a></td>
+          </tr>
+          <tr>
+            <td><a href="https://blog.csdn.net/ab603803/article/details/140932669" class="source-link">《十年OI》</a></td>
+            <td>特别篇：十年OI</td>
+            <td>2026-3-13-21:05</td>
+            <td><a href="https://aiyou945.github.io/problem/tenOI.html" class="table-link">十年OI</a></td>
+          </tr>
+          <tr>
+            <td><a href="https://www.luogu.com.cn/problem/P1194" class="source-link">洛谷P1194</a></td>
+            <td>买礼物</td>
+            <td>2026-2-2-00:00</td>
+            <td><span class="badge-wip">该文章正在编辑中，敬请期待</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ps-block">
+      <p><strong>ps：</strong>TouchFish OJ 是 piaoztsdy 创建的一个 OJ 测评网站，<a href="https://github.com/pztsdy">这是他的 Github 账户</a><br>
+      <strong>ps：</strong>安放在 TouchFish OJ 中的题目大多是哎呦经历过，但找不到原题的，大家参考一下就可以了</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="https://oj.piaoztsdy.cn" class="footer-btn">
+        <img src="https://aiyou945.github.io/problem/touchfish.png" alt="TouchFish OJ 图标" width="24" height="24">
+        TouchFish OJ
+      </a>
+      <a href="https://aiyou945.github.io" class="footer-btn">返回首页</a>
+    </div>
+
+    <footer class="site-footer">
+      <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+    </footer>
+  </main>
+</div>
+    <script>
+      document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+      document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) {
+          e.preventDefault();
+          return false;
+        }
+        if (e.key === 'F12') {
+          e.preventDefault();
+          return false;
+        }
+      });
+    </script>
+</body>
+</html>
