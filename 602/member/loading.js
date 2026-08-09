@@ -12,7 +12,7 @@ async function loadStudents() {
     const data = await response.json();
     renderStudents(data);
   } catch (error) {
-    document.getElementById('studentList').innerHTML = '<div style="text-align:center;padding:30px;color:#999;">加载失败，请刷新重试</div>';
+    document.getElementById('studentList').innerHTML = '<div style="text-align:center;padding:30px;color:#999;">加载失败，请刷新重试（访问https://supabase.com/dashboard/project/vrmxttqpaaodgqjlwfwq查看详情）</div>';
   }
 }
 
