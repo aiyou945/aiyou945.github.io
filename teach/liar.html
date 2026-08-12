@@ -2,7 +2,7 @@
 <html lang="en-US">
   <head>
     <meta charset="UTF-8">
-    <title>游戏教程01-教你手搓骗子酒馆（上）</title>
+    <title>游戏教程01-教你手搓骗子酒馆（中）</title>
     <meta name="generator" content="Jekyll v3.10.0" />
     <meta property="og:title" content="哎呦的个人主页" />
     <meta property="og:locale" content="en_US" />
@@ -70,52 +70,318 @@
         cursor: pointer;
         font-size: 14px;
       }
+      .code-block {
+        background: #1e293b;
+        color: #e2e8f0;
+        padding: 16px 20px;
+        border-radius: 12px;
+        overflow-x: auto;
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin: 12px 0;
+      }
+      .code-block .comment { color: #8b9bb5; }
+      .code-block .keyword { color: #ff79c6; }
+      .code-block .string { color: #f1fa8c; }
+      .code-block .func { color: #50fa7b; }
+      .code-block .type { color: #8be9fd; }
+      .code-block .num { color: #bd93f9; }
+      .highlight-box {
+        background: #f0f4ff;
+        padding: 16px 22px;
+        border-radius: 14px;
+        border-left: 5px solid #2a6df4;
+        margin: 18px 0;
+      }
+      .warning-box {
+        background: #fff3e0;
+        padding: 16px 22px;
+        border-radius: 14px;
+        border-left: 5px solid #ff9800;
+        margin: 18px 0;
+      }
+      .btn-code {
+        display: inline-block;
+        background: #1e293b;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-decoration: none;
+        margin: 6px 0 12px 0;
+        border: 1px solid #3b4a5e;
+        transition: 0.2s;
+        cursor: pointer;
+      }
+      .btn-code:hover {
+        background: #2d3f57;
+        border-color: #6a8bb0;
+      }
     </style>
   </head>
   <body>
     <a id="skip-to-content" href="#content">Skip to the content.</a>
     <header class="page-header" role="banner">
-      <h1 class="project-name">游戏教程01：教你手搓骗子酒馆（上）</h1>
-      <h2 class="project-tagline"></h2>
+      <h1 class="project-name">游戏教程01：教你手搓骗子酒馆（中）</h1>
+      <h2 class="project-tagline">从零实现核心玩法——出牌、质疑与开枪</h2>
     </header>
     <main id="content" class="main-content" role="main">
       <p>
-        <a href="https://aiyou945.github.io/teach/">返回上一级目录</a>
+        <a href="https://aiyou945.github.io/teach/">← 返回上一级目录</a>
+      </p>
+      <p>
         相信无数的编程小白，都幻想过能用C++编程制作出一款“好玩到爆炸”的游戏，推广到同学那里，<br />
-  不得成为整个编程班的“高手”啊……那么这期，就由哎呦手把手教会大家，如何用C++编程制作出 <br />
-  无数游戏主播都玩过的一款热门游戏——<font color="red">骗子酒馆！</font> <br />
-  <font color="purple">注意：本教程仅供娱乐学习，版权和解释权归原作者所有，请勿用此代码进行商业宣传等活动！</font>
+        不得成为整个编程班的“高手”啊……那么这期，就由哎呦手把手教会大家，如何用C++编程制作出 <br />
+        无数游戏主播都玩过的一款热门游戏——<font color="red">骗子酒馆！</font> <br />
+        <font color="purple">注意：本教程仅供娱乐学习，版权和解释权归原作者所有，请勿用此代码进行商业宣传等活动！</font>
       </p>
+
       <h3>1.1 回顾游戏内容</h3>
-      <p>首先，让我们回顾一下“骗子酒馆”这款游戏的内容吧。<br />
-游戏开局有四个人，每人发到五张牌<font color="blue">（牌型有A，Q，K，Joker）</font>，并且游戏开局还会指定一种牌型为系统牌<font color="blue">（Joker除外）</font>。
-每名玩家都有手枪，手枪里有6发子弹，其中有5发空弹，1发实弹，由系统随机分配。
-开始游戏后，将会由随机一名玩家进行出牌。该名玩家可以选择出1~3张牌，可以出与系统牌相符的真牌，也可以出与系统牌不相符的假牌。下家可以选择质疑：<font color="green">如果上家出的是真牌，则质疑失败，质疑的人开一枪；反之质疑成功，上家开一枪（每次开枪，都会重置手牌和系统牌）</font>。<br />
-若下家选择不质疑，则下家出牌，一直延续。如果有玩家出完了牌，则该玩家可以不参与后面的出牌。当场上一名玩家开枪并开到实弹后，该玩家出局，游戏继续；直到场上只剩一名玩家后，该玩家胜利。<br />
-<font color="red">（注意：如果场上只剩下两名玩家，当其中一方出完牌后，另一方必须开牌）</font>。<br />我们需要用编程，一步步模拟还原这些过程。
+      <p>
+        首先，让我们回顾一下“骗子酒馆”这款游戏的内容吧。<br />
+        游戏开局有四个人，每人发到五张牌<font color="blue">（牌型有A，Q，K，Joker）</font>，并且游戏开局还会指定一种牌型为系统牌<font color="blue">（Joker除外）</font>。
+        每名玩家都有手枪，手枪里有6发子弹，其中有5发空弹，1发实弹，由系统随机分配。
+        开始游戏后，将会由随机一名玩家进行出牌。该名玩家可以选择出1~3张牌，可以出与系统牌相符的真牌，也可以出与系统牌不相符的假牌。下家可以选择质疑：<font color="green">如果上家出的是真牌，则质疑失败，质疑的人开一枪；反之质疑成功，上家开一枪（每次开枪，都会重置手牌和系统牌）</font>。<br />
+        若下家选择不质疑，则下家出牌，一直延续。如果有玩家出完了牌，则该玩家可以不参与后面的出牌。当场上一名玩家开枪并开到实弹后，该玩家出局，游戏继续；直到场上只剩一名玩家后，该玩家胜利。<br />
+        <font color="red">（注意：如果场上只剩下两名玩家，当其中一方出完牌后，另一方必须开牌）</font>。<br />我们需要用编程，一步步模拟还原这些过程。
       </p>
+
       <h3>1.2 所需代码展示</h3>
       <p>如果想让我们的游戏更加美观智能，需要用到不少的新代码块，首先就来介绍一下<strong>SetConsoleTextAttribute</strong>语句：</p>
-      <p><div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">SetConsoleTextAttribute</span>(handle,COLOR);</code></pre></div></div></p>
+      <div class="code-block"><span class="keyword">SetConsoleTextAttribute</span>(handle, COLOR);</div>
       <p>这个语句可以改变字体的颜色，让我们的游戏变得引人注目，丰富多彩。至于具体的用法，下面会统一介绍。</p>
-      <p>另外，我们的游戏不可能只有一个界面，所以我们还需要一个<font color="purple">可以清屏</font>的语句。另外，我们顺便再介绍一个实用的代码块，后面<font color="blue">可能会用到</font>...</p>
-      <p><div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">system</span>("cls");</code></pre></div></div></p>
-      <p>上面的代码就是用来清屏的语句，同理，在system的括号里填上pause，就可以在屏幕上显示“按下任意键继续”，按下任意键后即可继续执行代码。</p>
-      <p>此外，为了让我们的游戏更加“高级”，可以加入一个判断按键按下的指令，这样玩家选关时操作会更加简单，只要按下对应的数字就可以了。我们可以把这段代码粘贴到头文件下方：</p>
-      <p><div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#define KEY_DOWN(vk) ((GetAsyncKeyState(vk) & 0x8000) ? 1 : 0)</span></code></pre></div></div></p>
+      <p>另外，我们的游戏不可能只有一个界面，所以我们还需要一个<font color="purple">可以清屏</font>的语句：</p>
+      <div class="code-block"><span class="keyword">system</span>(<span class="string">"cls"</span>);</div>
+      <p>上面的代码就是用来清屏的语句，同理，在system的括号里填上pause，就可以在屏幕上显示“按下任意键继续”。</p>
+      <p>此外，为了让我们的游戏更加“高级”，可以加入一个判断按键按下的指令：</p>
+      <div class="code-block"><span class="keyword">#define</span> KEY_DOWN(vk) ((GetAsyncKeyState(vk) & 0x8000) ? 1 : 0)</div>
       <font color="red">注意：以上介绍的代码块都需要windows.h头文件才可以正常使用！</font>
+
       <h3>1.3 搭建主界面</h3>
-      <p>介绍完基础代码，我们就可以考虑搭建游戏的主界面了。<br />这一部分我们可以做成一个选关界面，玩家可以选择想玩的关卡游玩。这时候，我们的<strong>KEY_DOWN</strong>指令就能派上用场了。<br />它的用法也很简单，对于数字，只需要在括号里填上单引号，在引号内填入需要检测按下的数字即可。<br />我们可以用一个while循环，不停检测是否按下按键，根据数字进入对应的模式。</p>
-      <p>哎呦在这里给大家做一个示范，如果大家有更多的创意，可以用上哦~</p>
-      <a href="https://aiyou945.github.io/teach/liar.html#code1">查看此部分代码</a>
+      <p>
+        介绍完基础代码，我们就可以考虑搭建游戏的主界面了。<br />
+        这一部分我们可以做成一个选关界面，玩家可以选择想玩的关卡游玩。这时候，我们的<strong>KEY_DOWN</strong>指令就能派上用场了。
+      </p>
+      <a href="https://aiyou945.github.io/teach/liar.html#code1" class="btn-code">查看主界面代码</a>
       <p>此外，从代码就可以看出来，我们后面搭建的工程量可能会很大，我们尽量做到<font color="red">“模块化”</font>，也就是把一个功能放在一个函数里，用到时直接调用。</p>
       <p>好了，接下来就让我们正式开始搭建游戏吧！</p>
-      <h3>1.4 核心实现：重置开枪数、底牌与玩家手牌</h3>
-      <p>接下来，就让我们转入正题，来实现骗子酒馆这款游戏最重要的部分：<font color="purple">模拟玩家手牌、游戏底牌和初始枪内的子弹情况。</font></p>
-      <p>根据游戏内容，玩家初始有5张手牌，每张手牌可能是Ace,Queen,King和Joker中的一种，还可能是恶魔牌（一局游戏中只会出现一张）。<br />对于这种情况，就可以用上rand语句了……</p>
-      <p>（敬请期待）</p>
+
+      <h3>1.4 核心实现：初始化与全局变量</h3>
+      <p>
+        在开始之前，我们先定义几个关键的全局变量，用来追踪游戏状态：
+      </p>
+      <div class="code-block">
+        <span class="type">char</span> a[10];        <span class="comment">// 存储玩家的手牌</span>
+        <span class="type">char</span> b[10];        <span class="comment">// 存储对手的手牌</span>
+        <span class="type">char</span> my[10];       <span class="comment">// 当前玩家手牌</span>
+        <span class="type">char</span> ch[10];       <span class="comment">// 存储每个玩家的底牌</span>
+        <span class="type">int</span> sum_p = 9;     <span class="comment">// 玩家数量（初始为9）</span>
+        <span class="type">int</span> ap, bp;        <span class="comment">// 玩家和对手的实弹位置</span>
+      </div>
+
+      <p><strong>init函数</strong> 负责初始化玩家的“血量”——也就是手枪里实弹的位置：</p>
+      <div class="code-block">
+        <span class="type">int</span> <span class="func">init</span>(<span class="type">int</span> player) {
+            <span class="type">int</span> bomm = rand() % 6 + 1;  <span class="comment">// 实弹在第几发（1~6）</span>
+            <span class="keyword">return</span> bomm;
+        }
+      </div>
+
+      <p>每次对局开始时，我们需要重置所有状态：</p>
+      <div class="code-block">
+        <span class="func">memset</span>(a, 0, <span class="keyword">sizeof</span>(a));
+        <span class="func">memset</span>(b, 0, <span class="keyword">sizeof</span>(b));
+        sum_p = 9;
+        <span class="type">int</span> ap = <span class="func">init</span>(1);   <span class="comment">// 玩家实弹位置</span>
+        a[ap] = 1;             <span class="comment">// 标记玩家已开枪1次</span>
+        <span class="type">int</span> bp = <span class="func">init</span>(2);   <span class="comment">// 对手实弹位置</span>
+        b[bp] = 1;
+      </div>
+      <div class="highlight-box">
+        💡 <strong>理解实弹机制：</strong>手枪有6发子弹，其中1发是实弹。init函数随机返回1~6的数字，代表实弹的位置。当玩家开枪次数达到这个数字时，就“中弹”出局。
+      </div>
+
+      <h3>1.5 底牌生成与手牌分配</h3>
+      <p>每一轮游戏开始，系统会随机指定一张底牌（Ace/Queen/King）：</p>
+      <div class="code-block">
+        <span class="type">int</span> p = <span class="func">init</span>(2);    <span class="comment">// 随机生成底牌索引</span>
+        <span class="type">char</span> ch_p;
+        <span class="keyword">if</span>(ch[p] == 'A') {
+            cout << <span class="string">"本轮底牌:Ace"</span> << endl;
+            ch_p = 'A';
+        } <span class="keyword">else if</span>(ch[p] == 'Q') {
+            cout << <span class="string">"本轮底牌:Queen"</span> << endl;
+            ch_p = 'Q';
+        } <span class="keyword">else</span> {
+            cout << <span class="string">"本轮底牌:King"</span> << endl;
+            ch_p = 'K';
+        }
+      </div>
+
+      <p>玩家的手牌由两部分组成：随机生成的牌（80%概率为底牌，20%概率为Joker）和补全的牌：</p>
+      <div class="code-block">
+        <span class="type">int</span> num1 = rand() % 5 + 1;  <span class="comment">// 随机生成1~5张"真牌"</span>
+        <span class="keyword">for</span>(<span class="type">int</span> i = 1; i <= num1; i++) {
+            <span class="type">int</span> joker = rand() % 100 + 1;
+            <span class="keyword">if</span>(joker <= 80) {
+                my[i] = ch_p;       <span class="comment">// 80%概率是底牌</span>
+            } <span class="keyword">else</span> {
+                my[i] = 'J';        <span class="comment">// 20%概率是Joker</span>
+            }
+        }
+        <span class="comment">// 补全剩余手牌（非底牌，且不能是Joker）</span>
+        <span class="keyword">for</span>(<span class="type">int</span> i = num1 + 1; i <= 5; i++) {
+            <span class="type">int</span> pp = <span class="func">init</span>(4);
+            <span class="keyword">if</span>(pp == 1) {
+                <span class="keyword">if</span>(ch_p == 'A') my[i] = 'Q';
+                <span class="keyword">if</span>(ch_p == 'Q') my[i] = 'A';
+                <span class="keyword">if</span>(ch_p == 'K') my[i] = 'A';
+            } <span class="keyword">else</span> {
+                <span class="keyword">if</span>(ch_p == 'A') my[i] = 'K';
+                <span class="keyword">if</span>(ch_p == 'Q') my[i] = 'A';
+                <span class="keyword">if</span>(ch_p == 'K') my[i] = 'Q';
+            }
+        }
+      </div>
+      <div class="warning-box">
+        ⚠️ <strong>注意：</strong>Joker是万能牌，可以当作任何牌使用。在质疑判定时，Joker视为真牌。
+      </div>
+
+      <h3>1.6 出牌逻辑与质疑机制</h3>
+      <p>出牌环节是整个游戏的核心。玩家可以选择出1~3张牌：</p>
+      <div class="code-block">
+        <span class="comment">// 玩家选择出牌张数</span>
+        <span class="type">int</span> n;
+        cin >> n;
+        <span class="keyword">if</span>(n > 3) n = 3;
+
+        <span class="type">int</span> right = 1;  <span class="comment">// 标记出的是否为真牌</span>
+        <span class="keyword">for</span>(<span class="type">int</span> i = 1; i <= n; i++) {
+            <span class="type">int</span> x;
+            cin >> x;      <span class="comment">// 输入手牌位置（1~5）</span>
+            <span class="keyword">if</span>(my[x] != ch_p && my[x] != 'J') {
+                right = 0;  <span class="comment">// 不是真牌也不是Joker → 假牌</span>
+            }
+            my[x] = '0';    <span class="comment">// 标记该位置已出牌</span>
+        }
+      </div>
+
+      <p><strong>质疑机制：</strong>对手可以选择是否质疑。在基础版本中，我们用随机数模拟对手的决策：</p>
+      <div class="code-block">
+        <span class="type">int</span> k = rand() % 100 + 1;
+        <span class="keyword">if</span>(k <= 40 || len1 == 0) {   <span class="comment">// 40%概率质疑，或没牌时强制质疑</span>
+            <span class="keyword">if</span>(right == 1) {
+                cnt = 1;   <span class="comment">// 出真牌 → 质疑失败，对手开枪</span>
+            } <span class="keyword">else</span> {
+                cnt = 2;   <span class="comment">// 出假牌 → 质疑成功，你开枪</span>
+            }
+        } <span class="keyword">else</span> {
+            shunxu = 2;    <span class="comment">// 不质疑，轮到对手出牌</span>
+        }
+      </div>
+      <div class="highlight-box">
+        🎯 <strong>质疑规则总结：</strong><br>
+        • 出真牌 + 质疑 → 质疑者开枪（质疑失败）<br>
+        • 出假牌 + 质疑 → 出牌者开枪（质疑成功）<br>
+        • 不质疑 → 继续游戏
+      </div>
+
+      <h3>1.7 开枪与死亡判定</h3>
+      <p>当质疑发生后，失败的一方需要开一枪：</p>
+      <div class="code-block">
+        <span class="keyword">if</span>(cnt == 1) {   <span class="comment">// 对手开枪</span>
+            your_bomm++;
+            <span class="keyword">if</span>(your_bomm == bp) {
+                cout << <span class="string">"You are the last winner!"</span> << endl;
+                <span class="keyword">return</span>;
+            }
+        } <span class="keyword">else</span> {         <span class="comment">// 你开枪</span>
+            my_bomm++;
+            <span class="keyword">if</span>(my_bomm == ap) {
+                cout << <span class="string">"You are die!"</span> << endl;
+                <span class="keyword">return</span>;
+            }
+        }
+      </div>
+
+      <h3>1.8 完整游戏循环框架</h3>
+      <p>整合以上所有部分，我们得到完整的游戏循环：</p>
+      <a href="https://aiyou945.github.io/teach/liar.html#code2" class="btn-code">查看完整框架代码</a>
+
+      <h3>1.9 对手AI的简单实现</h3>
+      <p>双人模式中，对手的AI至少需要包含出牌策略和质疑策略：</p>
+      <div class="code-block">
+        <span class="comment">// 对手出牌策略</span>
+        <span class="type">int</span> pai = rand() % 2 + 1;   <span class="comment">// 1=出真牌，2=出假牌</span>
+        <span class="keyword">if</span>(pai == 1 || num2 == 0) {
+            <span class="comment">// 出真牌（1~3张）</span>
+            <span class="type">int</span> num = min(3, 5 - num2);
+            len2 -= num;
+            num2 += num;
+        } <span class="keyword">else</span> {
+            <span class="comment">// 出假牌（随机1~3张）</span>
+            <span class="type">int</span> your = rand() % 3 + 1;
+            len2 -= your;
+        }
+
+        <span class="comment">// 玩家选择是否质疑</span>
+        <span class="type">int</span> kai;
+        cin >> kai;
+        <span class="keyword">if</span>(kai == 1) {
+            <span class="keyword">if</span>(pai == 1) cnt = 2;  <span class="comment">// 真牌→质疑失败→你开枪</span>
+            <span class="keyword">else</span> cnt = 1;          <span class="comment">// 假牌→质疑成功→对手开枪</span>
+        }
+      </div>
+
+      <h3>1.10 特殊情况处理</h3>
+      <div class="highlight-box">
+        📌 <strong>必须注意的特殊情况：</strong><br>
+        • <strong>手牌出完：</strong>len1 == 0 或 len2 == 0 时，该玩家不出牌<br>
+        • <strong>强制开牌：</strong>只剩两名玩家时，一方出完牌，另一方必须质疑<br>
+        • <strong>实弹随机：</strong>每次开局实弹位置随机（1~6），增加不确定性
+      </div>
+
+      <h3>1.11 基础版本总结</h3>
+      <p>至此，我们已完成骗子酒馆基础版本的所有核心功能：</p>
+      <ul>
+        <li>✅ 底牌随机生成（Ace/Queen/King）</li>
+        <li>✅ 玩家手牌随机分配（含Joker）</li>
+        <li>✅ 出牌逻辑（1~3张，真牌/假牌）</li>
+        <li>✅ 质疑机制（玩家质疑 + AI质疑）</li>
+        <li>✅ 开枪与死亡判定</li>
+        <li>✅ 游戏循环（重置状态，持续进行）</li>
+        <li>✅ 胜利条件判定</li>
+      </ul>
+
+      <div class="highlight-box">
+        🎮 <strong>基础版游戏流程：</strong><br>
+        1. 初始化：分配实弹位置，重置所有状态<br>
+        2. 每轮开始：生成底牌和手牌<br>
+        3. 随机决定先手<br>
+        4. 出牌方选择出牌（真牌或假牌）<br>
+        5. 对方选择是否质疑<br>
+        6. 质疑发生后，失败方开一枪<br>
+        7. 检查是否有人达到死亡阈值<br>
+        8. 如果无人死亡，清屏进入下一轮<br>
+        9. 直到一方死亡，游戏结束
+      </div>
+
+      <h3>下期预告</h3>
+      <p>
+        在下一期教程中，我们将为游戏加入更多有趣的机制：
+      </p>
+      <ul>
+        <li><strong>回响牌系统：</strong>夺心魄、招灾、惊雷、不灭、生生不息、嫁祸、显灵</li>
+        <li><strong>多人模式：</strong>支持3~4名玩家同台竞技</li>
+        <li><strong>更智能的AI：</strong>根据局势动态调整策略</li>
+        <li><strong>图形化界面：</strong>使用控制台颜色和字符打造视觉体验</li>
+      </ul>
+      <p>敬请期待《游戏教程02：教你手搓骗子酒馆（下）》！</p>
+
       <h3>帖子信息</h3>
-      <p>最新更新时间：2026年3月19日20时</p>
+      <p>最新更新时间：2026年8月12日</p>
     </main>
 
     <div class="code-overlay" id="overlay"></div>
@@ -129,21 +395,15 @@
       const modal = document.getElementById('modal');
       const closeBtn = document.getElementById('closeBtn');
       const codeContent = document.getElementById('codeContent');
-      const targetCode = `srand(time(0));
+
+      // 主界面代码
+      const code1 = `srand(time(0));
 HANDLE handle;
-handle = GetStdHandle(STD_OUTPUT_HANDLE); //调用Handle时必写
-/*这里再深入给大家讲讲Handle设置颜色的用法：
-1表示蓝色
-2表示绿色
-4表示红色
-其他的所有颜色都可以通过这三种颜色表示出来，比如黄色就可以表示为6或2 | 4
-而灰色比较特殊，它可以用8表示，用8加上任何一个字符都会变成亮色，
-比如亮紫色就是1 | 4 | 8
-这个知识点对我们后面写代码特别有效
-*/
+handle = GetStdHandle(STD_OUTPUT_HANDLE);
+
 while(true){
     system("cls");
-    SetConsoleTextAttribute(handle,1); //这里的配色是aiyou喜欢的，你们也可以用自己喜欢的
+    SetConsoleTextAttribute(handle,1);
     cout << "骗";
     SetConsoleTextAttribute(handle,2);
     cout << "子";
@@ -153,23 +413,86 @@ while(true){
     cout << "馆" << endl;
     colorclear(handle);
     cout << "版本号:" << vertion << endl;
-    cout << "编译环境:" << envir << "  编译器:" << compile << endl; //定义几个常量方便修改
+    cout << "编译环境:" << envir << "  编译器:" << compile << endl;
     SetConsoleTextAttribute(handle,8);
     cout << "请选择游戏模式" << endl;
     colorclear(handle);
-    cout << "1.双人模式" << endl; //这里的几个模式是我们以后需要攻破的功能
+    cout << "1.双人模式" << endl;
     cout << "2.三人模式" << endl;
     cout << "3.迭代日志+游戏规则" << endl;
     SetConsoleTextAttribute(handle,2 | 4);
-    cout << "注意:按下数字9即可进入控制台" << endl; //我们也可以设置一个控制台，方便玩家修改参数
-    //以后我们可以在这里添加更多的功能，比如选择模式界面等等
-    
+    cout << "注意:按下数字9即可进入控制台" << endl;
     cout << endl;
     system("pause");
 }`;
 
-      function showCodeModal() {
-        codeContent.textContent = targetCode;
+      // 完整游戏框架代码
+      const code2 = `void case1(HANDLE handle, int n) {
+    system("cls");
+    // 1. 初始化
+    memset(a, 0, sizeof(a));
+    memset(b, 0, sizeof(b));
+    sum_p = 9;
+    int ap = init(1);
+    a[ap] = 1;
+    int bp = init(2);
+    b[bp] = 1;
+
+    int my_bomm = 0;
+    int your_bomm = 0;
+
+    while(1) {
+        // 2. 生成底牌
+        int p = init(2);
+        char ch_p;
+        // ... 显示底牌
+
+        // 3. 生成手牌
+        // ... 随机生成5张手牌
+
+        // 4. 决定先手
+        int shunxu = rand() % 2 + 1;
+
+        // 5. 出牌循环
+        int cnt = 0;
+        while(cnt == 0) {
+            if(shunxu == 1) {
+                // 玩家出牌
+                // ... 选择出牌
+                // ... 对手质疑
+            } else {
+                // 对手出牌
+                // ... AI出牌
+                // ... 玩家质疑
+            }
+        }
+
+        // 6. 开枪判定
+        if(cnt == 1) {
+            your_bomm++;
+            if(your_bomm == bp) {
+                cout << "You are the last winner!" << endl;
+                return;
+            }
+        } else {
+            my_bomm++;
+            if(my_bomm == ap) {
+                cout << "You are die!" << endl;
+                return;
+            }
+        }
+
+        // 7. 显示状态
+        cout << "你的子弹数:" << my_bomm << "/" << ap << endl;
+        cout << "对方子弹数:" << your_bomm << "/" << bp << endl;
+
+        // 8. 清屏进入下一轮
+        system("cls");
+    }
+}`;
+
+      function showCodeModal(code) {
+        codeContent.textContent = code;
         overlay.style.display = 'block';
         modal.style.display = 'block';
       }
@@ -177,18 +500,33 @@ while(true){
       function hideCodeModal() {
         overlay.style.display = 'none';
         modal.style.display = 'none';
-        if (window.location.hash === '#code1') {
+        if (window.location.hash === '#code1' || window.location.hash === '#code2') {
           history.replaceState(null, document.title, window.location.pathname + window.location.search);
         }
       }
 
       function checkHash() {
         if (window.location.hash === '#code1') {
-          showCodeModal();
+          showCodeModal(code1);
+        } else if (window.location.hash === '#code2') {
+          showCodeModal(code2);
         } else {
           hideCodeModal();
         }
       }
+
+      // 为所有代码链接添加点击事件
+      document.querySelectorAll('.btn-code').forEach((btn, index) => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const hash = this.getAttribute('href').split('#')[1];
+          if (hash === 'code1') {
+            showCodeModal(code1);
+          } else if (hash === 'code2') {
+            showCodeModal(code2);
+          }
+        });
+      });
 
       window.addEventListener('load', checkHash);
       window.addEventListener('hashchange', checkHash);
