@@ -2,7 +2,7 @@
 <html lang="en-US">
   <head>
     <meta charset="UTF-8">
-    <title>游戏教程01-教你手搓骗子酒馆（中）</title>
+    <title>什么？用C++就能手搓热门游戏骗子酒馆？（1）</title>
     <meta name="generator" content="Jekyll v3.10.0" />
     <meta property="og:title" content="哎呦的个人主页" />
     <meta property="og:locale" content="en_US" />
@@ -80,6 +80,7 @@
         font-size: 0.9rem;
         line-height: 1.7;
         margin: 12px 0;
+        white-space: pre;
       }
       .code-block .comment { color: #8b9bb5; }
       .code-block .keyword { color: #ff79c6; }
@@ -119,6 +120,16 @@
         background: #2d3f57;
         border-color: #6a8bb0;
       }
+      .main-content p {
+        line-height: 1.8;
+      }
+      .main-content ul, .main-content ol {
+        line-height: 1.8;
+        padding-left: 24px;
+      }
+      .main-content li {
+        margin-bottom: 4px;
+      }
     </style>
   </head>
   <body>
@@ -132,31 +143,34 @@
         <a href="https://aiyou945.github.io/teach/">← 返回上一级目录</a>
       </p>
       <p>
-        相信无数的编程小白，都幻想过能用C++编程制作出一款“好玩到爆炸”的游戏，推广到同学那里，<br />
-        不得成为整个编程班的“高手”啊……那么这期，就由哎呦手把手教会大家，如何用C++编程制作出 <br />
+        相信无数的编程小白，都幻想过能用C++编程制作出一款"好玩到爆炸"的游戏，推广到同学那里，<br />
+        不得成为整个编程班的"高手"啊……那么这期，就由哎呦手把手教会大家，如何用C++编程制作出 <br />
         无数游戏主播都玩过的一款热门游戏——<font color="red">骗子酒馆！</font> <br />
         <font color="purple">注意：本教程仅供娱乐学习，版权和解释权归原作者所有，请勿用此代码进行商业宣传等活动！</font>
       </p>
 
       <h3>1.1 回顾游戏内容</h3>
       <p>
-        首先，让我们回顾一下“骗子酒馆”这款游戏的内容吧。<br />
-        游戏开局有四个人，每人发到五张牌<font color="blue">（牌型有A，Q，K，Joker）</font>，并且游戏开局还会指定一种牌型为系统牌<font color="blue">（Joker除外）</font>。
-        每名玩家都有手枪，手枪里有6发子弹，其中有5发空弹，1发实弹，由系统随机分配。
-        开始游戏后，将会由随机一名玩家进行出牌。该名玩家可以选择出1~3张牌，可以出与系统牌相符的真牌，也可以出与系统牌不相符的假牌。下家可以选择质疑：<font color="green">如果上家出的是真牌，则质疑失败，质疑的人开一枪；反之质疑成功，上家开一枪（每次开枪，都会重置手牌和系统牌）</font>。<br />
-        若下家选择不质疑，则下家出牌，一直延续。如果有玩家出完了牌，则该玩家可以不参与后面的出牌。当场上一名玩家开枪并开到实弹后，该玩家出局，游戏继续；直到场上只剩一名玩家后，该玩家胜利。<br />
-        <font color="red">（注意：如果场上只剩下两名玩家，当其中一方出完牌后，另一方必须开牌）</font>。<br />我们需要用编程，一步步模拟还原这些过程。
+        首先，让我们回顾一下"骗子酒馆"这款游戏的内容吧。<br />
+        游戏开局有四个人，每人发到五张牌<font color="blue">（牌型有A，Q，K，Joker）</font>，并且游戏开局还会指定一种牌型为系统牌<font color="blue">（Joker除外）</font>。<br />
+        每名玩家都有手枪，手枪里有6发子弹，其中有5发空弹，1发实弹，由系统随机分配。<br />
+        开始游戏后，将会由随机一名玩家进行出牌。该名玩家可以选择出1~3张牌，可以出与系统牌相符的真牌，也可以出与系统牌不相符的假牌。<br />
+        下家可以选择质疑：<font color="green">如果上家出的是真牌，则质疑失败，质疑的人开一枪；反之质疑成功，上家开一枪（每次开枪，都会重置手牌和系统牌）</font>。<br />
+        若下家选择不质疑，则下家出牌，一直延续。如果有玩家出完了牌，则该玩家可以不参与后面的出牌。<br />
+        当场上一名玩家开枪并开到实弹后，该玩家出局，游戏继续；直到场上只剩一名玩家后，该玩家胜利。<br />
+        <font color="red">（注意：如果场上只剩下两名玩家，当其中一方出完牌后，另一方必须开牌）</font>。<br />
+        我们需要用编程，一步步模拟还原这些过程。
       </p>
 
       <h3>1.2 所需代码展示</h3>
       <p>如果想让我们的游戏更加美观智能，需要用到不少的新代码块，首先就来介绍一下<strong>SetConsoleTextAttribute</strong>语句：</p>
-      <div class="code-block"><span class="keyword">SetConsoleTextAttribute</span>(handle, COLOR);</div>
+      <div class="code-block">SetConsoleTextAttribute(handle, COLOR);</div>
       <p>这个语句可以改变字体的颜色，让我们的游戏变得引人注目，丰富多彩。至于具体的用法，下面会统一介绍。</p>
       <p>另外，我们的游戏不可能只有一个界面，所以我们还需要一个<font color="purple">可以清屏</font>的语句：</p>
-      <div class="code-block"><span class="keyword">system</span>(<span class="string">"cls"</span>);</div>
-      <p>上面的代码就是用来清屏的语句，同理，在system的括号里填上pause，就可以在屏幕上显示“按下任意键继续”。</p>
-      <p>此外，为了让我们的游戏更加“高级”，可以加入一个判断按键按下的指令：</p>
-      <div class="code-block"><span class="keyword">#define</span> KEY_DOWN(vk) ((GetAsyncKeyState(vk) & 0x8000) ? 1 : 0)</div>
+      <div class="code-block">system("cls");</div>
+      <p>上面的代码就是用来清屏的语句，同理，在system的括号里填上pause，就可以在屏幕上显示"按下任意键继续"。</p>
+      <p>此外，为了让我们的游戏更加"高级"，可以加入一个判断按键按下的指令：</p>
+      <div class="code-block">#define KEY_DOWN(vk) ((GetAsyncKeyState(vk) & 0x8000) ? 1 : 0)</div>
       <font color="red">注意：以上介绍的代码块都需要windows.h头文件才可以正常使用！</font>
 
       <h3>1.3 搭建主界面</h3>
@@ -165,146 +179,130 @@
         这一部分我们可以做成一个选关界面，玩家可以选择想玩的关卡游玩。这时候，我们的<strong>KEY_DOWN</strong>指令就能派上用场了。
       </p>
       <a href="https://aiyou945.github.io/teach/liar.html#code1" class="btn-code">查看主界面代码</a>
-      <p>此外，从代码就可以看出来，我们后面搭建的工程量可能会很大，我们尽量做到<font color="red">“模块化”</font>，也就是把一个功能放在一个函数里，用到时直接调用。</p>
+      <p>此外，从代码就可以看出来，我们后面搭建的工程量可能会很大，我们尽量做到<font color="red">"模块化"</font>，也就是把一个功能放在一个函数里，用到时直接调用。</p>
       <p>好了，接下来就让我们正式开始搭建游戏吧！</p>
 
       <h3>1.4 核心实现：初始化与全局变量</h3>
       <p>
         在开始之前，我们先定义几个关键的全局变量，用来追踪游戏状态：
       </p>
-      <div class="code-block">
-        <span class="type">char</span> a[10];        <span class="comment">// 存储玩家的手牌</span>
-        <span class="type">char</span> b[10];        <span class="comment">// 存储对手的手牌</span>
-        <span class="type">char</span> my[10];       <span class="comment">// 当前玩家手牌</span>
-        <span class="type">char</span> ch[10];       <span class="comment">// 存储每个玩家的底牌</span>
-        <span class="type">int</span> sum_p = 9;     <span class="comment">// 玩家数量（初始为9）</span>
-        <span class="type">int</span> ap, bp;        <span class="comment">// 玩家和对手的实弹位置</span>
-      </div>
+      <div class="code-block">char a[10];        // 存储玩家的手牌
+char b[10];        // 存储对手的手牌
+char my[10];       // 当前玩家手牌
+char ch[10];       // 存储每个玩家的底牌
+int sum_p = 9;     // 玩家数量（初始为9）
+int ap, bp;        // 玩家和对手的实弹位置</div>
 
-      <p><strong>init函数</strong> 负责初始化玩家的“血量”——也就是手枪里实弹的位置：</p>
-      <div class="code-block">
-        <span class="type">int</span> <span class="func">init</span>(<span class="type">int</span> player) {
-            <span class="type">int</span> bomm = rand() % 6 + 1;  <span class="comment">// 实弹在第几发（1~6）</span>
-            <span class="keyword">return</span> bomm;
-        }
-      </div>
+      <p><strong>init函数</strong> 负责初始化玩家的"血量"——也就是手枪里实弹的位置：</p>
+      <div class="code-block">int init(int player) {
+    int bomm = rand() % 6 + 1;  // 实弹在第几发（1~6）
+    return bomm;
+}</div>
 
       <p>每次对局开始时，我们需要重置所有状态：</p>
-      <div class="code-block">
-        <span class="func">memset</span>(a, 0, <span class="keyword">sizeof</span>(a));
-        <span class="func">memset</span>(b, 0, <span class="keyword">sizeof</span>(b));
-        sum_p = 9;
-        <span class="type">int</span> ap = <span class="func">init</span>(1);   <span class="comment">// 玩家实弹位置</span>
-        a[ap] = 1;             <span class="comment">// 标记玩家已开枪1次</span>
-        <span class="type">int</span> bp = <span class="func">init</span>(2);   <span class="comment">// 对手实弹位置</span>
-        b[bp] = 1;
-      </div>
+      <div class="code-block">memset(a, 0, sizeof(a));
+memset(b, 0, sizeof(b));
+sum_p = 9;
+int ap = init(1);   // 玩家实弹位置
+a[ap] = 1;          // 标记玩家已开枪1次
+int bp = init(2);   // 对手实弹位置
+b[bp] = 1;</div>
       <div class="highlight-box">
-        💡 <strong>理解实弹机制：</strong>手枪有6发子弹，其中1发是实弹。init函数随机返回1~6的数字，代表实弹的位置。当玩家开枪次数达到这个数字时，就“中弹”出局。
+        💡 <strong>理解实弹机制：</strong>手枪有6发子弹，其中1发是实弹。init函数随机返回1~6的数字，代表实弹的位置。当玩家开枪次数达到这个数字时，就"中弹"出局。
       </div>
 
       <h3>1.5 底牌生成与手牌分配</h3>
       <p>每一轮游戏开始，系统会随机指定一张底牌（Ace/Queen/King）：</p>
-      <div class="code-block">
-        <span class="type">int</span> p = <span class="func">init</span>(2);    <span class="comment">// 随机生成底牌索引</span>
-        <span class="type">char</span> ch_p;
-        <span class="keyword">if</span>(ch[p] == 'A') {
-            cout << <span class="string">"本轮底牌:Ace"</span> << endl;
-            ch_p = 'A';
-        } <span class="keyword">else if</span>(ch[p] == 'Q') {
-            cout << <span class="string">"本轮底牌:Queen"</span> << endl;
-            ch_p = 'Q';
-        } <span class="keyword">else</span> {
-            cout << <span class="string">"本轮底牌:King"</span> << endl;
-            ch_p = 'K';
-        }
-      </div>
+      <div class="code-block">int p = init(2);    // 随机生成底牌索引
+char ch_p;
+if(ch[p] == 'A') {
+    cout << "本轮底牌:Ace" << endl;
+    ch_p = 'A';
+} else if(ch[p] == 'Q') {
+    cout << "本轮底牌:Queen" << endl;
+    ch_p = 'Q';
+} else {
+    cout << "本轮底牌:King" << endl;
+    ch_p = 'K';
+}</div>
 
       <p>玩家的手牌由两部分组成：随机生成的牌（80%概率为底牌，20%概率为Joker）和补全的牌：</p>
-      <div class="code-block">
-        <span class="type">int</span> num1 = rand() % 5 + 1;  <span class="comment">// 随机生成1~5张"真牌"</span>
-        <span class="keyword">for</span>(<span class="type">int</span> i = 1; i <= num1; i++) {
-            <span class="type">int</span> joker = rand() % 100 + 1;
-            <span class="keyword">if</span>(joker <= 80) {
-                my[i] = ch_p;       <span class="comment">// 80%概率是底牌</span>
-            } <span class="keyword">else</span> {
-                my[i] = 'J';        <span class="comment">// 20%概率是Joker</span>
-            }
-        }
-        <span class="comment">// 补全剩余手牌（非底牌，且不能是Joker）</span>
-        <span class="keyword">for</span>(<span class="type">int</span> i = num1 + 1; i <= 5; i++) {
-            <span class="type">int</span> pp = <span class="func">init</span>(4);
-            <span class="keyword">if</span>(pp == 1) {
-                <span class="keyword">if</span>(ch_p == 'A') my[i] = 'Q';
-                <span class="keyword">if</span>(ch_p == 'Q') my[i] = 'A';
-                <span class="keyword">if</span>(ch_p == 'K') my[i] = 'A';
-            } <span class="keyword">else</span> {
-                <span class="keyword">if</span>(ch_p == 'A') my[i] = 'K';
-                <span class="keyword">if</span>(ch_p == 'Q') my[i] = 'A';
-                <span class="keyword">if</span>(ch_p == 'K') my[i] = 'Q';
-            }
-        }
-      </div>
+      <div class="code-block">int num1 = rand() % 5 + 1;  // 随机生成1~5张"真牌"
+for(int i = 1; i <= num1; i++) {
+    int joker = rand() % 100 + 1;
+    if(joker <= 80) {
+        my[i] = ch_p;       // 80%概率是底牌
+    } else {
+        my[i] = 'J';        // 20%概率是Joker
+    }
+}
+// 补全剩余手牌（非底牌，且不能是Joker）
+for(int i = num1 + 1; i <= 5; i++) {
+    int pp = init(4);
+    if(pp == 1) {
+        if(ch_p == 'A') my[i] = 'Q';
+        if(ch_p == 'Q') my[i] = 'A';
+        if(ch_p == 'K') my[i] = 'A';
+    } else {
+        if(ch_p == 'A') my[i] = 'K';
+        if(ch_p == 'Q') my[i] = 'A';
+        if(ch_p == 'K') my[i] = 'Q';
+    }
+}</div>
       <div class="warning-box">
         ⚠️ <strong>注意：</strong>Joker是万能牌，可以当作任何牌使用。在质疑判定时，Joker视为真牌。
       </div>
 
       <h3>1.6 出牌逻辑与质疑机制</h3>
       <p>出牌环节是整个游戏的核心。玩家可以选择出1~3张牌：</p>
-      <div class="code-block">
-        <span class="comment">// 玩家选择出牌张数</span>
-        <span class="type">int</span> n;
-        cin >> n;
-        <span class="keyword">if</span>(n > 3) n = 3;
+      <div class="code-block">// 玩家选择出牌张数
+int n;
+cin >> n;
+if(n > 3) n = 3;
 
-        <span class="type">int</span> right = 1;  <span class="comment">// 标记出的是否为真牌</span>
-        <span class="keyword">for</span>(<span class="type">int</span> i = 1; i <= n; i++) {
-            <span class="type">int</span> x;
-            cin >> x;      <span class="comment">// 输入手牌位置（1~5）</span>
-            <span class="keyword">if</span>(my[x] != ch_p && my[x] != 'J') {
-                right = 0;  <span class="comment">// 不是真牌也不是Joker → 假牌</span>
-            }
-            my[x] = '0';    <span class="comment">// 标记该位置已出牌</span>
-        }
-      </div>
+int right = 1;  // 标记出的是否为真牌
+for(int i = 1; i <= n; i++) {
+    int x;
+    cin >> x;      // 输入手牌位置（1~5）
+    if(my[x] != ch_p && my[x] != 'J') {
+        right = 0;  // 不是真牌也不是Joker → 假牌
+    }
+    my[x] = '0';    // 标记该位置已出牌
+}</div>
 
       <p><strong>质疑机制：</strong>对手可以选择是否质疑。在基础版本中，我们用随机数模拟对手的决策：</p>
-      <div class="code-block">
-        <span class="type">int</span> k = rand() % 100 + 1;
-        <span class="keyword">if</span>(k <= 40 || len1 == 0) {   <span class="comment">// 40%概率质疑，或没牌时强制质疑</span>
-            <span class="keyword">if</span>(right == 1) {
-                cnt = 1;   <span class="comment">// 出真牌 → 质疑失败，对手开枪</span>
-            } <span class="keyword">else</span> {
-                cnt = 2;   <span class="comment">// 出假牌 → 质疑成功，你开枪</span>
-            }
-        } <span class="keyword">else</span> {
-            shunxu = 2;    <span class="comment">// 不质疑，轮到对手出牌</span>
-        }
-      </div>
+      <div class="code-block">int k = rand() % 100 + 1;
+if(k <= 40 || len1 == 0) {   // 40%概率质疑，或没牌时强制质疑
+    if(right == 1) {
+        cnt = 1;   // 出真牌 → 质疑失败，对手开枪
+    } else {
+        cnt = 2;   // 出假牌 → 质疑成功，你开枪
+    }
+} else {
+    shunxu = 2;    // 不质疑，轮到对手出牌
+}</div>
       <div class="highlight-box">
-        🎯 <strong>质疑规则总结：</strong><br>
-        • 出真牌 + 质疑 → 质疑者开枪（质疑失败）<br>
-        • 出假牌 + 质疑 → 出牌者开枪（质疑成功）<br>
+        🎯 <strong>质疑规则总结：</strong><br />
+        • 出真牌 + 质疑 → 质疑者开枪（质疑失败）<br />
+        • 出假牌 + 质疑 → 出牌者开枪（质疑成功）<br />
         • 不质疑 → 继续游戏
       </div>
 
       <h3>1.7 开枪与死亡判定</h3>
       <p>当质疑发生后，失败的一方需要开一枪：</p>
-      <div class="code-block">
-        <span class="keyword">if</span>(cnt == 1) {   <span class="comment">// 对手开枪</span>
-            your_bomm++;
-            <span class="keyword">if</span>(your_bomm == bp) {
-                cout << <span class="string">"You are the last winner!"</span> << endl;
-                <span class="keyword">return</span>;
-            }
-        } <span class="keyword">else</span> {         <span class="comment">// 你开枪</span>
-            my_bomm++;
-            <span class="keyword">if</span>(my_bomm == ap) {
-                cout << <span class="string">"You are die!"</span> << endl;
-                <span class="keyword">return</span>;
-            }
-        }
-      </div>
+      <div class="code-block">if(cnt == 1) {   // 对手开枪
+    your_bomm++;
+    if(your_bomm == bp) {
+        cout << "You are the last winner!" << endl;
+        return;
+    }
+} else {         // 你开枪
+    my_bomm++;
+    if(my_bomm == ap) {
+        cout << "You are die!" << endl;
+        return;
+    }
+}</div>
 
       <h3>1.8 完整游戏循环框架</h3>
       <p>整合以上所有部分，我们得到完整的游戏循环：</p>
@@ -312,34 +310,32 @@
 
       <h3>1.9 对手AI的简单实现</h3>
       <p>双人模式中，对手的AI至少需要包含出牌策略和质疑策略：</p>
-      <div class="code-block">
-        <span class="comment">// 对手出牌策略</span>
-        <span class="type">int</span> pai = rand() % 2 + 1;   <span class="comment">// 1=出真牌，2=出假牌</span>
-        <span class="keyword">if</span>(pai == 1 || num2 == 0) {
-            <span class="comment">// 出真牌（1~3张）</span>
-            <span class="type">int</span> num = min(3, 5 - num2);
-            len2 -= num;
-            num2 += num;
-        } <span class="keyword">else</span> {
-            <span class="comment">// 出假牌（随机1~3张）</span>
-            <span class="type">int</span> your = rand() % 3 + 1;
-            len2 -= your;
-        }
+      <div class="code-block">// 对手出牌策略
+int pai = rand() % 2 + 1;   // 1=出真牌，2=出假牌
+if(pai == 1 || num2 == 0) {
+    // 出真牌（1~3张）
+    int num = min(3, 5 - num2);
+    len2 -= num;
+    num2 += num;
+} else {
+    // 出假牌（随机1~3张）
+    int your = rand() % 3 + 1;
+    len2 -= your;
+}
 
-        <span class="comment">// 玩家选择是否质疑</span>
-        <span class="type">int</span> kai;
-        cin >> kai;
-        <span class="keyword">if</span>(kai == 1) {
-            <span class="keyword">if</span>(pai == 1) cnt = 2;  <span class="comment">// 真牌→质疑失败→你开枪</span>
-            <span class="keyword">else</span> cnt = 1;          <span class="comment">// 假牌→质疑成功→对手开枪</span>
-        }
-      </div>
+// 玩家选择是否质疑
+int kai;
+cin >> kai;
+if(kai == 1) {
+    if(pai == 1) cnt = 2;  // 真牌→质疑失败→你开枪
+    else cnt = 1;          // 假牌→质疑成功→对手开枪
+}</div>
 
       <h3>1.10 特殊情况处理</h3>
       <div class="highlight-box">
-        📌 <strong>必须注意的特殊情况：</strong><br>
-        • <strong>手牌出完：</strong>len1 == 0 或 len2 == 0 时，该玩家不出牌<br>
-        • <strong>强制开牌：</strong>只剩两名玩家时，一方出完牌，另一方必须质疑<br>
+        📌 <strong>必须注意的特殊情况：</strong><br />
+        • <strong>手牌出完：</strong>len1 == 0 或 len2 == 0 时，该玩家不出牌<br />
+        • <strong>强制开牌：</strong>只剩两名玩家时，一方出完牌，另一方必须质疑<br />
         • <strong>实弹随机：</strong>每次开局实弹位置随机（1~6），增加不确定性
       </div>
 
@@ -356,15 +352,15 @@
       </ul>
 
       <div class="highlight-box">
-        🎮 <strong>基础版游戏流程：</strong><br>
-        1. 初始化：分配实弹位置，重置所有状态<br>
-        2. 每轮开始：生成底牌和手牌<br>
-        3. 随机决定先手<br>
-        4. 出牌方选择出牌（真牌或假牌）<br>
-        5. 对方选择是否质疑<br>
-        6. 质疑发生后，失败方开一枪<br>
-        7. 检查是否有人达到死亡阈值<br>
-        8. 如果无人死亡，清屏进入下一轮<br>
+        🎮 <strong>基础版游戏流程：</strong><br />
+        1. 初始化：分配实弹位置，重置所有状态<br />
+        2. 每轮开始：生成底牌和手牌<br />
+        3. 随机决定先手<br />
+        4. 出牌方选择出牌（真牌或假牌）<br />
+        5. 对方选择是否质疑<br />
+        6. 质疑发生后，失败方开一枪<br />
+        7. 检查是否有人达到死亡阈值<br />
+        8. 如果无人死亡，清屏进入下一轮<br />
         9. 直到一方死亡，游戏结束
       </div>
 
@@ -515,8 +511,7 @@ while(true){
         }
       }
 
-      // 为所有代码链接添加点击事件
-      document.querySelectorAll('.btn-code').forEach((btn, index) => {
+      document.querySelectorAll('.btn-code').forEach((btn) => {
         btn.addEventListener('click', function(e) {
           e.preventDefault();
           const hash = this.getAttribute('href').split('#')[1];
