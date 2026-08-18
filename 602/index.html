@@ -19,6 +19,7 @@
       align-items: center;
       justify-content: center;
       padding: 30px 20px;
+      position: relative;
     }
 
     .container {
@@ -116,6 +117,28 @@
       display: inline-block;
     }
 
+    .permission-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 2px 14px;
+      border-radius: 30px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      margin-left: 8px;
+    }
+
+    .permission-tag.guest {
+      background: #e8f0fe;
+      color: #1f3a7a;
+      border: 1px solid #b6cceb;
+    }
+
+    .permission-tag.member {
+      background: #fef3e2;
+      color: #8a6d3b;
+      border: 1px solid #d4af37;
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -131,6 +154,7 @@
       transition: all 0.2s ease;
       box-shadow: 0 4px 12px rgba(31, 58, 107, 0.25);
       border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
     }
 
     .btn:hover {
@@ -151,12 +175,63 @@
       color: white;
     }
 
+    .btn-disabled {
+      background: #b0b8c5;
+      color: #fff;
+      cursor: not-allowed;
+      box-shadow: none;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .btn-disabled:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
     .flex-actions {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       gap: 14px 20px;
       margin-top: 6px;
+    }
+
+    .login-btn-area {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      z-index: 999;
+    }
+
+    .login-btn-area .btn {
+      padding: 8px 22px;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      background: #2c5282;
+    }
+
+    .login-btn-area .btn:hover {
+      background: #1a3f6a;
+    }
+
+    .login-btn-area .btn.logout-btn {
+      background: #8b7a6a;
+    }
+
+    .login-btn-area .btn.logout-btn:hover {
+      background: #6b5d50;
+    }
+
+    .user-status {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: #1f3a5f;
+      background: rgba(255,255,255,0.8);
+      padding: 6px 14px;
+      border-radius: 4px;
+      margin-right: 10px;
+      border: 1px solid #d4c5a6;
     }
 
     @media (max-width: 480px) {
@@ -169,10 +244,26 @@
       .card h2 {
         font-size: 1.3rem;
       }
+      .login-btn-area {
+        top: 10px;
+        right: 10px;
+      }
+      .login-btn-area .btn {
+        padding: 6px 14px;
+        font-size: 0.8rem;
+      }
+      .user-status {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+      }
     }
   </style>
 </head>
 <body>
+
+  <div class="login-btn-area" id="loginArea">
+    <!-- 由 JS 动态渲染 -->
+  </div>
 
   <div class="container">
     <div class="header">
@@ -180,19 +271,25 @@
       <p>珍藏六年时光 · 留存美好回忆</p>
     </div>
     
-    <div class="card">
-      <h2>全体同学名单</h2>
+    <div class="card" id="memberCard">
+      <h2>
+        全体同学名单
+        <span class="permission-tag member">成员</span>
+      </h2>
       <p>
         本篇帖子涵盖了六(2)全体同学的名单！<br />
         <span class="gray-meta">创建时间：2026-7-26 17:38</span>
       </p>
       <div class="flex-actions">
-        <a href="https://aiyou945.github.io/602/member/" class="btn">查看详情</a>
+        <a href="https://aiyou945.github.io/602/member/" class="btn" id="memberBtn">查看详情</a>
       </div>
     </div>
     
     <div class="card">
-      <h2>测试网站功能</h2>
+      <h2>
+        测试网站功能
+        <span class="permission-tag guest">访客</span>
+      </h2>
       <p>
         如果你能看到这篇帖子，那么恭喜你，你已经成功来到了六年(2)班的同学回忆录！请点开下面的按钮测试网页功能吧！<br />
         <span class="gray-meta">创建时间：2026-6-28 9:25</span>
@@ -204,12 +301,41 @@
   </div>
   
   <script>
-    (function checkLogin() {
-      let logined = sessionStorage.getItem('logined');
-      if (!logined) {
-        sessionStorage.setItem('backUrl', location.href);
-        location.href = '/602/login.html';
+    (function() {
+      var logined = sessionStorage.getItem('logined') === 'true';
+
+      function updateUI() {
+        var area = document.getElementById('loginArea');
+        var memberBtn = document.getElementById('memberBtn');
+
+        if (logined) {
+          area.innerHTML = '<span class="user-status">✅ 已登录</span><a href="javascript:void(0)" class="btn logout-btn" onclick="logout()">退出</a>';
+          if (memberBtn) {
+            memberBtn.className = 'btn';
+            memberBtn.href = 'https://aiyou945.github.io/602/member/';
+          }
+        } else {
+          area.innerHTML = '<a href="/602/login.html" class="btn">登录</a>';
+          if (memberBtn) {
+            memberBtn.className = 'btn btn-disabled';
+            memberBtn.href = 'javascript:void(0)';
+            memberBtn.onclick = function(e) {
+              e.preventDefault();
+              alert('此内容需要登录才能访问，请点击右上角"登录"按钮。');
+            };
+          }
+        }
       }
+
+      window.logout = function() {
+        sessionStorage.removeItem('logined');
+        sessionStorage.removeItem('backUrl');
+        logined = false;
+        updateUI();
+        alert('已退出登录');
+      };
+
+      updateUI();
     })();
   </script>
 </body>
