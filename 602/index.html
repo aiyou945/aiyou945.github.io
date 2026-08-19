@@ -274,7 +274,7 @@
     <div class="card" id="memberCard">
       <h2>
         全体同学名单
-        <span class="permission-tag member">成员</span>
+        <span class="permission-tag member"><a href="https://aiyou945.github.io/602/about.html">成员</a></span>
       </h2>
       <p>
         本篇帖子涵盖了六(2)全体同学的名单！<br />
@@ -288,7 +288,7 @@
     <div class="card">
       <h2>
         测试网站功能
-        <span class="permission-tag guest">访客</span>
+        <span class="permission-tag guest"><a href="https://aiyou945.github.io/602/about.html">访客</a></span>
       </h2>
       <p>
         如果你能看到这篇帖子，那么恭喜你，你已经成功来到了六年(2)班的同学回忆录！请点开下面的按钮测试网页功能吧！<br />
@@ -309,7 +309,7 @@
         var memberBtn = document.getElementById('memberBtn');
 
         if (logined) {
-          area.innerHTML = '<span class="user-status">欢迎同学！</span><a href="javascript:void(0)" class="btn logout-btn" onclick="logout()">退出登录</a>';
+          area.innerHTML = '<span class="user-status">欢迎！</span><a href="javascript:void(0)" class="btn logout-btn" onclick="logout()">退出登录</a>';
           if (memberBtn) {
             memberBtn.className = 'btn';
             memberBtn.href = 'https://aiyou945.github.io/602/member/';
@@ -321,7 +321,7 @@
             memberBtn.href = 'javascript:void(0)';
             memberBtn.onclick = function(e) {
               e.preventDefault();
-              alert('此内容需要登录才能访问，请点击右上角"登录"按钮。');
+              alert('权限不足，无法访问');
             };
           }
         }
