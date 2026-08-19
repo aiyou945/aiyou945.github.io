@@ -83,7 +83,6 @@
       box-shadow: 0 12px 30px rgba(44, 82, 130, 0.10);
       margin-bottom: 28px;
       border: 1px solid rgba(255, 255, 255, 0.5);
-      transition: box-shadow 0.25s;
     }
 
     .header h1 {
@@ -254,6 +253,7 @@
 <body>
 
   <div class="login-btn-area" id="loginArea">
+    <!-- 由 JS 动态渲染 -->
   </div>
 
   <div class="container">
@@ -290,7 +290,7 @@
       function updateUI() {
         var area = document.getElementById('loginArea');
         if (logined) {
-          area.innerHTML = '<span class="user-status">欢迎！</span><a href="javascript:void(0)" class="btn logout-btn" onclick="logout()">退出</a>';
+          area.innerHTML = '<span class="user-status">欢迎！</span><a href="javascript:void(0)" class="btn logout-btn" onclick="logout()">退出登录</a>';
         } else {
           area.innerHTML = '<a href="/602/login.html" class="btn">登录</a>';
         }
