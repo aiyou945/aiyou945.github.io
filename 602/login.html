@@ -5,22 +5,187 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>登录 - 西峰小学六年(2)班回忆册</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Microsoft YaHei", sans-serif; user-select: none; }
-    body { background: linear-gradient(120deg, #f5f7fa, #e4eaf5); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-    .login-box { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
-    .login-box h2 { color: #2c5282; margin-bottom: 25px; }
-    input { width: 100%; height: 44px; padding: 0 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; margin-bottom: 20px; outline: none; }
-    input:focus { border-color: #2c5282; }
-    button { width: 100%; height: 44px; background: #2c5282; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s; }
-    button:hover { background: #1a3b5d; }
-    .tip { margin-top: 15px; color: #666; font-size: 14px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f0f4fa 0%, #d9e2ef 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+    }
+
+    .login-box {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 8px;
+      padding: 45px 50px;
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(44, 82, 130, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .login-box .logo {
+      margin-bottom: 10px;
+    }
+
+    .login-box .logo h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(145deg, #1f3a6b, #b8860b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 2px;
+    }
+
+    .login-box .logo p {
+      font-size: 1rem;
+      color: #7a8a9e;
+      letter-spacing: 4px;
+      font-weight: 300;
+      margin-top: 4px;
+      border-top: 2px solid #d4c5a6;
+      display: inline-block;
+      padding-top: 8px;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .login-box .subtitle {
+      font-size: 0.95rem;
+      color: #5f6b7a;
+      margin-bottom: 28px;
+      font-weight: 300;
+    }
+
+    .login-box .field-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .login-box .field-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #1f3a5f;
+      margin-bottom: 6px;
+    }
+
+    .login-box .field-group input {
+      width: 100%;
+      height: 48px;
+      padding: 0 16px;
+      border: 1px solid #d0dbe8;
+      border-radius: 4px;
+      font-size: 16px;
+      outline: none;
+      background: white;
+      transition: border-color 0.2s;
+    }
+
+    .login-box .field-group input:focus {
+      border-color: #1f3a6b;
+      box-shadow: 0 0 0 3px rgba(31, 58, 107, 0.10);
+    }
+
+    .login-box .btn-login {
+      width: 100%;
+      height: 48px;
+      background: #1f3a6b;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(31, 58, 107, 0.25);
+      margin-top: 6px;
+    }
+
+    .login-box .btn-login:hover {
+      background: #0f2a50;
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(31, 58, 107, 0.35);
+    }
+
+    .login-box .btn-login:disabled {
+      background: #b0b8c5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .login-box .tip {
+      margin-top: 18px;
+      color: #8a9aaa;
+      font-size: 0.9rem;
+    }
+
+    .login-box .tip a {
+      color: #1f3a6b;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .login-box .tip a:hover {
+      text-decoration: underline;
+    }
+
+    .login-box .error-msg {
+      color: #c0392b;
+      font-size: 0.9rem;
+      margin-top: 8px;
+      min-height: 26px;
+    }
+
+    @media (max-width: 480px) {
+      .login-box {
+        padding: 30px 20px;
+        max-width: 100%;
+      }
+      .login-box .logo h1 {
+        font-size: 1.6rem;
+      }
+    }
   </style>
 </head>
 <body>
   <div id="app"></div>
+  <script src="/602/member/psw.js"></script>
   <script>
     (function() {
-      var html = '<div class="login-box"><h2>六年(2)班回忆册 登录</h2><input type="password" id="pwd" placeholder="请输入访问密码" autocomplete="off"><button onclick="login()">登录</button><div class="tip">验证密码可以私信18获取</div></div>';
+
+      var html = `
+        <div class="login-box">
+          <div class="logo">
+            <h1>六年(2)班</h1>
+            <p>同学回忆册</p>
+          </div>
+          <div class="subtitle">请输入座号和口令登录</div>
+          <div class="field-group">
+            <label for="studentId">座号</label>
+            <input type="number" id="studentId" placeholder="转学去其他学校的同学请输入999" autocomplete="off">
+          </div>
+          <div class="field-group">
+            <label for="pwd">口令</label>
+            <input type="password" id="pwd" placeholder="例：fzxf20200201abc" autocomplete="off">
+          </div>
+          <div class="error-msg" id="errorMsg"></div>
+          <button class="btn-login" id="loginBtn" onclick="login()">登 录</button>
+          <div class="tip">口令规则：fzxf202002 + 座号 + 姓名首字母</div>
+        </div>
+      `;
       document.getElementById('app').innerHTML = html;
 
       document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
@@ -35,23 +200,67 @@
         }
       });
 
+      function showError(msg) {
+        document.getElementById('errorMsg').textContent = msg;
+      }
+
       window.login = function() {
-        var password = document.getElementById('pwd').value;
-        var hashed = 0;
-        for (var i = 0; i < password.length; i++) {
-          hashed = (hashed * 31 + password.charCodeAt(i)) & 0xFFFFFFFF;
+        var idInput = document.getElementById('studentId');
+        var pwdInput = document.getElementById('pwd');
+        var btn = document.getElementById('loginBtn');
+
+        var studentId = idInput.value.trim();
+        var password = pwdInput.value;
+
+        if (!studentId) {
+          showError('请输入座号');
+          idInput.focus();
+          return;
         }
-        if (hashed === 1477323774) {
-          sessionStorage.setItem('logined', 'true');
-          var backUrl = sessionStorage.getItem('backUrl') || '/602/';
-          location.href = backUrl;
+        if (!password) {
+          showError('请输入口令');
+          pwdInput.focus();
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = '验证中...';
+        showError('');
+
+        if (typeof verifyLogin === 'function') {
+          verifyLogin(studentId, password, function(result) {
+            btn.disabled = false;
+            btn.textContent = '登 录';
+
+            if (result.success) {
+              sessionStorage.setItem('logined', 'true');
+              sessionStorage.setItem('studentId', studentId);
+              var backUrl = sessionStorage.getItem('backUrl') || '/602/';
+              location.href = backUrl;
+            } else {
+              showError(result.message);
+            }
+          });
         } else {
-          alert('密码错误，请重新输入！');
+          btn.disabled = false;
+          btn.textContent = '登 录';
+          showError('验证模块加载失败，请刷新重试');
         }
       };
 
-      document.getElementById('pwd').addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') login();
+      document.addEventListener('DOMContentLoaded', function() {
+        var pwdInput = document.getElementById('pwd');
+        var idInput = document.getElementById('studentId');
+        if (pwdInput) {
+          pwdInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') login();
+          });
+        }
+        if (idInput) {
+          idInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') login();
+          });
+        }
       });
     })();
   </script>
