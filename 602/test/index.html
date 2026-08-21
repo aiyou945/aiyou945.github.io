@@ -291,9 +291,14 @@
         if (logined) {
           area.innerHTML = '<span class="user-status">欢迎！</span><a href="javascript:void(0)" class="btn logout-btn" onclick="logout()">退出</a>';
         } else {
-          area.innerHTML = '<a href="/602/login.html" class="btn">登录</a>';
+          area.innerHTML = '<a href="javascript:void(0)" class="btn" onclick="goLogin()">登录</a>';
         }
       }
+
+      window.goLogin = function() {
+        sessionStorage.setItem('backUrl', location.href);
+        location.href = '/602/login.html';
+      };
 
       window.logout = function() {
         sessionStorage.removeItem('logined');
