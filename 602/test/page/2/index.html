@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>西峰小学六年(2)班同学回忆册</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Microsoft YaHei", "PingFang SC", -apple-system, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #f0f4fa 0%, #d9e2ef 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      position: relative;
+    }
+
+    .container {
+      max-width: 820px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      padding: 40px 30px 30px;
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 8px;
+      box-shadow: 0 12px 30px rgba(44, 82, 130, 0.10);
+      margin-bottom: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: box-shadow 0.25s;
+    }
+
+    .header h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      background: linear-gradient(145deg, #1f3a6b, #b8860b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .header p {
+      font-size: 1.2rem;
+      color: #4a5b6e;
+      letter-spacing: 6px;
+      font-weight: 300;
+      border-top: 2px solid #d4c5a6;
+      display: inline-block;
+      padding-top: 10px;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 8px;
+      padding: 32px 34px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(44, 82, 130, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: transform 0.15s ease, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 14px 32px rgba(44, 82, 130, 0.10);
+    }
+
+    .card h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #1f3a5f;
+      border-left: 6px solid #d4af37;
+      padding-left: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card h2::after {
+      content: "✦";
+      color: #b8860b;
+      font-size: 1.4rem;
+      margin-left: auto;
+      opacity: 0.4;
+    }
+
+    .card p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #2d3a4b;
+      margin-bottom: 18px;
+    }
+
+    .card p .gray-meta {
+      color: #7a8a9e;
+      font-size: 0.95rem;
+      background: #f0f4fa;
+      padding: 2px 12px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .permission-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 2px 14px;
+      border-radius: 30px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      margin-left: 8px;
+    }
+
+    .permission-tag.guest {
+      background: #e8f0fe;
+      color: #1f3a7a;
+      border: 1px solid #b6cceb;
+    }
+
+    .permission-tag.member {
+      background: #fef3e2;
+      color: #8a6d3b;
+      border: 1px solid #d4af37;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #1f3a6b;
+      color: white;
+      padding: 10px 30px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 1px;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(31, 58, 107, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #0f2a50;
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(31, 58, 107, 0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #1f3a6b;
+      border: 2px solid #1f3a6b;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: #1f3a6b;
+      color: white;
+    }
+
+    .btn-disabled {
+      background: #b0b8c5;
+      color: #fff;
+      cursor: not-allowed;
+      box-shadow: none;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .btn-disabled:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .flex-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px 20px;
+      margin-top: 6px;
+    }
+
+    .login-btn-area {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      z-index: 999;
+    }
+
+    .login-btn-area .btn {
+      padding: 8px 22px;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      background: #2c5282;
+    }
+
+    .login-btn-area .btn:hover {
+      background: #1a3f6a;
+    }
+
+    .login-btn-area .btn.logout-btn {
+      background: #8b7a6a;
+    }
+
+    .login-btn-area .btn.logout-btn:hover {
+      background: #6b5d50;
+    }
+
+    .user-status {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: #1f3a5f;
+      background: rgba(255,255,255,0.8);
+      padding: 6px 14px;
+      border-radius: 4px;
+      margin-right: 10px;
+      border: 1px solid #d4c5a6;
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 2.0rem;
+      }
+      .card {
+        padding: 24px 18px;
+      }
+      .card h2 {
+        font-size: 1.3rem;
+      }
+      .login-btn-area {
+        top: 10px;
+        right: 10px;
+      }
+      .login-btn-area .btn {
+        padding: 6px 14px;
+        font-size: 0.8rem;
+      }
+      .user-status {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-btn-area" id="loginArea">
+    <!-- 由 JS 动态渲染 -->
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <h1>2020级2班同学回忆册</h1>
+      <p>珍藏六年时光 · 留存美好回忆</p>
+    </div>
+  </div>
+</body>
+</html>
