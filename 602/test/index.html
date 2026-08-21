@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>测试网站功能 - 西峰小学六年(2)班同学回忆册</title>
+  <title>测试网站功能 - 西峰小学2020级2班班同学回忆册</title>
   <style>
     * {
       margin: 0;
@@ -253,11 +253,12 @@
 <body>
 
   <div class="login-btn-area" id="loginArea">
+    <!-- 由 JS 动态渲染 -->
   </div>
 
   <div class="container">
     <div class="header">
-      <h1>六年(2)班同学回忆册</h1>
+      <h1>2020级2班同学回忆册</h1>
       <p>测试网站功能</p>
     </div>
 
@@ -284,14 +285,8 @@
 
   <script>
     (function() {
-      // 检查登录状态
-      var logined = sessionStorage.getItem('logined') === 'true';
-
-      if (logined) {
-        sessionStorage.setItem('backUrl', location.href);
-      }
-
       function updateUI() {
+        var logined = sessionStorage.getItem('logined') === 'true';
         var area = document.getElementById('loginArea');
         if (logined) {
           area.innerHTML = '<span class="user-status">欢迎！</span><a href="javascript:void(0)" class="btn logout-btn" onclick="logout()">退出</a>';
@@ -303,14 +298,13 @@
       window.logout = function() {
         sessionStorage.removeItem('logined');
         sessionStorage.removeItem('backUrl');
-        logined = false;
         updateUI();
         alert('已退出登录');
         location.reload();
       };
-      
+
       updateUI();
-      
+
       document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
       document.addEventListener('keydown', function(e) {
         if (e.key === 'F12' ||
