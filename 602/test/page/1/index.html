@@ -189,6 +189,15 @@
       color: white;
     }
 
+    .btn-disabled {
+      background: #b0b8c5;
+      color: #fff;
+      cursor: not-allowed;
+      box-shadow: none;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
     .flex-actions {
       display: flex;
       flex-wrap: wrap;
@@ -245,7 +254,6 @@
 <body>
 
   <div class="login-btn-area" id="loginArea">
-    <!-- 由 JS 动态渲染 -->
   </div>
 
   <div class="container">
@@ -261,7 +269,9 @@
       </h2>
       <p>如果你看到这段文字，说明翻页功能没有问题，请点击下方按钮返回：</p>
       <div class="flex-actions">
-        <a href="https://aiyou945.github.io/602/test/" class="btn btn-outline">返回</a>
+        <a href="https://aiyou945.github.io/602/test/" class="btn btn">← 上一页</a>
+        &nbsp;
+        <a href="https://aiyou945.github.io/602/test/" class="btn disabled">下一页 →</a>
       </div>
     </div>
   </div>
