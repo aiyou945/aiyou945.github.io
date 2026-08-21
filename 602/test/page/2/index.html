@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>西峰小学六年(2)班同学回忆册</title>
+  <title>测试网站功能 - 西峰小学2020级2班班同学回忆册</title>
   <style>
     * {
       margin: 0;
@@ -12,7 +11,7 @@
       box-sizing: border-box;
       font-family: "Microsoft YaHei", "PingFang SC", -apple-system, sans-serif;
     }
-    
+
     body {
       background: linear-gradient(135deg, #f0f4fa 0%, #d9e2ef 100%);
       min-height: 100vh;
@@ -29,6 +28,51 @@
       margin: 0 auto;
     }
 
+    .login-btn-area {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      z-index: 999;
+    }
+
+    .login-btn-area .btn {
+      padding: 8px 22px;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      background: #2c5282;
+      color: white;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+
+    .login-btn-area .btn:hover {
+      background: #1a3f6a;
+      transform: scale(1.05);
+    }
+
+    .login-btn-area .btn.logout-btn {
+      background: #8b7a6a;
+    }
+
+    .login-btn-area .btn.logout-btn:hover {
+      background: #6b5d50;
+    }
+
+    .user-status {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: #1f3a5f;
+      background: rgba(255,255,255,0.8);
+      padding: 6px 14px;
+      border-radius: 4px;
+      margin-right: 10px;
+      border: 1px solid #d4c5a6;
+    }
+
     .header {
       text-align: center;
       padding: 40px 30px 30px;
@@ -39,7 +83,6 @@
       box-shadow: 0 12px 30px rgba(44, 82, 130, 0.10);
       margin-bottom: 28px;
       border: 1px solid rgba(255, 255, 255, 0.5);
-      transition: box-shadow 0.25s;
     }
 
     .header h1 {
@@ -109,37 +152,6 @@
       margin-bottom: 18px;
     }
 
-    .card p .gray-meta {
-      color: #7a8a9e;
-      font-size: 0.95rem;
-      background: #f0f4fa;
-      padding: 2px 12px;
-      border-radius: 4px;
-      display: inline-block;
-    }
-
-    .permission-tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      padding: 2px 14px;
-      border-radius: 30px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      margin-left: 8px;
-    }
-
-    .permission-tag.guest {
-      background: #e8f0fe;
-      color: #1f3a7a;
-      border: 1px solid #b6cceb;
-    }
-
-    .permission-tag.member {
-      background: #fef3e2;
-      color: #8a6d3b;
-      border: 1px solid #d4af37;
-    }
-
     .btn {
       display: inline-flex;
       align-items: center;
@@ -156,6 +168,7 @@
       box-shadow: 0 4px 12px rgba(31, 58, 107, 0.25);
       border: 1px solid rgba(255, 255, 255, 0.15);
       cursor: pointer;
+      margin-right: 12px;
     }
 
     .btn:hover {
@@ -177,17 +190,12 @@
     }
 
     .btn-disabled {
-      background: #b0b8c5;
-      color: #fff;
-      cursor: not-allowed;
-      box-shadow: none;
-      pointer-events: none;
-      opacity: 0.6;
-    }
-
-    .btn-disabled:hover {
-      transform: none;
-      box-shadow: none;
+      background: #b0b8c5 !important;
+      color: #fff !important;
+      cursor: not-allowed !important;
+      box-shadow: none !important;
+      pointer-events: none !important;
+      opacity: 0.6 !important;
     }
 
     .flex-actions {
@@ -198,41 +206,20 @@
       margin-top: 6px;
     }
 
-    .login-btn-area {
-      position: fixed;
-      top: 20px;
-      right: 30px;
-      z-index: 999;
-    }
-
-    .login-btn-area .btn {
-      padding: 8px 22px;
-      font-size: 0.9rem;
-      border-radius: 4px;
-      background: #2c5282;
-    }
-
-    .login-btn-area .btn:hover {
-      background: #1a3f6a;
-    }
-
-    .login-btn-area .btn.logout-btn {
-      background: #8b7a6a;
-    }
-
-    .login-btn-area .btn.logout-btn:hover {
-      background: #6b5d50;
-    }
-
-    .user-status {
+    .permission-tag {
       display: inline-block;
-      font-size: 0.85rem;
-      color: #1f3a5f;
-      background: rgba(255,255,255,0.8);
-      padding: 6px 14px;
-      border-radius: 4px;
-      margin-right: 10px;
-      border: 1px solid #d4c5a6;
+      font-size: 0.75rem;
+      padding: 2px 14px;
+      border-radius: 30px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      margin-left: 8px;
+    }
+
+    .permission-tag.guest {
+      background: #e8f0fe;
+      color: #1f3a7a;
+      border: 1px solid #b6cceb;
     }
 
     @media (max-width: 480px) {
@@ -244,6 +231,10 @@
       }
       .card h2 {
         font-size: 1.3rem;
+      }
+      .btn {
+        padding: 8px 18px;
+        font-size: 0.9rem;
       }
       .login-btn-area {
         top: 10px;
@@ -263,14 +254,66 @@
 <body>
 
   <div class="login-btn-area" id="loginArea">
-    <!-- 由 JS 动态渲染 -->
   </div>
 
   <div class="container">
     <div class="header">
       <h1>2020级2班同学回忆册</h1>
-      <p>珍藏六年时光 · 留存美好回忆</p>
+      <p>测试网站功能</p>
+    </div>
+
+    <div class="card">
+      <h2>
+        测试网站功能-第3页
+        <span class="permission-tag guest">访客</span>
+      </h2>
+      <p>盲猜一手，你是强行输入网址进来的吧……有意思…… 快给我回去！不然……</p>
+      <img src="https://aiyou945.github.io/image/img1.png"></img>
+      <div class="flex-actions">
+        <a href="https://aiyou945.github.io/602/test/page/1" class="btn btn">← 上一页</a>
+        &nbsp;
+        <a href="javascript:void(0)" class="btn btn-disabled">下一页 →</a>
+      </div>
     </div>
   </div>
+
+  <script>
+    (function() {
+      function updateUI() {
+        var logined = sessionStorage.getItem('logined') === 'true';
+        var area = document.getElementById('loginArea');
+        if (logined) {
+          area.innerHTML = '<span class="user-status">欢迎！</span><a href="javascript:void(0)" class="btn logout-btn" onclick="logout()">退出</a>';
+        } else {
+          area.innerHTML = '<a href="javascript:void(0)" class="btn" onclick="goLogin()">登录</a>';
+        }
+      }
+
+      window.goLogin = function() {
+        sessionStorage.setItem('backUrl', location.href);
+        location.href = '/602/login.html';
+      };
+
+      window.logout = function() {
+        sessionStorage.removeItem('logined');
+        sessionStorage.removeItem('backUrl');
+        updateUI();
+        alert('已退出登录');
+        location.reload();
+      };
+
+      updateUI();
+
+      document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' ||
+            (e.ctrlKey && e.key === 'u') ||
+            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J'))) {
+          e.preventDefault();
+          return false;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
