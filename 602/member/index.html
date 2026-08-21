@@ -36,7 +36,7 @@
       text-align: center;
       line-height: 44px;
       text-decoration: none;
-      border-radius: 40px;
+      border-radius: 6px;
       color: white;
       font-weight: 500;
       letter-spacing: 1px;
@@ -57,7 +57,7 @@
       margin-bottom: 30px;
       position: relative;
       background: rgba(255, 252, 245, 0.6);
-      border-radius: 60px 60px 20px 20px;
+      border-radius: 6px;
       backdrop-filter: blur(2px);
     }
     .header h1 {
@@ -82,7 +82,7 @@
     }
     .content {
       background: #fffcfa;
-      border-radius: 28px;
+      border-radius: 6px;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06), 0 4px 10px rgba(184, 134, 11, 0.08);
       padding: 40px 35px;
       margin-bottom: 30px;
@@ -116,13 +116,13 @@
       color: #3d3529;
       background: #f9f3e9;
       padding: 14px 20px;
-      border-radius: 40px;
+      border-radius: 6px;
       border-left: 4px solid #d4af37;
     }
     .notice {
       background: #f0f4ff;
       border: 2px dashed #b6cceb;
-      border-radius: 16px;
+      border-radius: 6px;
       padding: 16px 22px;
       margin-bottom: 28px;
       font-size: 1rem;
@@ -145,7 +145,7 @@
       flex-wrap: wrap;
       padding: 12px 16px;
       margin: 4px 0;
-      border-radius: 16px;
+      border-radius: 6px;
       background: #fcf8f0;
       border: 1px solid #efe6d6;
       transition: background 0.15s, border-color 0.15s;
@@ -161,7 +161,7 @@
       font-weight: 600;
       font-size: 0.85rem;
       padding: 2px 10px;
-      border-radius: 30px;
+      border-radius: 4px;
       margin-right: 8px;
       letter-spacing: 0.5px;
       flex-shrink: 0;
@@ -197,7 +197,7 @@
       gap: 4px;
       font-size: 0.8rem;
       padding: 2px 10px 2px 6px;
-      border-radius: 30px;
+      border-radius: 4px;
       background: #eef3fa;
       color: #1f3a5f;
       margin: 2px 4px 2px 0;
@@ -238,7 +238,7 @@
       background: #e7dcc8;
       border: 2px solid #a58b68;
       padding: 0 12px 0 8px;
-      border-radius: 30px;
+      border-radius: 4px;
       font-size: 0.8rem;
       margin-left: 6px;
       color: #3d2e1a;
@@ -255,7 +255,7 @@
       display: inline-block;
       background: #ffedc9;
       border: 1px dashed #b8860b;
-      border-radius: 30px;
+      border-radius: 4px;
       padding: 0 12px;
       font-size: 0.8rem;
       color: #5f4400;
@@ -266,7 +266,7 @@
       display: inline-block;
       background: #e8f0fe;
       border: 1px solid #b6cceb;
-      border-radius: 30px;
+      border-radius: 4px;
       padding: 0 12px;
       font-size: 0.8rem;
       color: #1f3a7a;
@@ -308,7 +308,7 @@
       background: #27ae60;
       color: white;
       padding: 8px 20px;
-      border-radius: 40px;
+      border-radius: 4px;
       text-decoration: none;
       font-size: 0.9rem;
       font-weight: 500;
@@ -320,14 +320,70 @@
     .btn-download:hover {
       background: #1e8449;
     }
+    .login-btn-area {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      z-index: 999;
+    }
+    .login-btn-area .btn {
+      padding: 8px 22px;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      background: #2c5282;
+      color: white;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+    .login-btn-area .btn:hover {
+      background: #1a3f6a;
+      transform: scale(1.05);
+    }
+    .login-btn-area .btn.logout-btn {
+      background: #8b7a6a;
+    }
+    .login-btn-area .btn.logout-btn:hover {
+      background: #6b5d50;
+    }
+    .user-status {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: #1f3a5f;
+      background: rgba(255,255,255,0.8);
+      padding: 6px 14px;
+      border-radius: 4px;
+      margin-right: 10px;
+      border: 1px solid #d4c5a6;
+    }
     @media (max-width: 600px) {
       .content { padding: 20px 15px; }
       .header h1 { font-size: 1.9rem; }
       .student-item { padding: 10px 12px; }
+      .login-btn-area {
+        top: 10px;
+        right: 10px;
+      }
+      .login-btn-area .btn {
+        padding: 6px 14px;
+        font-size: 0.8rem;
+      }
+      .user-status {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+      }
     }
   </style>
 </head>
 <body>
+
+<div class="login-btn-area" id="loginArea">
+  <!-- 由 JS 动态渲染 -->
+</div>
+
 <div class="container">
   <div class="header">
     <h1>六年(2)班同学回忆册</h1>
@@ -362,19 +418,39 @@
 </div>
 
 <script>
-  document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-  document.addEventListener('keydown', function(e) {
-    if(e.key === 'F12' || (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J'))){
-      e.preventDefault();
-      return false;
+  (function() {
+    function updateUI() {
+      var logined = sessionStorage.getItem('logined') === 'true';
+      var area = document.getElementById('loginArea');
+      if (logined) {
+        area.innerHTML = '<span class="user-status">欢迎！</span><a href="javascript:void(0)" class="btn logout-btn" onclick="logout()">退出</a>';
+      } else {
+        area.innerHTML = '<a href="javascript:void(0)" class="btn" onclick="goLogin()">登录</a>';
+      }
     }
-  });
-  (function checkLogin(){
-    let logined = sessionStorage.getItem('logined');
-    if(!logined){
+
+    window.goLogin = function() {
       sessionStorage.setItem('backUrl', location.href);
       location.href = '/602/login.html';
-    }
+    };
+
+    window.logout = function() {
+      sessionStorage.removeItem('logined');
+      sessionStorage.removeItem('backUrl');
+      updateUI();
+      alert('已退出登录');
+      location.href = '/602/';
+    };
+
+    updateUI();
+
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    document.addEventListener('keydown', function(e) {
+      if(e.key === 'F12' || (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J'))){
+        e.preventDefault();
+        return false;
+      }
+    });
   })();
 
   function downloadTxt() {
