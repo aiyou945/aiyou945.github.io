@@ -419,6 +419,22 @@
 
 <script>
   (function() {
+    // 检查登录状态，未登录直接跳转
+    function checkLogin() {
+      var logined = sessionStorage.getItem('logined') === 'true';
+      if (!logined) {
+        sessionStorage.setItem('backUrl', location.href);
+        location.href = '/602/login.html';
+        return false;
+      }
+      return true;
+    }
+
+    // 立即执行登录检查
+    if (!checkLogin()) {
+      return;
+    }
+
     function updateUI() {
       var logined = sessionStorage.getItem('logined') === 'true';
       var area = document.getElementById('loginArea');
