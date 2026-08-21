@@ -197,6 +197,15 @@
       color: white;
     }
 
+    .btn-disabled {
+      background: #b0b8c5 !important;
+      color: #fff !important;
+      cursor: not-allowed !important;
+      box-shadow: none !important;
+      pointer-events: none !important;
+      opacity: 0.6 !important;
+    }
+
     .flex-actions {
       display: flex;
       flex-wrap: wrap;
@@ -272,13 +281,16 @@
         首先，请按下下方的按钮测试翻页功能：
       </p>
       <div class="flex-actions">
+        <a href="java void(0)" class="btn-disabled">← 上一页</a>
+        &nbsp;
         <a href="https://aiyou945.github.io/602/test/page/1" class="btn">下一页 →</a>
       </div>
+      <br />
       <p>下方有一张尺寸为 200×100 的图片，如果你能看到这张图片，代表这个功能没有问题：</p>
       <img src="https://aiyou945.github.io/image/check.png" width="200" height="150" alt="测试图片">
       <p>本篇帖子的内容就只有这么多，下篇帖子不见不散！</p>
       <div class="flex-actions">
-        <a href="https://aiyou945.github.io/602" class="btn btn-outline">返回</a>
+        <a href="https://aiyou945.github.io/602" class="btn btn-outline">返回首页</a>
       </div>
     </div>
   </div>
