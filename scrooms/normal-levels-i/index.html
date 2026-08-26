@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The School Rooms - 层级列表</title>
+    <link rel="stylesheet" href="../loading/1.css">
+    <link rel="stylesheet" href="../loading/font1.css">
+    <link rel="stylesheet" href="../loading/font2.css">
+
+    <style>
+        :root {
+            --pale-gray-monochrome: 255, 251, 240;
+            --gray-monochrome: 72, 69, 60;
+            --black-monochrome: 25, 20, 16;
+            --white-monochrome: 237, 233, 223;
+            --link-color: 230, 23, 68;
+            --dark-accent: 140, 136, 126;
+        }
+
+        body {
+            background-color: rgb(var(--pale-gray-monochrome));
+            margin: 0;
+            padding: 20px;
+            color: rgb(var(--black-monochrome));
+            font-family: Inter, "Noto Sans SC", Arimo, Verdana, Geneva, sans-serif;
+        }
+
+        .style-block {
+            padding: 0;
+            background-color: rgb(var(--pale-gray-monochrome));
+            border: rgb(var(--gray-monochrome)) solid 0.2rem;
+            border-top: none;
+            position: relative;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .style-block h2 {
+            background-color: rgb(var(--gray-monochrome));
+            color: rgb(var(--pale-gray-monochrome));
+            padding: 0.3em 1rem 0.3em 0.5em;
+            margin: 0;
+            font-size: 1.2em;
+            display: flex;
+            position: relative;
+        }
+
+        .style-block h2 span {
+            padding-left: 0.5em;
+        }
+
+        .style-block h2::before {
+            margin-top: -0.9rem;
+            content: ' ';
+            width: 1.3rem;
+            background: rgb(var(--pale-gray-monochrome));
+            display: block;
+            clip-path: polygon(-100% -100%, 100% 0%, 100% 100%, 50% 80%, 0% 100%);
+            border: rgb(var(--gray-monochrome)) solid 0.2rem;
+            border-bottom: none;
+        }
+
+        .back-to-toc {
+            position: absolute;
+            right: 1rem;
+            top: 0.43125rem;
+        }
+        .back-to-toc p { margin: 0; }
+        .back-to-toc p a {
+            color: rgb(var(--white-monochrome));
+            text-decoration: none !important;
+        }
+        .back-to-toc p a::after {
+            content: ' 回到顶部';
+            padding-left: 0.5em;
+            font-size: 0.9em;
+        }
+
+        .style-block ul {
+            padding: 1em 1em;
+            margin: 0;
+            list-style: none;
+        }
+
+        .style-block ul > li {
+            padding: 0.1rem 0.2rem;
+            font-size: 1em;
+        }
+
+        .style-block ul > li:nth-child(even) {
+            background: rgba(var(--white-monochrome), 0.3);
+        }
+
+        li::marker {
+            content: ' ';
+            font-size: 0px;
+        }
+
+        .style-block a {
+            color: rgb(var(--link-color));
+            text-decoration: none;
+        }
+        .style-block a:hover {
+            text-decoration: underline;
+        }
+
+        .style-block ul > li > ul {
+            padding: 0;
+            margin-top: 0.2rem;
+            margin-left: 1.5rem;
+            position: relative;
+        }
+        .style-block ul > li > ul::before {
+            content: "⤷";
+            display: block;
+            left: -1rem;
+            top: 0;
+            position: absolute;
+            color: rgb(var(--link-color));
+        }
+
+        .rew {
+            float: right;
+        }
+
+        .rew::before {
+            content: "⚠";
+            color: rgb(var(--dark-accent));
+            font-size: 0.95em;
+        }
+        .rew::after {
+            content: " 该文章正在重写中";
+            color: rgb(var(--dark-accent));
+            font-size: 0.95em;
+            font-family: Inter, "Noto Sans SC", sans-serif;
+        }
+    </style>
+</head>
+<body>
+<div class="style-block">
+    <h2 id="toc0"><span>Level 0-19</span></h2>
+    <div class="back-to-toc">
+        <p><a href="#t">▲</a></p>
+    </div>
+
+    <ul>
+        <li><a href="../level-0">Level 0</a> - “学校大门”
+            <ul>
+                <li><a href="#">Level 0.1</a> - “小卖部”</li>
+                <li><a href="#">Level 0.2</a> - “停车场”</li>
+                <li><a href="#">Level 0.9</a> - “保安室”</li>
+            </ul>
+        </li>
+        <li><a href="#">Level 1</a> - “操场”
+            <ul>
+                <li><a href="#">Level 1.1</a> - “<del>跑操进行时</del><strong>Run！</strong>”</li>
+                <li><a href="#">Level 1.5</a> - “电梯”</li>
+            </ul>
+        </li>
+        <li><a href="#">Level 2</a> - “教学楼走廊”
+            <ul>
+                <li><a href="#">Level 2.1</a> - “厕所”</li>
+                <li><a href="#">Level 2.2</a> - “观景平台”</li>
+            </ul>
+        </li>
+        <li><a href="#">Level 3</a> - “教室”
+            <ul>
+                <li><a href="#">Level 3.1</a> - “<font color="red">规</font><font color="yellow">则</font><font color="blue">之</font><font color="green">地</font>”</li>
+                <li><a href="#">Level 3.<i>-1_</i>norm</a> - “+-×÷%”</li>
+            </ul>
+        </li>
+        <li><a href="#">Level 4</a> - “老师办公室”<span class="rew"></span></li>
+        <li><a href="#">Level 5</a> - “体育馆”</li>
+    </ul>
+</div>
+
+</body>
+</html>
