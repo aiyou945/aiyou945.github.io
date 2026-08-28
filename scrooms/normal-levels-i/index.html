@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The School Rooms - 层级列表</title>
+    <link rel="icon" href="../loading/index_icon.png" type="image/png">
     <link rel="stylesheet" href="../loading/1.css">
     <link rel="stylesheet" href="../loading/font1.css">
     <link rel="stylesheet" href="../loading/font2.css">
-
     <style>
         :root {
             --pale-gray-monochrome: 255, 251, 240;
@@ -17,15 +17,83 @@
             --link-color: 230, 23, 68;
             --dark-accent: 140, 136, 126;
         }
-
         body {
             background-color: rgb(var(--pale-gray-monochrome));
             margin: 0;
-            padding: 20px;
+            padding: 0;
             color: rgb(var(--black-monochrome));
             font-family: Inter, "Noto Sans SC", Arimo, Verdana, Geneva, sans-serif;
         }
+        #top-bar {
+            display: flex;
+            justify-content: center;
+            background-color: rgb(var(--gray-monochrome));
+            width: 100%;
+            border-bottom: 4px solid rgb(var(--gray-monochrome));
+        }
+        #top-bar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+        }
+        #top-bar ul li {
+            position: relative;
+        }
+        #top-bar ul li > a,
+        #top-bar ul li {
+            display: block;
+            padding: 1rem 2.4rem;
+            color: rgb(var(--white-monochrome));
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 150ms;
+        }
+        #top-bar ul li:hover {
+            background-color: rgba(var(--white-monochrome), 0.1);
+        }
+        #top-bar ul li ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(20, 20, 20, 0.85);
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            min-width: 220px;
+            width: auto;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+        }
+        #top-bar ul li:hover > ul {
+            display: block;
+        }
+        #top-bar ul li ul li {
+            padding: 0;
+            margin: 0;
+        }
+        #top-bar ul li ul li a {
+            display: block;
+            padding: 0.75rem 1.4rem;
+            font-size: 1rem;
+            font-weight: 400;
+            text-align: left;
+            color: rgb(var(--white-monochrome));
+            text-decoration: none;
+            transition: background-color 150ms;
+        }
+        #top-bar ul li ul li a:hover {
+            background-color: rgba(255,255,255,0.15);
+        }
 
+        .page-wrap{
+            padding: 20px;
+        }
         .style-block {
             padding: 0;
             background-color: rgb(var(--pale-gray-monochrome));
@@ -35,7 +103,6 @@
             max-width: 750px;
             margin: 0 auto;
         }
-
         .style-block h2 {
             background-color: rgb(var(--gray-monochrome));
             color: rgb(var(--pale-gray-monochrome));
@@ -45,11 +112,9 @@
             display: flex;
             position: relative;
         }
-
         .style-block h2 span {
             padding-left: 0.5em;
         }
-
         .style-block h2::before {
             margin-top: -0.9rem;
             content: ' ';
@@ -60,7 +125,6 @@
             border: rgb(var(--gray-monochrome)) solid 0.2rem;
             border-bottom: none;
         }
-
         .back-to-toc {
             position: absolute;
             right: 1rem;
@@ -76,27 +140,22 @@
             padding-left: 0.5em;
             font-size: 0.9em;
         }
-
         .style-block ul {
             padding: 1em 1em;
             margin: 0;
             list-style: none;
         }
-
         .style-block ul > li {
             padding: 0.1rem 0.2rem;
             font-size: 1em;
         }
-
         .style-block ul > li:nth-child(even) {
             background: rgba(var(--white-monochrome), 0.3);
         }
-
         li::marker {
             content: ' ';
             font-size: 0px;
         }
-
         .style-block a {
             color: rgb(var(--link-color));
             text-decoration: none;
@@ -104,7 +163,6 @@
         .style-block a:hover {
             text-decoration: underline;
         }
-
         .style-block ul > li > ul {
             padding: 0;
             margin-top: 0.2rem;
@@ -119,11 +177,9 @@
             position: absolute;
             color: rgb(var(--link-color));
         }
-
         .rew {
             float: right;
         }
-
         .rew::before {
             content: "⚠";
             color: rgb(var(--dark-accent));
@@ -138,42 +194,69 @@
     </style>
 </head>
 <body>
-<div class="style-block">
-    <h2 id="toc0"><span>Level 0-19</span></h2>
-    <div class="back-to-toc">
-        <p><a href="#t">▲</a></p>
+    <div id="top-bar">
+        <ul>
+            <li>返回
+                <ul>
+                    <li><a href="..">首页</a></li>
+                </ul>
+            </li>
+            <li>图书馆
+                <ul>
+                    <li><a href="#">层级</a></li>
+                    <li><a href="../objects">物品</a></li>
+                    <li><a href="../entities">实体</a></li>
+                    <li><a href="../hide-levels-i">隐秘层级</a></li>
+                </ul>
+            </li>
+            <li>指导
+                <ul>
+                    <li><a href="../study/levels">如何撰写一篇层级？</a></li>
+                    <li><a href="../study/objects">如何撰写一篇物品？</a></li>
+                    <li><a href="../study/entities">如何撰写一篇实体？</a></li>
+                </ul>
+            </li>
+        </ul>
     </div>
 
-    <ul>
-        <li><a href="../level-0">Level 0</a> - “学校大门”
+    <div class="page-wrap">
+        <div class="style-block">
+            <h2 id="toc0"><span>Level 0-19</span></h2>
+            <div class="back-to-toc">
+                <p><a href="#t">▲</a></p>
+            </div>
             <ul>
-                <li><a href="#">Level 0.1</a> - “小卖部”</li>
-                <li><a href="#">Level 0.2</a> - “停车场”</li>
-                <li><a href="#">Level 0.9</a> - “保安室”</li>
+                <li><a href="../level-0">Level 0</a> - “学校大门”
+                    <ul>
+                        <li><a href="../level-0-1">Level 0.1</a> - “小卖部”</li>
+                        <li><a href="../level-0-2">Level 0.2</a> - “停车场”</li>
+                        <li><a href="../level-0-9">Level 0.9</a> - “保安室”</li>
+                    </ul>
+                </li>
+                <li><a href="../level-1">Level 1</a> - “操场”
+                    <ul>
+                        <li><a href="../level-1-1">Level 1.1</a> - “<del>跑操进行时</del><strong>Run！</strong>”</li>
+                        <li><a href="../level-1-5">Level 1.5</a> - “电梯”</li>
+                    </ul>
+                </li>
+                <li><a href="../level-2">Level 2</a> - “教学楼走廊”
+                    <ul>
+                        <li><a href="../level-2-1">Level 2.1</a> - “厕所”</li>
+                        <li><a href="../level-2-2">Level 2.2</a> - “观景平台”<span class="rew"></span></li>
+                    </ul>
+                </li>
+                <li><a href="../level-3">Level 3</a> - “教室”
+                    <ul>
+                        <li><a href="../level-3-1">Level 3.1</a> - “<font color="red">规</font><font color="yellow">则</font><font color="blue">之</font><font color="green">地</font>”<span class="rew"></span></li>
+                        <li><a href="../level-3-s1-norm">Level 3.<i>-1_</i>norm</a> - “+-×÷%”</li>
+                    </ul>
+                </li>
+                <li><a href="../level-4">Level 4</a> - “老师办公室”<span class="rew"></span></li>
+                <li><a href="../level-5">Level 5</a> - “体育馆”<span class="rew"></span></li>
+                <li><a href="../level-6">Level 6</a> - [NO DATA]</li>
+                <li><a href="../level-7">Level 7</a> - “多功能报告厅”</li>
             </ul>
-        </li>
-        <li><a href="#">Level 1</a> - “操场”
-            <ul>
-                <li><a href="#">Level 1.1</a> - “<del>跑操进行时</del><strong>Run！</strong>”</li>
-                <li><a href="#">Level 1.5</a> - “电梯”</li>
-            </ul>
-        </li>
-        <li><a href="#">Level 2</a> - “教学楼走廊”
-            <ul>
-                <li><a href="#">Level 2.1</a> - “厕所”</li>
-                <li><a href="#">Level 2.2</a> - “观景平台”</li>
-            </ul>
-        </li>
-        <li><a href="#">Level 3</a> - “教室”
-            <ul>
-                <li><a href="#">Level 3.1</a> - “<font color="red">规</font><font color="yellow">则</font><font color="blue">之</font><font color="green">地</font>”</li>
-                <li><a href="#">Level 3.<i>-1_</i>norm</a> - “+-×÷%”</li>
-            </ul>
-        </li>
-        <li><a href="#">Level 4</a> - “老师办公室”<span class="rew"></span></li>
-        <li><a href="#">Level 5</a> - “体育馆”</li>
-    </ul>
-</div>
-
+        </div>
+    </div>
 </body>
 </html>
