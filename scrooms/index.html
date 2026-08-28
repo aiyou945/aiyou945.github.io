@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The School Rooms - 主页</title>
-
+    <title>主页 - The School Rooms</title>
+    <link rel="icon" href="./loading/index_icon.png" type="image/png">
+    
     <link rel="stylesheet" href="./loading/1.css">
     <link rel="stylesheet" href="./loading/font1.css">
     <link rel="stylesheet" href="./loading/font2.css">
-
     <style>
         :root {
             --pale-gray-monochrome: 255, 251, 240;
@@ -18,126 +18,302 @@
             --link-color: 230, 23, 68;
             --dark-accent: 140, 136, 126;
         }
-
         body {
+            background-color: #f8f4dc !important;
+            font-family: Inter, "Noto Sans SC", Arimo, Verdana, Geneva, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: rgb(var(--pale-gray-monochrome));
-            font-family: Inter, "Noto Sans SC", Arimo, Verdana, Geneva, sans-serif;
-            color: rgb(var(--black-monochrome));
         }
-
         #header {
             background-color: rgb(var(--gray-monochrome));
             color: rgb(var(--white-monochrome));
             text-align: center;
             padding: 3rem 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        #header::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://backrooms-wiki-cn.wdfiles.com/local--files/backrooms-wiki%3Athemes/logo.png");
+            background-size: auto 16rem;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+        }
+        #header h1, #header h2 {
+            position: relative;
+            z-index: 1;
+            margin: 0;
         }
         #header h1 {
-            margin: 0;
-            font-size: 3rem;
-            font-weight: 900;
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 1px;
         }
         #header h1 a {
             color: rgb(var(--white-monochrome));
             text-decoration: none;
         }
         #header h2 {
-            margin: 0.5rem 0 0 0;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-style: italic;
-            font-weight: 400;
+            font-weight: 300;
             color: rgb(var(--white-monochrome));
+            margin-top: 0.35rem;
+            opacity: 0.85;
         }
-
         #top-bar {
-            background-color: rgb(var(--gray-monochrome));
-            padding: 0;
-            margin: 0;
-            width: 100%;
             display: flex;
             justify-content: center;
+            background-color: rgb(var(--gray-monochrome));
+            width: 100%;
             border-bottom: 4px solid rgb(var(--gray-monochrome));
-            position: relative;
-            z-index: 10;
         }
-
         #top-bar ul {
             list-style: none;
             padding: 0;
             margin: 0;
             display: flex;
+            justify-content: center;
+            gap: 4rem;
         }
         #top-bar ul li {
             position: relative;
         }
-        #top-bar ul li > a {
+        #top-bar ul li > a,
+        #top-bar ul li {
             display: block;
-            padding: 1rem 2rem;
+            padding: 1rem 2.4rem;
             color: rgb(var(--white-monochrome));
-            text-decoration: none;
             font-size: 1.2rem;
             font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
             transition: background-color 150ms;
         }
-        #top-bar ul li > a:hover {
+        #top-bar ul li:hover {
             background-color: rgba(var(--white-monochrome), 0.1);
         }
-
-        /* 下拉子菜单 */
         #top-bar ul li ul {
             display: none;
             position: absolute;
             top: 100%;
             left: 0;
-            background-color: rgb(var(--gray-monochrome));
-            min-width: 100%;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            background-color: rgba(20, 20, 20, 0.85);
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            min-width: 220px;
+            width: auto;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
         }
         #top-bar ul li:hover > ul {
             display: block;
         }
+        #top-bar ul li ul li {
+            padding: 0;
+            margin: 0;
+        }
         #top-bar ul li ul li a {
             display: block;
-            padding: 0.8rem 2rem;
+            padding: 0.75rem 1.4rem;
+            font-size: 1rem;
+            font-weight: 400;
+            text-align: left;
             color: rgb(var(--white-monochrome));
             text-decoration: none;
-            font-size: 1rem;
-            white-space: nowrap;
-            text-align: left;
+            transition: background-color 150ms;
         }
         #top-bar ul li ul li a:hover {
+            background-color: rgba(255,255,255,0.15);
+        }
+        #main-content {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            box-sizing: border-box;
+        }
+        .bannerContainer {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .bannerContainer .welcome {
+            grid-column: 1 / -1;
+            background-color: rgb(var(--gray-monochrome));
+            color: rgb(var(--white-monochrome));
+            font-style: italic;
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: 0.5rem;
+        }
+        .bannerContainer .navigator {
+            grid-column: 1 / -1;
+            display: flex;
+            background-color: rgb(var(--gray-monochrome));
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .bannerContainer .navigator a {
+            flex: 1;
+            padding: 1rem 0;
+            text-align: center;
+            color: rgb(var(--white-monochrome));
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 150ms;
+        }
+        .bannerContainer .navigator a:hover {
             background-color: rgba(var(--white-monochrome), 0.1);
         }
-
-        #main-content {
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 2rem;
+        .announceContainer {
+            width: 100%;
+            border: 4px solid rgb(var(--gray-monochrome));
+            margin-bottom: 2rem;
+        }
+        .announceContainer .welcome {
+            background-color: rgb(var(--gray-monochrome));
+            color: rgb(var(--white-monochrome));
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.5rem;
+            padding: 0.5rem;
+        }
+        .announceContainer .announcement {
+            background-color: rgb(var(--pale-gray-monochrome));
+            padding: 1.5rem;
+            border-top: 4px solid rgb(var(--gray-monochrome));
+        }
+        .announceContainer .archive {
+            background-color: rgb(var(--gray-monochrome));
+            color: rgb(var(--white-monochrome));
+            text-align: right;
+            padding: 0.5rem 1rem;
+        }
+        .announceContainer .archive a {
+            color: rgb(var(--white-monochrome));
+            text-decoration: none;
+        }
+        .recentPages {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .recentPages .pageContainer {
+            border: 3px solid rgb(var(--gray-monochrome));
+            background-color: rgb(var(--pale-gray-monochrome));
+        }
+        .recentPages .pageContainer .title {
+            background-color: rgb(var(--gray-monochrome));
+            color: rgb(var(--white-monochrome));
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+        }
+        .recentPages .pageContainer .page {
+            padding: 1rem;
+            min-height: 100px;
+        }
+        .recentPages .pageContainer .page a {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: rgb(var(--link-color));
+            text-decoration: none;
+        }
+        .recentPages .pageContainer .recently {
+            background-color: rgb(var(--gray-monochrome));
+            color: rgb(var(--white-monochrome));
+            text-align: right;
+            padding: 0.5rem 1rem;
+        }
+        .recentPages .pageContainer .recently a {
+            color: rgb(var(--white-monochrome));
+            text-decoration: none;
+        }
+        .gg a {
+            color: rgb(var(--link-color));
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-
     <div id="header">
         <h1><a href="index.html">The School Rooms</a></h1>
         <h2>你曾经来过这里</h2>
     </div>
-
     <div id="top-bar">
         <ul>
-            <li>
-                <a href="javascript:void(0);">图书馆</a>
+            <li>图书馆
                 <ul>
-                    <li><a href="/normal-levels-i/">层级</a></li>
-                    <!--<li><a href="/objects/">物品</a></li>-->
+                    <li><a href="./normal-levels-i">层级</a></li>
+                    <li><a href="./objects">物品</a></li>
+                    <li><a href="./entities">实体</a></li>
+                    <li><a href="./hide-levels-i">隐秘层级</a></li>
+                </ul>
+            </li>
+            <li>指导
+                <ul>
+                    <li><a href="./study/levels">如何撰写一篇层级？</a></li>
+                    <li><a href="./study/objects">如何撰写一篇物品？</a></li>
+                    <li><a href="./study/entities">如何撰写一篇实体？</a></li>
                 </ul>
             </li>
         </ul>
     </div>
-
     <div id="main-content">
+        <div class="bannerContainer">
+            <div class="welcome">
+假如你愉快的假期结束，你最终将会来到学校，<br>
+这里只有单调的旧课桌、数不清的老师和令人发狂的作业，<br>
+教室上方的 LED 灯管和老旧的风扇全力运作发出的嗡鸣。<br>
+倘若你听见有人在对着你怒吼，<br>
+愿老天爷保佑你吧，<br>
+因为你的假期作业还没有写完……
+            </div>
+            <div class="navigator">
+                <a href="#" onclick="alert('该页面暂未创建');return false;">迭代日志</a>
+                <a href="#" onclick="alert('该页面暂未创建');return false;">常见问题</a>
+                <a href="#" onclick="alert('该页面暂未创建');return false;">加入我们</a>
+            </div>
+        </div>
+        <div class="announceContainer">
+            <div class="welcome">公告</div>
+            <div class="announcement">
+                <p>欢迎来到 The School Rooms！<br>这里只有数不清的作业，数不清的老师，以及令人疯狂的课堂。当然，这里也有无数和你一样不幸的“流浪者”，你将在这里开启一段特殊的“旅程”。<br>祝你好运！也欢迎贡献更多的新帖！<br>
+                <div class="gg">
+                    <a href="./normal-levels-i">查看层级列表（若水平实在太烂可提出建议，不喜勿喷）</a></p>
+                </div>
+            </div>
+            <div class="archive"><a href="#">旧公告归档</a></div>
+        </div>
+        <div class="recentPages">
+            <div class="pageContainer">
+                <div class="title">最近创建的页面</div>
+                <div class="page">
+                    <a href="./level-0">Level 0 - "学校大门"</a>
+                </div>
+                <div class="recently"><a href="#">查看全部</a></div>
+            </div>
+            <div class="pageContainer">
+                <div class="title">最近搬运的页面</div>
+                <div class="page">
+                    <a href="#">[NO DATA]</a>
+                </div>
+                <div class="recently"><a href="#">查看全部</a></div>
+            </div>
+        </div>
     </div>
-
 </body>
 </html>
