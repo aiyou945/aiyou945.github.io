@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 0.9 - "保安室" - The School Rooms</title>
+    <link rel="icon" href="../loading/index_icon.png" type="image/png">
+    <link rel="stylesheet" href="../loading/1.css">
+    <link rel="stylesheet" href="../loading/font1.css">
+    <link rel="stylesheet" href="../loading/font2.css">
+    <style>
+        :root {
+            --pale-gray-monochrome: 255, 251, 240;
+            --gray-monochrome: 72, 69, 60;
+            --black-monochrome: 25, 20, 16;
+            --white-monochrome: 237, 233, 223;
+            --link-color: 230, 23, 68;
+            --dark-accent: 140, 136, 126;
+        }
+        body {
+            background-color: rgb(var(--pale-gray-monochrome));
+            font-family: Inter, "Noto Sans SC", Arimo, Verdana, Geneva, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .doc-content a:link,
+        .doc-content a:visited,
+        .author-list a:link,
+        .author-list a:visited {
+            color: rgb(var(--link-color));
+            text-decoration: none;
+        }
+        .doc-content a:hover,
+        .author-list a:hover {
+            color: rgb(var(--link-color));
+            filter: brightness(1.2);
+        }
+        .doc-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: transparent;
+            border: none;
+            padding: 2em;
+            box-sizing: border-box;
+        }
+        #header {
+            background-color: rgb(var(--gray-monochrome));
+            color: rgb(var(--white-monochrome));
+            text-align: center;
+            padding: 3rem 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        #header::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://backrooms-wiki-cn.wdfiles.com/local--files/backrooms-wiki%3Athemes/logo.png");
+            background-size: auto 16rem;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+        }
+        #top-bar {
+            display: flex;
+            justify-content: center;
+            background-color: rgb(var(--gray-monochrome));
+            width: 100%;
+            border-bottom: 4px solid rgb(var(--gray-monochrome));
+        }
+        #top-bar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+        }
+        #top-bar ul li {
+            position: relative;
+        }
+        #top-bar ul li > a,
+        #top-bar ul li {
+            display: block;
+            padding: 1rem 2.4rem;
+            color: rgb(var(--white-monochrome));
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 150ms;
+        }
+        #top-bar ul li:hover {
+            background-color: rgba(var(--white-monochrome), 0.1);
+        }
+        #top-bar ul li ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(20, 20, 20, 0.85);
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            min-width: 220px;
+            width: auto;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+        }
+        #top-bar ul li:hover > ul {
+            display: block;
+        }
+        #top-bar ul li ul li {
+            padding: 0;
+            margin: 0;
+        }
+        #top-bar ul li ul li a {
+            display: block;
+            padding: 0.75rem 1.4rem;
+            font-size: 1rem;
+            font-weight: 400;
+            text-align: left;
+            color: rgb(var(--white-monochrome));
+            text-decoration: none;
+            transition: background-color 150ms;
+        }
+        #top-bar ul li ul li a:hover {
+            background-color: rgba(255,255,255,0.15);
+        }
+        .page-title {
+            font-size: 1.5em;
+            font-weight: 400;
+            color: rgb(var(--black-monochrome));
+            margin-bottom: 1rem;
+            border-bottom: none;
+        }
+        .rate-box {
+            float: right;
+            font-size: 1em;
+            font-weight: 400;
+            color: rgb(var(--black-monochrome));
+            margin-top: 0.5rem;
+        }
+        .clear-float { clear: both; }
+        .intro-quote {
+            background-color: rgba(var(--white-monochrome), 0.5);
+            border: 0.15rem solid rgb(var(--gray-monochrome));
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-style: italic;
+            line-height: 1.8;
+            color: rgb(var(--black-monochrome));
+        }
+        .image-survival-box {
+            width: 110%;
+            max-width: 800px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+        .image-survival-box img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .doc-content p {
+            margin: 1em 0;
+            line-height: 1.8;
+            font-size: 1em;
+            font-weight: 400;
+        }
+        .scp-image-block {
+            float: right;
+            width: 240px;
+            margin: 0 0 1rem 1.5rem;
+            background-color: rgb(var(--pale-gray-monochrome));
+            border: 0.1rem solid rgb(var(--gray-monochrome));
+            padding: 0.3rem;
+        }
+        .scp-image-block img {
+            width: 100%;
+            display: block;
+            border: none;
+        }
+        .scp-image-caption {
+            text-align: center;
+            font-size: 0.9em;
+            padding: 0.5rem;
+            color: rgb(var(--black-monochrome));
+        }
+        .author-float {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            z-index: 999;
+            max-width: 260px;
+        }
+        .author-float details {
+            background-color: rgb(var(--pale-gray-monochrome));
+            border: 0.15rem solid rgb(var(--gray-monochrome));
+            border-radius: 4px;
+        }
+        .author-float summary {
+            padding: 0.5rem 0.8rem;
+            cursor: pointer;
+            color: rgb(var(--link-color));
+            font-weight:bold;
+            list-style: none;
+        }
+        .author-float summary::-webkit-details-marker {
+            display:none;
+        }
+        .author-float .author-list {
+            padding:0 0.8rem 0.8rem 0.8rem;
+            color: rgb(var(--black-monochrome));
+        }
+        .author-float .author-list ul {
+            margin:0.4rem 0 0 0;
+            padding-left:1.2rem;
+        }
+        .fade-trigger{
+            animation: textFade 0.8s ease-in-out;
+        }
+        @keyframes textFade {
+            0%{opacity:0.2;}
+            100%{opacity:1;}
+        }
+    </style>
+</head>
+<body>
+<div id="top-bar">
+        <ul>
+            <li>返回
+                <ul>
+                    <li><a href="..">首页</a></li>
+                    <li><a href="../normal-levels-i">层级列表</a></li>
+                </ul>
+            </li>
+            <li>图书馆
+                <ul>
+                    <li><a href="../normal-levels-i">层级</a></li>
+                    <li><a href="../objects">物品</a></li>
+                    <li><a href="../entities">实体</a></li>
+                    <li><a href="../hide-levels-i">隐秘层级</a></li>
+                </ul>
+            </li>
+            <li>指导
+                <ul>
+                    <li><a href="../study/levels">如何撰写一篇层级？</a></li>
+                    <li><a href="../study/objects">如何撰写一篇物品？</a></li>
+                    <li><a href="../study/entities">如何撰写一篇实体？</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+<div class="doc-container">
+    <h1>Level 0.9 - "保安室"</h1>
+    <div class="clear-float"></div>
+    <div class="image-survival-box">
+        <img src="./0.9.png" alt="生存难度"></img>
+    </div>
+    <div class="doc-content">
+     <h1>描述：</h1>
+        <div class="scp-image-block">
+            <img src="../image_files_levels/0.9-png-files.png" alt="Level 0.9">
+            <div class="scp-image-caption">一张于 Level 0.9 内部拍摄的图片，由 <a href="../s-m-e-g">S.M.E.G</a> 资深特工提供。</div>
+        </div>
+        <p><strong>Level 0.9</strong> 是一个坐落于<a href="../level-0"> Level 0 </a>和<a href="../level-1"> Level 1 </a>之间的子层级，其内部空间大小近似于<a href="../level-0-1"> Level 0.1</a>，可容大约 3~4 名流浪者进入。<strong>Level 0.9 </strong>的外貌呈现为一座由瓷砖搭成的小型建筑，门口挂有醒目的“保安亭”标识牌，在<strong> Level 0.9 </strong>的外墙上总是挂着一台老旧的电话座机。</p>
+        <p>此层级可以被看作临近 <a href="../level-0">Level 0 </a>的一个“实体巢穴型”建筑，其被大量<a href="../entities/2">“保安”</a>所占据，该实体会经常在 <a href="../level-0">Level 0</a> 和 <strong>Level 0.9</strong> 之间往返站岗。关于<a href="../entities/2">“保安”</a>的习性详见该页面的【实体】一栏。</p>
+        <p><strong>Level 0.9 </strong>内部的设施都比较老旧，且会在流浪者每次到达这里时自动重新更改布局。层级内的设施大概如下：</p>
+        <p>一张木质桌子，桌面微有破损，上面铺着一张透明硅胶桌垫；一台微微泛黄的老式空调，运行时会发出“咔哒”声；一个电子监控显示屏，上面显示着各层级当前的样子；一扇窗户，透过窗户可以看到 <a href="../level-0">Level 0</a> 和 <a href="../level-1">Level 1</a>，但是由于未知原因，从 <a href="../level-0">Level 0</a> 无法透过窗户反向看到保安室内部的样子。除此之外，层级内还可能刷新这些物品：剪刀，圆珠笔，花名册，离校申请单，话筒，哨棍。经推测，这些物品都为实体<a href="../entities/2">“保安”</a>的随身物品。因此，请流浪者不要随便触碰这些物品。</p>
+        <p>流浪者经常会在身不由己的情况下被要求前往 <strong>Level 0.9</strong>，主要原因之一是部分流浪者可能受到 <a href="..">The School Rooms</a> 内一种特殊效应<a href="../no_homework">“物资遗漏”</a>的影响而被<a href="../entities/1">“老师”</a>被迫借用此层级的电话机向<a href="../entities/5">“家长”</a>发送加密信息，将所<del>忘带的作业</del>遗漏的物品从<a href="../home">“家”</a>中送至 <strong>Level 0.9</strong>。在此请各位迫不得已需要靠近 <strong>Level 0.9 </strong>的流浪者小心行事。</p>
+        <p>另外，值得注意的是，实体<a href="../entities/2">“保安”</a>似乎可以通过观看 <strong>Level 0.9</strong> 内的监控显示屏来了解流浪者的实时位置，而该层级的监控可以拍摄到多个层级的实况，为了避免在校园中的行踪被全部记录，请务必认真阅读以下监控可以拍摄到的层级列表：</p>
+        <p><strong>监控可拍摄的层级：</strong><a href="../level-0">Level 0</a>，<a href="../level-0-2">Level 0.2</a>，<a href="../level-1">Level 1</a>，<a href="../level-1-1">Level 1.1</a>，<a href="../level-1-5">Level 1.5</a>，<a href="../level-2">Level 2</a>，<a href="../level-3">Level 3</a>，<a href="../level-3-1">Level 3.1</a>，<a href="../level-3-s1-norm">Level 3.<i>-1_</i>norm</a>，<a href="../level-4">Level 4</a>，<a href="../level-4-1">Level 4.1</a>，<a href="../level-5">Level 5</a>，<a href="../level-5-1">Level 5.1</a>，<a href="../level-6">Level 6</a>，<a href="../level-7">Level 7</a>，<a href="../level-8">Level 8</a>，<a href="../level-10">Level 10</a>，<a href="../level-12">Level 12</a>，<a href="../level-13">Level 13</a>，<a href="../level-14">Level 14</a>，<a href="../level-15">Level 15</a>，<a href="../level-17">Level 17</a>，<a href="../level-18">Level 18</a>。</p>
+        <h1>实体：</h1>
+        <p>本层级唯一的实体是<a href="../entities/2">“保安”</a>，他会在“上学时间”和“放学时间”拿着自己的哨棍在 <a href="../level-0">Level 0</a> 站岗。其他时间内，该实体会一直停留在 <strong>Level 0.9</strong>。当流浪者尝试进入 <strong>Level 0.9</strong> 后，其会先对流浪者进行警告，如果流浪者在发出警告的 2~3 秒内没有任何反应，<a href="../entities/2">“保安”</a>就会拿起哨棍对流浪者进行驱逐。正是因为此原因，除非被<a href="../entities/1">“老师”</a>允许，流浪者很难进入 <strong>Level 0.9</strong> 的内部。</p>
+        <p>在流浪者向<a href="../entities/2">“保安”</a>提出借用电话机的请求后，就可以在 10 分钟内获得电话机的使用权，请有需要联系<a href="../entities/5">“家长”</a>的流浪者在这段时间内尽快说明需求，若流浪者在此处停留的时间超过 10 分钟，则有很大可能会引起<a href="../entities/2">“保安”</a>的敌意并被其驱逐。</p>
+        <p>特殊的是，如果流浪者手持被<a href="../entities/5">“家长”</a>以及<a href="../entities/2">“老师”</a>签过字的<a href="../objects/4">“请假条”</a>来到 <strong>Level 0.9</strong>，<a href="../entities/2">“保安”</a>将会在短时间内失去对你的所有敌意。此时只要向<a href="../entities/2">“保安”</a>申请离开，流浪者就可以成功离开学校。</p>
+        <h1>基地、前哨和社区：</h1>
+        <p><strong><a href="../s-m-e-g">S.M.E.G</a></strong> —— 电话管理团：由 <a href="../s-m-e-g">S.M.E.G</a> 的 3 名成员组成，他们已经取得了<a href="../entities/2">“保安”</a>的信任，负责帮忙管理 <strong>Level 0.9</strong> 内的电话。当流浪者因为忘记带<a href="../objects/1">“作业”</a>要叫送时，可以向他们请求帮助。</p>
+       <p><strong>VR-0.9</strong>：一个常驻于 <strong>Level 0.9</strong> 的组织，由 2 名<a href="../entities/4">“执勤队员”</a>组成，会经常来到<strong> Level 0.9 </strong>找<a href="../entities/2">“保安”</a>唠嗑。他们对流浪者保持中立态度。</p>
+        <h1>入口和出口：</h1>
+        <p>入口：在 <a href="../level-0">Level 0</a> 和 <a href="../level-1">Level 1</a> 的交界处有一个保安亭，走进保安亭即可进入 <strong>Level 0.9</strong>。</p>
+        <p>出口：原路返回即可回到 <a href="../level-1">Level 1</a>。如果实体<a href="../entities/2">“保安”</a>同意你离开，且电动拉杆门开始缓缓打开，你就会在一阵白光中来到 <a href="../level-0">Level 0</a>，而此时<a href="../entities/5">“家长”</a>一定会站在远处的街道上，且 <a href="../level-0">Level 0 </a>街道尽头的迷雾会短暂地消失。此时与远处的<a href="../entities/5">“家长”</a>交互，会让你回到<a href="../home">“家”</a>。</p>
+        <i>欢迎回家！</i>
+    </div>
+</div>
+<div class="author-float">
+    <details>
+        <summary>作者信息</summary>
+        <div class="author-list">
+            <p>本文贡献者：</p>
+            <ul>
+                <li>本文作者：<a href="https://www.luogu.com.cn/user/1353362">aiyou</a></li>
+                <li>文案补充：<a href="https://www.luogu.com.cn/user/1421211">holy1128</a></li>
+            </ul>
+            <p style="margin:0.5rem 0 0 0;font-size:0.9em;color:rgb(var(--dark-accent))">图片源自百度图库，若有侵权，可随时通知下架！</p>
+        </div>
+    </details>
+</div>
+<font color="gray">最近更新日期：2026-9-3</font>
+</body>
+</html>
