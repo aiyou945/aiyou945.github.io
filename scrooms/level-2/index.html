@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 2 - "教学楼走廊" - The School Rooms</title>
+    <link rel="icon" href="../loading/index_icon.png" type="image/png">
+    <link rel="stylesheet" href="../loading/1.css">
+    <link rel="stylesheet" href="../loading/font1.css">
+    <link rel="stylesheet" href="../loading/font2.css">
+    <style>
+        :root {
+            --pale-gray-monochrome: 255, 251, 240;
+            --gray-monochrome: 72, 69, 60;
+            --black-monochrome: 25, 20, 16;
+            --white-monochrome: 237, 233, 223;
+            --link-color: 230, 23, 68;
+            --dark-accent: 140, 136, 126;
+        }
+        body {
+            background-color: rgb(var(--pale-gray-monochrome));
+            font-family: Inter, "Noto Sans SC", Arimo, Verdana, Geneva, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .doc-content a:link,
+        .doc-content a:visited,
+        .author-list a:link,
+        .author-list a:visited {
+            color: rgb(var(--link-color));
+            text-decoration: none;
+        }
+        .doc-content a:hover,
+        .author-list a:hover {
+            color: rgb(var(--link-color));
+            filter: brightness(1.2);
+        }
+        .doc-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: transparent;
+            border: none;
+            padding: 2em;
+            box-sizing: border-box;
+        }
+        #header {
+            background-color: rgb(var(--gray-monochrome));
+            color: rgb(var(--white-monochrome));
+            text-align: center;
+            padding: 3rem 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        #header::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://backrooms-wiki-cn.wdfiles.com/local--files/backrooms-wiki%3Athemes/logo.png");
+            background-size: auto 16rem;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+        }
+        #top-bar {
+            display: flex;
+            justify-content: center;
+            background-color: rgb(var(--gray-monochrome));
+            width: 100%;
+            border-bottom: 4px solid rgb(var(--gray-monochrome));
+        }
+        #top-bar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+        }
+        #top-bar ul li {
+            position: relative;
+        }
+        #top-bar ul li > a,
+        #top-bar ul li {
+            display: block;
+            padding: 1rem 2.4rem;
+            color: rgb(var(--white-monochrome));
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 150ms;
+        }
+        #top-bar ul li:hover {
+            background-color: rgba(var(--white-monochrome), 0.1);
+        }
+        #top-bar ul li ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(20, 20, 20, 0.85);
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            min-width: 220px;
+            width: auto;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+        }
+        #top-bar ul li:hover > ul {
+            display: block;
+        }
+        #top-bar ul li ul li {
+            padding: 0;
+            margin: 0;
+        }
+        #top-bar ul li ul li a {
+            display: block;
+            padding: 0.75rem 1.4rem;
+            font-size: 1rem;
+            font-weight: 400;
+            text-align: left;
+            color: rgb(var(--white-monochrome));
+            text-decoration: none;
+            transition: background-color 150ms;
+        }
+        #top-bar ul li ul li a:hover {
+            background-color: rgba(255,255,255,0.15);
+        }
+        .page-title {
+            font-size: 1.5em;
+            font-weight: 400;
+            color: rgb(var(--black-monochrome));
+            margin-bottom: 1rem;
+            border-bottom: none;
+        }
+        .rate-box {
+            float: right;
+            font-size: 1em;
+            font-weight: 400;
+            color: rgb(var(--black-monochrome));
+            margin-top: 0.5rem;
+        }
+        .clear-float { clear: both; }
+        .intro-quote {
+            background-color: rgba(var(--white-monochrome), 0.5);
+            border: 0.15rem solid rgb(var(--gray-monochrome));
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-style: italic;
+            line-height: 1.8;
+            color: rgb(var(--black-monochrome));
+        }
+        .image-survival-box {
+            width: 110%;
+            max-width: 800px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+        .image-survival-box img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .doc-content p {
+            margin: 1em 0;
+            line-height: 1.8;
+            font-size: 1em;
+            font-weight: 400;
+        }
+        .scp-image-block {
+            float: right;
+            width: 300px;
+            margin: 0 0 1rem 1.5rem;
+            background-color: rgb(var(--pale-gray-monochrome));
+            border: 0.1rem solid rgb(var(--gray-monochrome));
+            padding: 0.3rem;
+        }
+        .scp-image-block img {
+            width: 100%;
+            display: block;
+            border: none;
+        }
+        .scp-image-caption {
+            text-align: center;
+            font-size: 0.9em;
+            padding: 0.5rem;
+            color: rgb(var(--black-monochrome));
+        }
+        .author-float {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            z-index: 999;
+            max-width: 260px;
+        }
+        .author-float details {
+            background-color: rgb(var(--pale-gray-monochrome));
+            border: 0.15rem solid rgb(var(--gray-monochrome));
+            border-radius: 4px;
+        }
+        .author-float summary {
+            padding: 0.5rem 0.8rem;
+            cursor: pointer;
+            color: rgb(var(--link-color));
+            font-weight:bold;
+            list-style: none;
+        }
+        .author-float summary::-webkit-details-marker {
+            display:none;
+        }
+        .author-float .author-list {
+            padding:0 0.8rem 0.8rem 0.8rem;
+            color: rgb(var(--black-monochrome));
+        }
+        .author-float .author-list ul {
+            margin:0.4rem 0 0 0;
+            padding-left:1.2rem;
+        }
+        .fade-trigger{
+            animation: textFade 0.8s ease-in-out;
+        }
+        @keyframes textFade {
+            0%{opacity:0.2;}
+            100%{opacity:1;}
+        }
+    </style>
+</head>
+<body>
+<div id="top-bar">
+        <ul>
+            <li>返回
+                <ul>
+                    <li><a href="..">首页</a></li>
+                    <li><a href="../normal-levels-i">层级列表</a></li>
+                </ul>
+            </li>
+            <li>图书馆
+                <ul>
+                    <li><a href="../normal-levels-i">层级</a></li>
+                    <li><a href="../objects">物品</a></li>
+                    <li><a href="../entities">实体</a></li>
+                    <li><a href="../hide-levels-i">隐秘层级</a></li>
+                    <li><a href="../team">组织</a></li>
+                </ul>
+            </li>
+            <li>指导
+                <ul>
+                    <li><a href="../study/levels">如何撰写一篇层级？</a></li>
+                    <li><a href="../study/objects">如何撰写一篇物品？</a></li>
+                    <li><a href="../study/entities">如何撰写一篇实体？</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+<div class="doc-container">
+    <h1>Level 2 - "教学楼走廊"</h1>
+    <div class="clear-float"></div>
+    <div class="image-survival-box">
+        <img src="./2.png" alt="生存难度"></img>
+    </div>
+    <div class="doc-content">
+     <h1>描述：</h1>
+        <div class="scp-image-block">
+            <img src="https://i.hd-r.cn/119aa756-d784-4a42-9f39-4e3514d79d59.png" alt="Level 2">
+            <div class="scp-image-caption">流浪者拍摄的一张 Level 2 靠近<a href="../staircase">楼梯间</a>的图片。</div>
+        </div>
+        <p><strong>Level 2</strong> 是 <a href="..">The School Rooms</a> 的第三个主要区域，它在学校中的作用类似于一个“枢纽”，将各个层级连接在一起。<strong>Level 2</strong> 的主体是一条走廊，走廊的一边是由玻璃和钢管制成的栏杆，阳光可以透过栏杆照在走廊上，另一边是一面墙壁，墙壁上装有几扇门和窗户，在大部分情况下，窗户都是被遮光布或窗帘挡住的，只有在少数情况下才能透过窗户看到里面的教室。<strong>Level 2</strong> 的顶端装有 LED 灯，为整个走廊进行照明。</p>
+        <p>值得注意的是，<a href="..">The School Rooms </a>中似乎不止存在一个 <strong>Level 2</strong>，据流浪者汇报，从教学楼底部往上望去，可以看到好几个与 <strong>Level 2</strong> 类似的结构，这似乎与<a href="../level-1-5">电梯</a>的层数有直接关系，即 <strong>Level 2</strong> 的个数=教学楼的层数-1，其中电梯的 1 层为 <a href="../level-1">Level 1</a>。该层级常有<a href="../entities/1">“老师”</a>或<a href="../entities/9">“段长”</a>巡逻或经过，请流浪者提高警惕。</p>
+        <p>此外，此层级在即将进入<a href="../class-time">“上课时间”</a>时，会播放上课铃声，在播放上课铃声的 1 分钟内会有大量<a href="../entities/1">“老师”</a>涌入，在播放眼保健操铃声时会有大量的<a href="../entities/4">“执勤队员”</a>进入，直到播放下课铃声后撤离。请流浪者在听到对应的铃声时务必做出对应的反应和应对措施。</p>
+        <h1>实体：</h1>
+        <p><strong>Level 2</strong> 中最常见的实体为<a href="../entities/1">“老师”</a>和<a href="../entities/4">“执勤队员”</a>，其中<a href="../entities/1">“老师”</a>大多会在<a href="../class-time">“上课时间”</a>通过该层级进入教室上课，在“下课时间”通过此层级前往另一个教室或办公室。“执勤队员”则多在播放眼操铃声时进入该层级巡逻，在“下课时间”也可能来到该层级检查纪律。</p>
+        <h1>基地、前哨和社区：</h1>
+        <p>本层级存在多个组织和前哨站，流浪者可以很轻易地找到帮助：</p>
+        <p><strong><a href="../r-s-s">R.S.S ——“休闲娱乐基地”</a></strong>：位于 <a href="../level-2">Level 2 </a>与 <a href="../level-2-2">Level 2.2</a> 的交界处，流浪者可以在此基地得到帮助，也可以使用<a href="../objects/4">“层级代币”</a>获取关键的物资（包含饮料，零食，小物件等），但要小心被<a href="../entities/1">“老师”</a>没收。</p>
+        <p><strong>T.L.T —— “厕所装修大队”</strong>：喜欢一下课就去搞一些非法事项的神秘组织……</p>
+        <p><strong><a href="../running_team">跑抓社</a></strong>：在 <a href="../level-1">Level 1 </a>和 <a href="../level-1-1">Level 1.1 </a>活动的跑抓社有时候也会在 <strong>Level 2 </strong>进行“跑跑抓”游戏，但依旧很容易被<a href="../entities/4">“执勤队员”</a>制裁。</p>
+        <p><strong><a href="../s-m-e-g">S.M.E.G —— “Level 2 研究所”</a></strong>：S.M.E.G用于调查 <strong>Level 2</strong> 信息的组织，共有5名成员组成。</p>
+        <p><strong>The School Rooms 八卦交谈社</strong>：由 3 名流浪者组成，喜欢在 <strong>Level 2</strong> 谈论关于其他流浪者或者<a href="../entities/1">“老师”</a>的八卦，对<a href="../entities/1">“老师”</a>和<a href="../entities/4">“执勤队员”</a>的制裁有了应对方法，但有时候还是可能在不知觉间被<a href="../entities/1">“老师”</a>制裁。</p>
+        <h1>入口和出口：</h1>
+        <p>入口：在<a href="../staircase">“楼梯间”</a>走楼梯到大部分楼层都会进入该层级，你也可以通过乘坐<a href="../level-1-5">电梯</a>来到这里。</p>
+        <p>出口：进入走廊旁边的门，会把你带到不同的层级：</p>
+        <ul>
+            <li>进入标有“x 年 x 班”的门根据时间进入 <a href="../level-3">Level 3</a> 或 <a href="../level-3-1">Level 3.1</a>。</li>
+            <li>进入标有“教师办公室”的门会进入 <a href="../level-4">Level 4</a>。</li>
+            <li>进入标有“校长室”的门会进入 <a href="../level-8">Level 8。</a></li>
+            <li>进入标有“信息教室”的门会进入 <a href="../level-12">Level 12</a>。</li>
+            <li>进入标有“活动房”的门会进入 <a href="../level-13">Level 13 </a>或 <a href="../level-14">Level 14</a>。
+            <li>进入标有“录播教室”的门会进入 <a href="../level-10">Level 10</a>。</li>
+            <li>在 <strong>Level 2</strong> 中漫无目的地闲逛，直到眼前的走廊慢慢变成一个装有护栏的平台会进入 <a href="../level-2-2">Level 2.2</a>，在此过程中周边的景物会慢慢变化。</li>
+            <li>进入卫生间，会进入 <a href="../level-2-1">Level 2.1</a>。</li>
+        </ul>
+    </div>
+</div>
+<div class="author-float">
+    <details>
+        <summary>作者信息</summary>
+        <div class="author-list">
+            <p>本文贡献者：</p>
+            <ul>
+                <li>本文作者：<a href="https://www.luogu.com.cn/user/1353362">aiyou</a></li>
+            </ul>
+            <p style="margin:0.5rem 0 0 0;font-size:0.9em;color:rgb(var(--dark-accent))">图片为百度图库中某图片，若侵权可随时通知下架图片。</p>
+        </div>
+    </details>
+</div>
+<font color="gray">最近更新日期：2026-9-9</font>
+</body>
+</html>
