@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object 1 - "作业" - The School Rooms</title>
+    <link rel="icon" href="../loading/index_icon.png" type="image/png">
+    <link rel="stylesheet" href="../../loading/1.css">
+    <link rel="stylesheet" href="../../loading/font1.css">
+    <link rel="stylesheet" href="../../loading/font2.css">
+    <style>
+        :root {
+            --pale-gray-monochrome: 255, 251, 240;
+            --gray-monochrome: 72, 69, 60;
+            --black-monochrome: 25, 20, 16;
+            --white-monochrome: 237, 233, 223;
+            --link-color: 230, 23, 68;
+            --dark-accent: 140, 136, 126;
+        }
+        body {
+            background-color: rgb(var(--pale-gray-monochrome));
+            font-family: Inter, "Noto Sans SC", Arimo, Verdana, Geneva, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .doc-content a:link,
+        .doc-content a:visited,
+        .author-list a:link,
+        .author-list a:visited {
+            color: rgb(var(--link-color));
+            text-decoration: none;
+        }
+        .doc-content a:hover,
+        .author-list a:hover {
+            color: rgb(var(--link-color));
+            filter: brightness(1.2);
+        }
+        .doc-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: transparent;
+            border: none;
+            padding: 2em;
+            box-sizing: border-box;
+        }
+        #header {
+            background-color: rgb(var(--gray-monochrome));
+            color: rgb(var(--white-monochrome));
+            text-align: center;
+            padding: 3rem 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        #header::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://backrooms-wiki-cn.wdfiles.com/local--files/backrooms-wiki%3Athemes/logo.png");
+            background-size: auto 16rem;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+        }
+        #top-bar {
+            display: flex;
+            justify-content: center;
+            background-color: rgb(var(--gray-monochrome));
+            width: 100%;
+            border-bottom: 4px solid rgb(var(--gray-monochrome));
+        }
+        #top-bar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+        }
+        #top-bar ul li {
+            position: relative;
+        }
+        #top-bar ul li > a,
+        #top-bar ul li {
+            display: block;
+            padding: 1rem 2.4rem;
+            color: rgb(var(--white-monochrome));
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 150ms;
+        }
+        #top-bar ul li:hover {
+            background-color: rgba(var(--white-monochrome), 0.1);
+        }
+        #top-bar ul li ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(20, 20, 20, 0.85);
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            min-width: 220px;
+            width: auto;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+        }
+        #top-bar ul li:hover > ul {
+            display: block;
+        }
+        #top-bar ul li ul li {
+            padding: 0;
+            margin: 0;
+        }
+        #top-bar ul li ul li a {
+            display: block;
+            padding: 0.75rem 1.4rem;
+            font-size: 1rem;
+            font-weight: 400;
+            text-align: left;
+            color: rgb(var(--white-monochrome));
+            text-decoration: none;
+            transition: background-color 150ms;
+        }
+        #top-bar ul li ul li a:hover {
+            background-color: rgba(255,255,255,0.15);
+        }
+        .page-title {
+            font-size: 1.5em;
+            font-weight: 400;
+            color: rgb(var(--black-monochrome));
+            margin-bottom: 1rem;
+            border-bottom: none;
+        }
+        .rate-box {
+            float: right;
+            font-size: 1em;
+            font-weight: 400;
+            color: rgb(var(--black-monochrome));
+            margin-top: 0.5rem;
+        }
+        .clear-float { clear: both; }
+        .intro-quote {
+            background-color: rgba(var(--white-monochrome), 0.5);
+            border: 0.15rem solid rgb(var(--gray-monochrome));
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-style: italic;
+            line-height: 1.8;
+            color: rgb(var(--black-monochrome));
+        }
+        .image-survival-box {
+            width: 110%;
+            max-width: 800px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+        .image-survival-box img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .doc-content p {
+            margin: 1em 0;
+            line-height: 1.8;
+            font-size: 1em;
+            font-weight: 400;
+        }
+        .scp-image-block {
+            float: right;
+            width: 300px;
+            margin: 0 0 1rem 1.5rem;
+            background-color: rgb(var(--pale-gray-monochrome));
+            border: 0.1rem solid rgb(var(--gray-monochrome));
+            padding: 0.3rem;
+        }
+        .scp-image-block img {
+            width: 100%;
+            display: block;
+            border: none;
+        }
+        .scp-image-caption {
+            text-align: center;
+            font-size: 0.9em;
+            padding: 0.5rem;
+            color: rgb(var(--black-monochrome));
+        }
+        .author-float {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            z-index: 999;
+            max-width: 260px;
+        }
+        .author-float details {
+            background-color: rgb(var(--pale-gray-monochrome));
+            border: 0.15rem solid rgb(var(--gray-monochrome));
+            border-radius: 4px;
+        }
+        .author-float summary {
+            padding: 0.5rem 0.8rem;
+            cursor: pointer;
+            color: rgb(var(--link-color));
+            font-weight:bold;
+            list-style: none;
+        }
+        .author-float summary::-webkit-details-marker {
+            display:none;
+        }
+        .author-float .author-list {
+            padding:0 0.8rem 0.8rem 0.8rem;
+            color: rgb(var(--black-monochrome));
+        }
+        .author-float .author-list ul {
+            margin:0.4rem 0 0 0;
+            padding-left:1.2rem;
+        }
+        .fade-trigger{
+            animation: textFade 0.8s ease-in-out;
+        }
+        .q{
+            color: orange;
+            font-weight: bold;
+        }
+        .a{
+            color: red;
+            font-weight: bold;
+        }
+        .t{
+            color: green;
+            font-weight: bold;
+        }
+        @keyframes textFade {
+            0%{opacity:0.2;}
+            100%{opacity:1;}
+        }
+    </style>
+</head>
+<body>
+    <div id="top-bar">
+        <ul>
+            <li>返回
+                <ul>
+                    <li><a href="../..">首页</a></li>
+                    <li><a href="..">物品列表</a></li>
+                </ul>
+            </li>
+            <li>图书馆
+                <ul>
+                    <li><a href="../../normal-levels-i">层级</a></li>
+                    <li><a href="..">物品</a></li>
+                    <li><a href="../../entities">实体</a></li>
+                    <li><a href="../../hide-levels-i">隐秘层级</a></li>
+                    <li><a href="../../team">组织</a></li>
+                </ul>
+            </li>
+            <li>指导
+                <ul>
+                    <li><a href="../../study/levels">如何撰写一篇层级？</a></li>
+                    <li><a href="../../study/objects">如何撰写一篇物品？</a></li>
+                    <li><a href="../../study/entities">如何撰写一篇实体？</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="doc-container">
+        <h1>Object 1 - "作业"</h1>
+        <div class="clear-float"></div>
+        <div class="doc-content">
+            <p><strong>等级：</strong><font color="green">安全？</font>   <strong>常见指数：</strong><font color="lightgreen">极其常见</font>        <strong>  评价：</strong>对生存有极大帮助<br><font color="red">含有一定危险性及精神伤害</font></p>
+            <div class="scp-image-block">
+                <img src="../../image_files_objects/object-1.png" alt="Object 1">
+                <div class="scp-image-caption">流浪者 <font color="blue"><strong>dtjg123</strong></font> 上传的作业本示例图片，可能与真实情况有所差异。</div>
+            </div>
+            <p><strong>Object 1</strong> 是 The School Rooms 中的一种常见物品，它具有多种不同的外观，但其本质都大致相同。</p>
+            <p><strong>Object 1</strong> 的外观有很多，但大多都呈现为由硬纸壳、塑料、牛皮纸等材料包起来的本子，与 <a href="../6">Object 6</a> 的外观极其相似，但流浪者依旧可以通过以下方法很轻松地分辨它们：<strong>Object 1</strong> 中记录的大多是练习题，其内容大致包括：选择题，填空题，解答题，主观题，阅读题，翻译题，资料分析题，作文题等；而 <a href="../6">Object 6</a> 中记录的则大多是课文、新例题等（也包含一些练习）。</p>
+            <h2>作用</h2>
+            <p><strong>Object 1</strong> 最主要的作用除了帮助流浪者巩固知识以外，还可以帮助流浪者化解<a href="../../entities/1">“老师”</a>的攻击：在每天早上来到学校后，流浪者会被要求上交 <strong>Object 1</strong> 给<a href="../../entities/1">“老师”</a>，并由流浪者中被<a href="../../entities/1">“老师”</a>给予称号“组长”或“课代表”的成员将 <strong>Object 1</strong> 送至 <a href="../../level-4">Level 4</a> 接受批改、检查。若完成 <strong>Object 1</strong> 的质量不过关或流浪者没有及时上交 <strong>Object 1</strong>，流浪者将会遭到<a href="../../entities/1">“老师”</a>的训斥，严重者可能会被给予更加严重的惩罚或者叫<a href="../../entities/5">“家长”</a>。</p>
+            <h2>如何完成 Object 1？</h2>
+            <p>完成作业（下文指代 <strong>Object 1</strong>）是所有流浪者每天被安排的任务，而需要完成作业的多少大多由<a href="../../entities/1">“老师”</a>决定，流浪者在学习的时候需要记清楚作业是什么，需要怎么完成，有没有什么特殊要求等，回到“家”后使用 <a href="../2">Object 2</a> 完成它们，并使用 <a href="../3">Object 3</a> 将它们重新带到学校。</p>
+            <p><strong><font color="red">注意</font></strong>：务必要认真完成作业，不要抄袭，否则更可能收到<a href="../../entities/1">“老师”</a>的惩罚！</p>
+            <h2>常见问题解答</h2>
+            <p><span class="q">Q：</span>我忘记带作业来学校了，怎么办？<br>
+            <span class="a">A：</span>保持冷静，你可以前往 <a href="../../level-0-9">Level 0.9</a> 打电话请<a href="../../entities/5">“家长”</a>送来，切记，要在<a href="../../entities/1">“老师”</a>发现之前！</p>
+            <p><span class="q">Q：</span>今天的作业实在太多了，我可以不写吗？<br>
+            <span class="a">A：</span>请记住一点：无论作业有多少，只要<a href="../../entities/1">“老师”</a>声明必须在第二日上交作业，无论以任何方式（除了抄作业），都必须写完！如果你实在感到力不从心，可以选择先去休息，第二天早上早起完成剩余的作业。</p>
+            <p><span class="q">Q：</span>周末作业一定要在周五写完吗？<br>
+            <span class="a">A：</span>不一定。如果周末作业很多的话，可以合理分配到周六或周日完成；但如果被<a href="../../entities/5">“家长”</a>强制要求，还是建议在周五认真完成，这样分配可以增加周末空闲的时间，方便流浪者恢复理智。……</p>
+            <p><span class="q">Q：</span>有一道题我一直不会做，已经卡了 1 小时 18 分钟了，我应该继续琢磨吗？<br>
+            <span class="a">A：</span>建议先做后面的题，过度琢磨一道题可能会浪费你的时间，如果你看了一道题很久都做不出来，建议先放一放，这样可以节省你的精力、时间和理智值。在 <a href="../..">The School Rooms</a> 中，理智是非常重要的。</p>
+            <p>……<br>（若流浪者还有想提问的地方，可以联系 <strong><a href="../../s-m-e-g">S.M.E.G</a></strong> 官方）</p>
+            <h2>如何获得 Object 1？</h2>
+            <p>在一般情况下，流浪者会在开学第一天领到作业，你也可能被<a href="../../entities/5">“家长”</a>强制布置作业。</p>
+            <p><strong><font color="red">再次强调：</font></strong>过度使用 <strong>Object 1</strong> 可能会导致流浪者的理智下降，而导致精神疲劳，甚至做出一些奇怪的举动。在感到疲劳的时候，尽量休息（除非迫不得已）！</p>
+            <h2>行为准则</h2>
+            <p><span class="t">应当：</span></p>
+            <ul><li>按时认真完成布置的 <strong>Object 1</strong>。</li></ul>
+            <p><span class="a">不应：</span></p>
+            <ul><li>抄答案或胡乱做题</li>
+            <li>故意不做作业</li></ul>
+        </div>
+    </div>
+    <div class="author-float">
+        <details>
+            <summary>作者信息</summary>
+            <div class="author-list">
+                <p>本文贡献者：</p>
+                <ul>
+                    <li>本文作者：<a href="https://www.luogu.com.cn/user/1353362">aiyou</a></li>
+                </ul>
+                <p style="margin:0.5rem 0 0 0;font-size:0.9em;color:rgb(var(--dark-accent))">图片为 aiyou 实拍的作业本图片。</p>
+            </div>
+        </details>
+    </div>
+    <font color="gray">最近更新日期：2026-9-25</font>
+</body>
+</html>
