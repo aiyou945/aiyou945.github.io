@@ -14,41 +14,37 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background: #f7f9fc;
-      color: #1e293b;
+      background: #f0f7f3;
+      color: #1a3629;
       line-height: 1.6;
       padding: 0 1.5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-
     .container {
       max-width: 1100px;
       width: 100%;
       background: #ffffff;
       border-radius: 28px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 12px 40px rgba(26, 71, 49, 0.08), 0 2px 8px rgba(26, 71, 49, 0.03);
       margin: 2.5rem auto;
       padding: 2.5rem 2.8rem;
       transition: all 0.2s ease;
     }
-
     .page-header {
-      background: linear-gradient(145deg, #1e2b3c, #0f1a2b);
+      background: linear-gradient(145deg, #205c42, #133d2b);
       color: white;
       padding: 2.5rem 2.8rem;
       border-radius: 24px;
       margin-bottom: 2.8rem;
-      box-shadow: 0 8px 24px rgba(0, 20, 40, 0.12);
+      box-shadow: 0 8px 24px rgba(22, 80, 54, 0.15);
       text-align: center;
       position: relative;
       overflow: hidden;
     }
-
     .page-header::after {
       content: '';
       position: absolute;
@@ -56,11 +52,10 @@
       right: -10%;
       width: 280px;
       height: 280px;
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.03);
       border-radius: 50%;
       pointer-events: none;
     }
-
     .page-header h1 {
       font-size: 2.4rem;
       font-weight: 700;
@@ -70,7 +65,6 @@
       position: relative;
       z-index: 1;
     }
-
     .page-header h1 small {
       font-weight: 400;
       opacity: 0.8;
@@ -78,7 +72,6 @@
       display: inline-block;
       margin-left: 0.3rem;
     }
-
     .page-header .project-tagline {
       font-size: 1.2rem;
       font-weight: 400;
@@ -86,12 +79,11 @@
       letter-spacing: 0.3px;
       position: relative;
       z-index: 1;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
       padding-top: 0.8rem;
       display: inline-block;
       margin-top: 0.4rem;
     }
-
     .section-title {
       font-size: 1.9rem;
       font-weight: 600;
@@ -99,134 +91,118 @@
       margin-top: 0.2rem;
       margin-bottom: 1.8rem;
       padding-bottom: 0.5rem;
-      border-bottom: 3px solid #eef2f6;
+      border-bottom: 3px solid #d8ebe1;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-
     .section-title span {
-      background: #d0d9e6;
-      color: #1e2b3c;
+      background: #d8ebe1;
+      color: #1a3629;
       font-size: 1rem;
       font-weight: 600;
       padding: 0.15rem 0.9rem;
       border-radius: 40px;
       letter-spacing: 0.3px;
     }
-
     .table-wrap {
       overflow-x: auto;
       border-radius: 18px;
-      border: 1px solid #eef2f6;
-      background: #fbfcfe;
+      border: 1px solid #d8ebe1;
+      background: #f6fbf9;
       margin-bottom: 2.2rem;
     }
-
     table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.96rem;
       min-width: 620px;
     }
-
     thead {
-      background: #f1f4f9;
-      border-bottom: 2px solid #dce2ec;
+      background: #e6f3ed;
+      border-bottom: 2px solid #c2e2d4;
     }
-
     th {
       text-align: center;
       padding: 1rem 0.8rem;
       font-weight: 600;
-      color: #1e2b3c;
+      color: #1a3629;
       letter-spacing: 0.3px;
       font-size: 0.92rem;
       text-transform: uppercase;
-      opacity: 0.8;
+      opacity: 0.85;
     }
-
     td {
       padding: 1rem 0.7rem;
       text-align: center;
-      border-bottom: 1px solid #edf2f7;
+      border-bottom: 1px solid #e2f1eb;
       vertical-align: middle;
     }
-
     tr:last-child td {
       border-bottom: none;
     }
-
     tbody tr:hover {
-      background: #f4f7fc;
+      background: #eaf7f1;
       transition: background 0.15s ease;
     }
-
     /* --- 按钮样式 (a 标签) --- */
     a {
       text-decoration: none;
       font-weight: 500;
       transition: all 0.2s ease;
     }
-
     /* 表格内的链接按钮 */
     .table-link {
       display: inline-block;
-      background: #eef2f6;
-      color: #1e2b3c;
+      background: #e6f3ed;
+      color: #1a3629;
       padding: 0.35rem 1.2rem;
       border-radius: 40px;
       font-weight: 500;
       border: 1px solid transparent;
       box-shadow: 0 1px 2px rgba(0,0,0,0.02);
     }
-
     .table-link:hover {
-      background: #dce2ec;
-      color: #0f1a2b;
-      border-color: #c8d2df;
+      background: #c2e2d4;
+      color: #0f271c;
+      border-color: #a2cfbb;
       transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 8px rgba(18, 68, 46, 0.08);
     }
-
     /* 原题链接 (表格内左侧) 也变为按钮风格，但稍弱化 */
     .source-link {
       display: inline-block;
-      background: #f1f4f9;
-      color: #1f5f9e;
+      background: #edf7f2;
+      color: #1b704b;
       padding: 0.25rem 1rem;
       border-radius: 30px;
       font-weight: 500;
-      border: 1px solid #e2e8f0;
+      border: 1px solid #d0e9dd;
     }
-
     .source-link:hover {
-      background: #e2eaf5;
-      border-color: #b6cae0;
-      color: #0d3b6b;
+      background: #d0e9dd;
+      border-color: #98c9b3;
+      color: #104730;
     }
-
     /* 底部导航按钮 */
     .footer-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: #f1f5f9;
+      background: #e6f3ed;
       padding: 0.5rem 1.6rem;
       border-radius: 60px;
       font-weight: 500;
-      color: #1e2b3c;
-      border: 1px solid #e2e8f0;
+      color: #1a3629;
+      border: 1px solid #c2e2d4;
       transition: all 0.2s;
     }
-
     .footer-btn:hover {
-      background: #dce2ec;
-      border-color: #bcc9db;
+      background: #c2e2d4;
+      border-color: #8fc2a9;
       transform: translateY(-2px);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 6px 14px rgba(22, 80, 54, 0.08);
     }
-
     .footer-btn img {
       width: 24px;
       height: 24px;
@@ -234,10 +210,9 @@
       border-radius: 4px;
       display: inline-block;
     }
-
     .badge-wip {
-      background: #eef2f6;
-      color: #475569;
+      background: #e6f3ed;
+      color: #2c5742;
       padding: 0.2rem 0.9rem;
       border-radius: 30px;
       font-size: 0.85rem;
@@ -245,39 +220,34 @@
       white-space: nowrap;
       display: inline-block;
     }
-
     .ps-block {
-      background: #f1f5f9;
+      background: #edf7f2;
       padding: 1.5rem 2rem;
       border-radius: 20px;
       margin: 2rem 0 1.2rem 0;
-      border-left: 4px solid #8ba0bb;
+      border-left: 4px solid #479c74;
       font-size: 0.95rem;
       line-height: 1.7;
-      color: #1e2b3c;
+      color: #1a3629;
     }
-
     .ps-block strong {
       font-weight: 600;
-      color: #0f1a2b;
+      color: #0f271c;
     }
-
     .ps-block a {
       font-weight: 500;
       display: inline-block;
-      background: #e2eaf5;
+      background: #d8ebe1;
       padding: 0.1rem 1rem;
       border-radius: 30px;
-      color: #1f5f9e;
-      border: 1px solid #d0dcec;
+      color: #1b704b;
+      border: 1px solid #b2d9c7;
       transition: all 0.2s;
     }
-
     .ps-block a:hover {
-      background: #d0dcec;
-      border-color: #a9bdd6;
+      background: #b2d9c7;
+      border-color: #7bb899;
     }
-
     .footer-links {
       display: flex;
       flex-wrap: wrap;
@@ -285,33 +255,29 @@
       gap: 1.8rem;
       margin-top: 2.2rem;
       padding-top: 1.8rem;
-      border-top: 2px solid #eef2f6;
+      border-top: 2px solid #d8ebe1;
     }
-
     .site-footer {
       text-align: center;
       margin-top: 1.8rem;
       padding-top: 1rem;
-      color: #6b7a8f;
+      color: #406b57;
       font-size: 0.9rem;
-      border-top: 1px solid #eef2f6;
+      border-top: 1px solid #d8ebe1;
     }
-
     .site-footer a {
       display: inline-block;
-      background: #eef2f6;
+      background: #e6f3ed;
       padding: 0.1rem 1.2rem;
       border-radius: 30px;
-      color: #3d5a78;
-      border: 1px solid #dfe6ef;
+      color: #2c5742;
+      border: 1px solid #c2e2d4;
       transition: all 0.2s;
     }
-
     .site-footer a:hover {
-      background: #dce2ec;
-      border-color: #c2cedd;
+      background: #c2e2d4;
+      border-color: #8fc2a9;
     }
-
     @media (max-width: 700px) {
       .container {
         padding: 1.5rem 1.2rem;
@@ -350,7 +316,6 @@
         height: 20px;
       }
     }
-
     @media (max-width: 480px) {
       body {
         padding: 0 0.8rem;
@@ -372,17 +337,14 @@
 </head>
 <body>
 <div class="container">
-
   <header class="page-header" role="banner">
-    <h1>【那些让你让你崩溃的编程题】<small>目录</small></h1>
+    <h1>【那些让你崩溃的编程题】<small>目录</small></h1>
     <div class="project-tagline">哎呦的编程日常</div>
   </header>
-
   <main id="content" role="main">
     <h2 class="section-title">
-      <span>📋</span> 那些让你让你崩溃的编程题 · 目录
+      <span>📋</span> 那些让你崩溃的编程题 · 目录
     </h2>
-
     <div class="table-wrap">
       <table>
         <thead>
@@ -427,12 +389,10 @@
         </tbody>
       </table>
     </div>
-
     <div class="ps-block">
       <p><strong>ps：</strong>TouchFish OJ 是 piaoztsdy 创建的一个 OJ 测评网站，<a href="https://github.com/pztsdy">这是他的 Github 账户</a><br>
       <strong>ps：</strong>安放在 TouchFish OJ 中的题目大多是哎呦经历过，但找不到原题的，大家参考一下就可以了</p>
     </div>
-
     <div class="footer-links">
       <a href="https://oj.piaoztsdy.cn" class="footer-btn">
         <img src="https://aiyou945.github.io/problem/touchfish.png" alt="TouchFish OJ 图标" width="24" height="24">
@@ -440,7 +400,6 @@
       </a>
       <a href="https://aiyou945.github.io" class="footer-btn">返回首页</a>
     </div>
-
     <footer class="site-footer">
       <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
     </footer>
