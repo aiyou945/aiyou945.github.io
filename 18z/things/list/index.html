@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>十八中 · 故事列表</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Microsoft YaHei", "PingFang SC", -apple-system, sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #f0f4fa 0%, #d9e2ef 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 820px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      padding: 40px 30px 30px;
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 8px;
+      box-shadow: 0 12px 30px rgba(44, 82, 130, 0.10);
+      margin-bottom: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    .header h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      background: linear-gradient(145deg, #1f3a6b, #b8860b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+    .header p {
+      font-size: 1.2rem;
+      color: #4a5b6e;
+      letter-spacing: 6px;
+      font-weight: 300;
+      border-top: 2px solid #d4c5a6;
+      display: inline-block;
+      padding-top: 10px;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 8px;
+      padding: 32px 34px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(44, 82, 130, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+    .list-item {
+      padding:16px 14px;
+      border-bottom:1px solid #e8edf5;
+      transition:0.2s;
+    }
+    .list-item:last-child{
+      border-bottom:none;
+    }
+    .list-item:hover{
+      background:rgba(31, 58, 107, 0.04);
+    }
+    .list-item a{
+      text-decoration:none;
+    }
+    .list-title{
+      font-size:1.2rem;
+      color:#1f3a5f;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+    .list-meta{
+      font-size:0.9rem;
+      color:#7a8a9e;
+    }
+    .back-area{
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:14px;
+      padding-top:16px;
+      border-top:1px solid #e8edf5;
+      align-items:center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #1f3a6b;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(31, 58, 107, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #0f2a50;
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(31, 58, 107, 0.35);
+    }
+    .btn-outline {
+      background: transparent;
+      color: #1f3a6b;
+      border: 2px solid #1f3a6b;
+      box-shadow: none;
+    }
+    .btn-outline:hover {
+      background: #1f3a6b;
+      color: white;
+    }
+    .loading-box {
+      text-align: center;
+      padding: 40px;
+      color: #999;
+    }
+    .loading-box .main-text {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .loading-box .sub-text {
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 2.0rem;
+      }
+      .card {
+        padding: 24px 18px;
+      }
+      .back-area {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .btn {
+        width: 100%;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>十八中 · 故事列表</h1>
+    <p>📋 全部班级小故事</p>
+  </div>
+  <div class="card" id="listCard">
+    <div id="listContent">
+      <div class="loading-box">
+        <div class="main-text">⏳ 加载中...</div>
+        <div class="sub-text">正在读取故事列表</div>
+      </div>
+    </div>
+    <div class="back-area">
+      <a href="/18z/things" class="btn btn-outline">📖 返回阅读页</a>
+      <a href="/18z/" class="btn btn-outline">🏠 返回首页</a>
+    </div>
+  </div>
+</div>
+<script>
+  var SUPABASE_URL = 'https://vrmxttqpaaodgqjlwfwq.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_IZEstYDnwdE2-EonDD_uhg_rhq314BL';
+  function loadStories(callback) {
+    fetch(SUPABASE_URL + '/rest/v1/middle_school_story?select=id,title,time&order=id.asc', {
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(res) {
+      if (!res.ok) throw new Error('网络请求失败');
+      return res.json();
+    })
+    .then(function(data) {
+      callback(null, data);
+    })
+    .catch(function(err) {
+      callback(err, null);
+    });
+  }
+  function renderList(stories) {
+    var box = document.getElementById('listContent');
+    if(!stories || stories.length === 0){
+      box.innerHTML = `
+        <div style="text-align:center;padding:40px;color:#999;">
+          <p style="font-size:1.2rem;">📭 暂无故事</p>
+          <p style="margin-top:12px;">管理员正在准备内容，请稍后再来</p>
+        </div>
+      `;
+      return;
+    }
+    var html = '';
+    for(var i=0;i<stories.length;i++){
+      var s = stories[i];
+      html += `
+      <div class="list-item">
+        <a href="./?id=${s.id}">
+          <div class="list-title">#${s.id} ${s.title}</div>
+          <div class="list-meta">📅 ${s.time || '日期不详'}</div>
+        </a>
+      </div>
+      `;
+    }
+    box.innerHTML = html;
+  }
+  loadStories(function(err, stories){
+    if(err){
+      document.getElementById('listContent').innerHTML = `
+        <div style="text-align:center;padding:40px;color:#c0392b;">
+          <p style="font-size:1.2rem;">❌ 加载失败</p>
+          <p style="margin-top:12px;">请检查网络连接后刷新重试</p>
+        </div>
+      `;
+      return;
+    }
+    renderList(stories);
+  })
+  document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' ||
+        (e.ctrlKey && e.key === 'u') ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J'))) {
+      e.preventDefault();
+      return false;
+    }
+  });
+</script>
+</body>
+</html>
