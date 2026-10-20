@@ -18,17 +18,19 @@
       align-items: center;
       justify-content: center;
       padding: 30px 20px;
+      position: relative;
+    }
+    /* 直接贴页面右上角，提升层级，不会被挡住 */
+    .top-right-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 99;
     }
     .container {
       max-width: 820px;
       width: 100%;
       margin: 0 auto;
-      position: relative;
-    }
-    .top-right-btn {
-      position: absolute;
-      top: 0;
-      right: 0;
     }
     .header {
       text-align: center;
@@ -169,9 +171,6 @@
       color: #bbb;
     }
     @media (max-width: 480px) {
-      .container {
-        padding-top: 50px;
-      }
       .header h1 {
         font-size: 2.0rem;
       }
@@ -197,10 +196,11 @@
   </style>
 </head>
 <body>
-<div class="container">
+  <!-- 移到container外面，固定在页面右上角，z-index最高，不会被遮挡 -->
   <div class="top-right-btn">
-    <a href="./list" class="btn">📋 进入列表</a>
+    <a href="/18z/list" class="btn">📋 进入列表</a>
   </div>
+<div class="container">
   <div class="header">
     <h1>十八中小故事</h1>
     <p>📖 班级故事（特别是26级11班的）</p>
@@ -302,7 +302,6 @@
     html += '</div>';
     container.innerHTML = html;
   }
-
   var storyId = getStoryId();
   loadStories(function(err, stories) {
     if (err) {
