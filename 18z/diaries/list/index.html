@@ -184,8 +184,9 @@
 <script>
   var SUPABASE_URL = 'https://vrmxttqpaaodgqjlwfwq.supabase.co';
   var SUPABASE_KEY = 'sb_publishable_IZEstYDnwdE2-EonDD_uhg_rhq314BL';
+  
   function loadStories(callback) {
-    fetch(SUPABASE_URL + '/rest/v1/diaries?select=id,title,time&order=id.asc', {
+    fetch(SUPABASE_URL + '/rest/v1/diaries?select=id,test,date&order=id.asc', {
       headers: {
         'apikey': SUPABASE_KEY,
         'Authorization': 'Bearer ' + SUPABASE_KEY,
@@ -203,6 +204,7 @@
       callback(err, null);
     });
   }
+
   function renderList(stories) {
     var box = document.getElementById('listContent');
     if(!stories || stories.length === 0){
@@ -220,14 +222,15 @@
       html += `
       <div class="list-item">
         <a href="../?id=${s.id}">
-          <div class="list-title">#${s.id} ${s.title}</div>
-          <div class="list-meta">📅 ${s.time || '日期不详'}</div>
+          <div class="list-title">#${s.id} ${s.test}</div> 
+          <div class="list-meta">📅 ${s.date || '日期不详'}</div>
         </a>
       </div>
       `;
     }
     box.innerHTML = html;
   }
+
   loadStories(function(err, stories){
     if(err){
       document.getElementById('listContent').innerHTML = `
@@ -240,6 +243,7 @@
     }
     renderList(stories);
   })
+  
   document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
   document.addEventListener('keydown', function(e) {
     if (e.key === 'F12' ||
