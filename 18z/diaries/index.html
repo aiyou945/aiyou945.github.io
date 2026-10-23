@@ -253,8 +253,9 @@
       `;
       return;
     }
-    var story = stories.find(function(s) { return s.id === id; });
-    if (!story) {
+    // 【已修复】这里改成 var diaries
+    var diaries = stories.find(function(s) { return s.id === id; });
+    if (!diaries) {
       container.innerHTML = `
         <div style="text-align:center;padding:40px;color:#999;">
           <p style="font-size:1.2rem;">📭 日记不存在</p>
@@ -271,15 +272,18 @@
       if (stories[i].id === id) {
         if (i > 0) {
           prevId = stories[i - 1].id;
-          prevTitle = stories[i - 1].title;
+          // 【已修复】把 title 改成 test
+          prevTitle = stories[i - 1].test;
         }
         if (i < stories.length - 1) {
           nextId = stories[i + 1].id;
-          nextTitle = stories[i + 1].title;
+          // 【已修复】把 title 改成 test
+          nextTitle = stories[i + 1].test;
         }
         break;
       }
     }
+    // 这里原本就是 diaries.test 等，保持不变
     var html = `
       <div class="story-title">${diaries.test}</div>
       <div class="story-meta">📅 ${diaries.date || '日期不详'}</div>
