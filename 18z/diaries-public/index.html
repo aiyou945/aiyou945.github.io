@@ -182,7 +182,6 @@
       color: #bbb;
     }
 
-    /* 私密提示样式 */
     .private-notice {
       background: #fef7e0;
       border-left: 6px solid #e6b800;
@@ -240,7 +239,7 @@
 </head>
 <body>
   <div class="top-right-btn">
-    <a href="https://aiyou945.github.io/18z/diaries/list/" class="btn">📋 进入列表</a>
+    <a href="https://aiyou945.github.io/18z/diaries-public/list/" class="btn">📋 进入列表</a>
   </div>
 <div class="container">
   <div class="header">
@@ -263,14 +262,12 @@
   var SUPABASE_URL = 'https://vrmxttqpaaodgqjlwfwq.supabase.co';
   var SUPABASE_KEY = 'sb_publishable_IZEstYDnwdE2-EonDD_uhg_rhq314BL';
 
-  // 获取当前 URL 中的日记 id，默认为 1
   function getStoryId() {
     var params = new URLSearchParams(window.location.search);
     var id = parseInt(params.get('id'), 10);
     return isNaN(id) ? 1 : id;
   }
 
-  // 从 Supabase 获取所有日记（包含 private 字段，如果存在）
   function loadStories(callback) {
     fetch(SUPABASE_URL + '/rest/v1/diaries?select=id,things,test,date,private&order=id.asc', {
       headers: {
@@ -281,7 +278,6 @@
     })
     .then(function(res) {
       if (!res.ok) {
-        // 如果是因为 private 字段不存在导致 400，则回退到不带 private 的查询
         if (res.status === 400) {
           return fetch(SUPABASE_URL + '/rest/v1/diaries?select=id,things,test,date&order=id.asc', {
             headers: {
