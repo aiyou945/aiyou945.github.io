@@ -263,14 +263,15 @@
   var SUPABASE_URL = 'https://vrmxttqpaaodgqjlwfwq.supabase.co';
   var SUPABASE_KEY = 'sb_publishable_IZEstYDnwdE2-EonDD_uhg_rhq314BL';
 
+  // 获取当前 URL 中的日记 id，默认为 1
   function getStoryId() {
     var params = new URLSearchParams(window.location.search);
     var id = parseInt(params.get('id'), 10);
     return isNaN(id) ? 1 : id;
   }
 
+  // 从 Supabase 获取所有日记（包含 private 字段，如果存在）
   function loadStories(callback) {
-    // 先尝试查询 id, things, test, date, private
     fetch(SUPABASE_URL + '/rest/v1/diaries?select=id,things,test,date,private&order=id.asc', {
       headers: {
         'apikey': SUPABASE_KEY,
@@ -280,6 +281,7 @@
     })
     .then(function(res) {
       if (!res.ok) {
+        // 如果是因为 private 字段不存在导致 400，则回退到不带 private 的查询
         if (res.status === 400) {
           return fetch(SUPABASE_URL + '/rest/v1/diaries?select=id,things,test,date&order=id.asc', {
             headers: {
@@ -328,7 +330,7 @@
             things: item.things,
             test: item.test,
             date: item.date,
-            private: 0 // 回退时没有 private 字段，全部视为公开
+            private: 0
           };
         });
         callback(null, processed);
@@ -337,6 +339,17 @@
         callback(err2, null);
       });
     });
+  }
+
+  function isPrivateDiary(diary) {
+    return diary && (diary.private === 1 || diary.private === true);
+  }
+
+  function displayTitle(diary) {
+    if (isPrivateDiary(diary)) {
+      return '🔒 私密日记';
+    }
+    return diary.test;
   }
 
   function renderStory(stories, id) {
@@ -363,24 +376,16 @@
       return;
     }
 
-    var isPrivate = currentDiary.private === 1 || currentDiary.private === true;
+    var isPrivate = isPrivateDiary(currentDiary);
 
-    var prevId = null, nextId = null;
-    var prevTitle = '', nextTitle = '';
+    var prevDiary = null, nextDiary = null;
     for (var i = 0; i < stories.length; i++) {
       if (stories[i].id === id) {
-        if (i > 0) {
-          prevId = stories[i - 1].id;
-          prevTitle = stories[i - 1].test;
-        }
-        if (i < stories.length - 1) {
-          nextId = stories[i + 1].id;
-          nextTitle = stories[i + 1].test;
-        }
+        if (i > 0) prevDiary = stories[i - 1];
+        if (i < stories.length - 1) nextDiary = stories[i + 1];
         break;
       }
     }
-
     var html = '';
 
     if (isPrivate) {
@@ -388,12 +393,12 @@
         <div class="private-notice">
           <span class="icon">🔒</span>
           <div class="text">
+            这是一篇私密日记
             <small>作者已将其设为私密，内容不可见</small>
           </div>
         </div>
       `;
     } else {
-
       html += `
         <div class="story-title">${currentDiary.test}</div>
         <div class="story-meta">📅 ${currentDiary.date || '日期不详'}</div>
@@ -401,12 +406,10 @@
       `;
     }
 
-    // 导航区域
     html += `<div class="nav-area">`;
 
-    if (prevId !== null) {
-
-      html += `<a href="?id=${prevId}" class="btn btn-outline">⬅ 上一篇：${prevTitle}</a>`;
+    if (prevDiary) {
+      html += `<a href="?id=${prevDiary.id}" class="btn btn-outline">⬅ 上一篇：${displayTitle(prevDiary)}</a>`;
     } else {
       html += `<span class="btn btn-disabled">⬅ 已是第一篇</span>`;
     }
@@ -415,8 +418,8 @@
     var position = currentIndex !== -1 ? currentIndex + 1 : '?';
     html += `<span class="nav-info">📖 ${position} / ${stories.length}</span>`;
 
-    if (nextId !== null) {
-      html += `<a href="?id=${nextId}" class="btn btn-outline">下一篇：${nextTitle} ➡</a>`;
+    if (nextDiary) {
+      html += `<a href="?id=${nextDiary.id}" class="btn btn-outline">下一篇：${displayTitle(nextDiary)} ➡</a>`;
     } else {
       html += `<span class="btn btn-disabled">已是最后一篇 ➡</span>`;
     }
@@ -425,7 +428,6 @@
     container.innerHTML = html;
   }
 
-  // 初始化
   var storyId = getStoryId();
   loadStories(function(err, stories) {
     if (err) {
