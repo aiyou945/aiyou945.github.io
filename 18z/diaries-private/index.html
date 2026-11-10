@@ -205,7 +205,10 @@
       }
     }
     .diary-video {
-        width: 100%;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+        display: block;
         border-radius: 8px;
         box-shadow: 0 6px 18px rgba(44, 82, 130, 0.12);
         border: 1px solid rgba(255,255,255,0.6);
@@ -218,6 +221,19 @@
     }
     .diary-video:focus {
         box-shadow: 0 0 0 3px rgba(31, 58, 107, 0.2);
+    }
+    .video-wrap {
+        width: 100%;
+        margin: 18px 0;
+    }
+    .video-wrap .diary-video {
+        margin: 0 auto;
+    }
+    .video-caption {
+        text-align: center;
+        color: #4a5b6e;
+        font-size: 0.9rem;
+        margin-top: 8px;
     }
   </style>
 </head>
