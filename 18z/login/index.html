@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>18z · 登录</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif; }
+    body {
+      background: linear-gradient(135deg,#f0f4fa 0%,#d9e2ef 100%);
+      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      padding:30px 20px;
+    }
+    .container { max-width:480px; width:100%; margin:0 auto; }
+    .header {
+      text-align:center; padding:34px 24px 24px;
+      background:rgba(255,255,255,0.70); backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px); border-radius:8px;
+      box-shadow:0 12px 30px rgba(44,82,130,0.10); margin-bottom:24px;
+      border:1px solid rgba(255,255,255,0.5);
+    }
+    .header h1 {
+      font-size:2.0rem; font-weight:700;
+      background:linear-gradient(145deg,#1f3a6b,#b8860b);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      letter-spacing:2px; margin-bottom:8px;
+    }
+    .header p {
+      font-size:1rem; color:#4a5b6e; letter-spacing:3px; font-weight:300;
+      border-top:2px solid #d4c5a6; display:inline-block; padding:8px 12px 0;
+    }
+    .card {
+      background:rgba(255,255,255,0.85); backdrop-filter:blur(4px);
+      -webkit-backdrop-filter:blur(4px); border-radius:8px;
+      padding:30px 30px; box-shadow:0 8px 24px rgba(0,0,0,0.04),0 2px 8px rgba(44,82,130,0.06);
+      border:1px solid rgba(255,255,255,0.6);
+    }
+    .card h2 {
+      font-size:1.4rem; font-weight:600; color:#1f3a5f;
+      border-left:6px solid #d4af37; padding-left:14px; margin-bottom:22px;
+      display:flex; align-items:center;
+    }
+    .card h2::after { content:"✦"; color:#b8860b; font-size:1.2rem; margin-left:auto; opacity:0.4; }
+    .form-group { margin-bottom:20px; }
+    .form-group label {
+      display:block; font-size:0.95rem; color:#1f3a5f; font-weight:500;
+      margin-bottom:8px; letter-spacing:0.5px;
+    }
+    .form-group input {
+      width:100%; padding:12px 16px; font-size:1rem; color:#2d3a4b;
+      background:rgba(255,255,255,0.9); border:1px solid #c9d6e8;
+      border-radius:4px; outline:none; transition:border-color .2s, box-shadow .2s;
+    }
+    .form-group input:focus {
+      border-color:#1f3a6b; box-shadow:0 0 0 3px rgba(31,58,107,0.12);
+    }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center;
+      background:#1f3a6b; color:#fff; padding:12px 30px; border-radius:4px;
+      text-decoration:none; font-weight:500; letter-spacing:1px; font-size:1rem;
+      transition:all .2s ease; box-shadow:0 4px 12px rgba(31,58,107,0.25);
+      border:1px solid rgba(255,255,255,0.15); cursor:pointer; width:100%;
+    }
+    .btn:hover { background:#0f2a50; transform:scale(1.02); }
+    .btn:disabled { background:#b0b8c5; cursor:not-allowed; transform:none; }
+    .msg {
+      margin-top:16px; font-size:0.9rem; text-align:center;
+      min-height:1.4em; letter-spacing:0.5px;
+    }
+    .msg.error { color:#c0392b; }
+    .msg.ok { color:#1f7a3d; }
+    .back-link {
+      display:block; text-align:center; margin-top:18px;
+      font-size:0.9rem; color:#1f3a6b; text-decoration:none; letter-spacing:0.5px;
+    }
+    .back-link:hover { text-decoration:underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>无需多言 —— sbz</h1>
+      <p>成员登录入口</p>
+    </div>
+
+    <div class="card">
+      <h2>登录验证</h2>
+      <form id="loginForm" autocomplete="off">
+        <div class="form-group">
+          <label for="username">用户名</label>
+          <input type="text" id="username" name="username" placeholder="请输入用户名" required>
+        </div>
+        <div class="form-group">
+          <label for="password">密码</label>
+          <input type="password" id="password" name="password" placeholder="请输入密码" required>
+        </div>
+        <button type="submit" class="btn" id="submitBtn">登 录</button>
+        <div class="msg" id="msg"></div>
+      </form>
+      <a class="back-link" href="../index.html">← 返回首页</a>
+    </div>
+  </div>
+
+  <script>
+    var SUPABASE_URL = 'https://vrmxttqpaaodgqjlwfwq.supabase.co';
+    var SUPABASE_KEY = 'sb_publishable_IZEstYDnwdE2-EonDD_uhg_rhq314BL';
+    var TOKEN_SALT = 'sbz_secret_salt_2025';
+
+    var headers = {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'application/json'
+    };
+
+    function hashToken(username, password, dateObj) {
+      var y = dateObj.getFullYear();
+      var m = ('0' + (dateObj.getMonth() + 1)).slice(-2);
+      var d = ('0' + dateObj.getDate()).slice(-2);
+      var h = ('0' + dateObj.getHours()).slice(-2);
+      var raw = y + m + d + h + username + password + TOKEN_SALT;
+      var hash = 0;
+      for (var i = 0; i < raw.length; i++) {
+        hash = ((hash << 5) - hash) + raw.charCodeAt(i);
+        hash |= 0;
+      }
+      return (hash >>> 0).toString(16);
+    }
+
+    function generateToken(username, password) {
+      return hashToken(username, password, new Date());
+    }
+
+    (function () {
+      try {
+        var raw = localStorage.getItem('sbz_auth');
+        if (!raw) return;
+        var obj = JSON.parse(raw);
+        if (obj && obj.token && obj.username && obj.psw) {
+          window.location.href = '../index.html?pw=' + encodeURIComponent(obj.token);
+        }
+      } catch (e) {}
+    })();
+
+    var form = document.getElementById('loginForm');
+    var msg = document.getElementById('msg');
+    var submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      msg.textContent = '';
+      msg.className = 'msg';
+
+      var username = document.getElementById('username').value.trim();
+      var password = document.getElementById('password').value;
+
+      if (!username || !password) {
+        msg.textContent = '用户名和密码不能为空';
+        msg.className = 'msg error';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = '验证中…';
+
+      fetch(SUPABASE_URL + '/rest/v1/diaries?select=username,psw&username=eq.' +
+            encodeURIComponent(username), { headers: headers })
+        .then(function (res) {
+          if (!res.ok) throw new Error('查询失败');
+          return res.json();
+        })
+        .then(function (rows) {
+          if (!rows || rows.length === 0) throw new Error('用户名不存在');
+          if (rows[0].psw !== password) throw new Error('密码错误');
+
+          var token = generateToken(username, password);
+          var isAdmin = (username === 'admin');
+          localStorage.setItem('sbz_auth', JSON.stringify({
+            username: username,
+            psw: password,
+            token: token,
+            isAdmin: isAdmin
+          }));
+
+          msg.textContent = '登录成功，正在跳转…';
+          msg.className = 'msg ok';
+          setTimeout(function () {
+            window.location.href = '../index.html?pw=' + encodeURIComponent(token);
+          }, 500);
+        })
+        .catch(function (err) {
+          msg.textContent = '❌ ' + err.message;
+          msg.className = 'msg error';
+          submitBtn.disabled = false;
+          submitBtn.textContent = '登 录';
+        });
+    });
+
+  document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' ||
+        (e.ctrlKey && e.key === 'u') ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J'))) {
+      e.preventDefault();
+      return false;
+    }
+  });
+  </script>
+</body>
+</html>
