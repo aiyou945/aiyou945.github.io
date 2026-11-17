@@ -188,18 +188,75 @@
       </div>
     </div>
     <div class="back-area">
-      <a href="../" class="btn btn-outline">📖 返回阅读页</a>
-      <a href="../../" class="btn btn-outline">🏠 返回首页</a>
+      <a href="../index.html" class="btn btn-outline" id="backReadLink">📖 返回阅读页</a>
+      <a href="../../index.html" class="btn btn-outline" id="backHomeLink">🏠 返回首页</a>
     </div>
   </div>
 </div>
 <script>
   var SUPABASE_URL = 'https://vrmxttqpaaodgqjlwfwq.supabase.co';
   var SUPABASE_KEY = 'sb_publishable_IZEstYDnwdE2-EonDD_uhg_rhq314BL';
+  var TOKEN_SALT = 'sbz_secret_salt_2025';
 
-  // 加载日记列表，尝试包含 private 字段，若失败则回退
+  function hashToken(username, password, dateObj) {
+    var y = dateObj.getFullYear();
+    var m = ('0' + (dateObj.getMonth() + 1)).slice(-2);
+    var d = ('0' + dateObj.getDate()).slice(-2);
+    var h = ('0' + dateObj.getHours()).slice(-2);
+    var raw = y + m + d + h + username + password + TOKEN_SALT;
+    var hash = 0;
+    for (var i = 0; i < raw.length; i++) {
+      hash = ((hash << 5) - hash) + raw.charCodeAt(i);
+      hash |= 0;
+    }
+    return (hash >>> 0).toString(16);
+  }
+
+  function verifyToken(token, username, password) {
+    if (!token || !username || !password) return false;
+    var now = new Date();
+    var prev = new Date(now.getTime() - 3600 * 1000);
+    if (hashToken(username, password, now) === token) return true;
+    if (hashToken(username, password, prev) === token) return true;
+    return false;
+  }
+
+  function getLoginState(pw) {
+    var raw = localStorage.getItem('sbz_auth');
+    if (!raw) return null;
+    try {
+      var obj = JSON.parse(raw);
+      if (!obj.username || !obj.token || !obj.psw) {
+        localStorage.removeItem('sbz_auth');
+        return null;
+      }
+      if (!pw || pw !== obj.token) {
+        localStorage.removeItem('sbz_auth');
+        return null;
+      }
+      if (!verifyToken(obj.token, obj.username, obj.psw)) {
+        localStorage.removeItem('sbz_auth');
+        return null;
+      }
+      return obj;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  var pageParams = new URLSearchParams(window.location.search);
+  var pwParam = pageParams.get('pw');
+  var authState = getLoginState(pwParam);
+
+  if (!authState) {
+    window.location.href = '../../index.html';
+  } else {
+    var tokenEnc = encodeURIComponent(authState.token);
+    document.getElementById('backReadLink').href = '../index.html?pw=' + tokenEnc;
+    document.getElementById('backHomeLink').href = '../../index.html?pw=' + tokenEnc;
+  }
+
   function loadStories(callback) {
-    // 第一次尝试：带 private
     fetch(SUPABASE_URL + '/rest/v1/diaries?select=id,test,date,private&order=id.asc', {
       headers: {
         'apikey': SUPABASE_KEY,
@@ -209,7 +266,6 @@
     })
     .then(function(res) {
       if (!res.ok) {
-        // 如果是因为 private 字段不存在导致 400，则回退到不带 private 的查询
         if (res.status === 400) {
           return fetch(SUPABASE_URL + '/rest/v1/diaries?select=id,test,date&order=id.asc', {
             headers: {
@@ -228,7 +284,6 @@
       return res.json();
     })
     .then(function(data) {
-      // 为每条记录补充 private 字段（默认0）
       var processed = data.map(function(item) {
         return {
           id: item.id,
@@ -240,7 +295,6 @@
       callback(null, processed);
     })
     .catch(function(err) {
-      // 二次回退：直接请求不带 private 的版本，确保列表能显示（全部视为公开）
       fetch(SUPABASE_URL + '/rest/v1/diaries?select=id,test,date&order=id.asc', {
         headers: {
           'apikey': SUPABASE_KEY,
@@ -280,16 +334,15 @@
       `;
       return;
     }
+    var tokenEnc = encodeURIComponent(authState.token);
     var html = '';
     for (var i = 0; i < stories.length; i++) {
       var s = stories[i];
       var isPrivate = s.private === 1 || s.private === true;
-      // 私密条目：显示锁图标 + "私密日记"，隐藏真实标题，但保留日期（或者也可以隐藏日期？需求是隐藏日记本身，标题和内容都不展示。这里标题隐藏，日期可以展示也可以不展示。根据需求“日记设置为private=1就隐藏”，指内容隐藏，列表里最好只提示私密，不展示标题，日期可保留作为元信息，但标题肯定不能露。我们保留日期显示，但标题替换为“私密日记”）
-      // 同时给条目添加 private 类以改变样式
       if (isPrivate) {
         html += `
         <div class="list-item private">
-          <a href="../?id=${s.id}">
+          <a href="../index.html?id=${s.id}&pw=${tokenEnc}">
             <div class="list-title"><span class="lock">🔒</span> 私密日记</div>
             <div class="list-meta">📅 ${s.date || '日期不详'} · 内容已隐藏</div>
           </a>
@@ -298,7 +351,7 @@
       } else {
         html += `
         <div class="list-item">
-          <a href="../?id=${s.id}">
+          <a href="../?id=${s.id}&pw=${tokenEnc}">
             <div class="list-title">#${s.id} ${s.test}</div> 
             <div class="list-meta">📅 ${s.date || '日期不详'}</div>
           </a>
@@ -309,20 +362,21 @@
     box.innerHTML = html;
   }
 
-  loadStories(function(err, stories) {
-    if (err) {
-      document.getElementById('listContent').innerHTML = `
-        <div style="text-align:center;padding:40px;color:#c0392b;">
-          <p style="font-size:1.2rem;">❌ 加载失败</p>
-          <p style="margin-top:12px;">请检查网络连接后刷新重试</p>
-        </div>
-      `;
-      return;
-    }
-    renderList(stories);
-  });
+  if (authState) {
+    loadStories(function(err, stories) {
+      if (err) {
+        document.getElementById('listContent').innerHTML = `
+          <div style="text-align:center;padding:40px;color:#c0392b;">
+            <p style="font-size:1.2rem;">❌ 加载失败</p>
+            <p style="margin-top:12px;">请检查网络连接后刷新重试</p>
+          </div>
+        `;
+        return;
+      }
+      renderList(stories);
+    });
+  }
 
-  // 右键和F12屏蔽
   document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
   document.addEventListener('keydown', function(e) {
     if (e.key === 'F12' ||
