@@ -151,6 +151,9 @@
       background: #1f3a6b;
       color: white;
     }
+    .story-content a{
+        text-decoration: none;
+    }
     .btn-disabled {
       background: #b0b8c5 !important;
       color: #fff !important;
@@ -217,7 +220,7 @@
       <div class="story-content">
         <div class="story-title">通知</div>
         <p>因特殊原因，本网址日记已迁移，请访问：<br>
-        <p><a href="https://aiyou945.github.io/18z/diaries-public/">https://aiyou945.github.io/18z/diaries-public/</a><br>
+        <p><a href="../diaries-public/index.html">https://aiyou945.github.io/18z/diaries-public/</a><br>
         <p>以查看<strong>公开部分</strong>的日记，部分日记被归为“隐藏”一类，无法通过常规手段查看。<br>
         <p>具体事件、原因以及私有日记，仅赋予了权限的用户可查看，此处不多叙述。</p>
         <p>本次删除的内容：</p>
@@ -225,13 +228,100 @@
           <li>https://aiyou945.github.io/18z/diaries/</li>
           <li>https://aiyou945.github.io/18z/diaries/list/</li>
         </ul>
-        <p>对您造成的影响我们深表歉意，新网页依旧可以查看旧日记内容，这个网页将于 2027-1-1 或提前彻底删除，变为重定向页面。<br>这是一个无可奈何做出的决定，后续可能会引入 602 网页（即 aiyou 的小学同学录）中的登录板块，敬请期待！谢谢支持！</p>
+        <p>对您造成的影响我们深表歉意，新网页依旧可以查看旧日记内容，这个网页将于 2027-1-1 或提前彻底删除，变为重定向页面。<br>这是一个无可奈何做出的决定，如你所见，我们引入了 aiyou 研发的登录板块 2.0 来保证绝对安全，每个页面都有一个专属的 token，谢谢支持！</p>
       </div>
     </div>
   </div>
   <div class="back-home">
-    <a href="/18z/" class="btn btn-outline">🏠 返回首页</a>
+    <a href="../index.html" class="btn btn-outline" id="backHomeLink">🏠 返回首页</a>
   </div>
 </div>
+
+<script>
+  var SUPABASE_URL = 'https://vrmxttqpaaodgqjlwfwq.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_IZEstYDnwdE2-EonDD_uhg_rhq314BL';
+  var TOKEN_SALT = 'sbz_secret_salt_2025';
+
+  function hashToken(username, password, dateObj) {
+    var y = dateObj.getFullYear();
+    var m = ('0' + (dateObj.getMonth() + 1)).slice(-2);
+    var d = ('0' + dateObj.getDate()).slice(-2);
+    var h = ('0' + dateObj.getHours()).slice(-2);
+    var raw = y + m + d + h + username + password + TOKEN_SALT;
+    var hash = 0;
+    for (var i = 0; i < raw.length; i++) {
+      hash = ((hash << 5) - hash) + raw.charCodeAt(i);
+      hash |= 0;
+    }
+    return (hash >>> 0).toString(16);
+  }
+
+  function verifyToken(token, username, password) {
+    if (!token || !username || !password) return false;
+    var now = new Date();
+    var prev = new Date(now.getTime() - 3600 * 1000);
+    if (hashToken(username, password, now) === token) return true;
+    if (hashToken(username, password, prev) === token) return true;
+    return false;
+  }
+
+  function getLoginState(pw) {
+    var raw = localStorage.getItem('sbz_auth');
+    if (!raw) return null;
+    try {
+      var obj = JSON.parse(raw);
+      if (!obj.username || !obj.token || !obj.psw) {
+        localStorage.removeItem('sbz_auth');
+        return null;
+      }
+      if (!pw || pw !== obj.token) {
+        localStorage.removeItem('sbz_auth');
+        return null;
+      }
+      if (!verifyToken(obj.token, obj.username, obj.psw)) {
+        localStorage.removeItem('sbz_auth');
+        return null;
+      }
+      return obj;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  var params = new URLSearchParams(window.location.search);
+  var pw = params.get('pw');
+  var auth = getLoginState(pw);
+
+  if (!auth) {
+    window.location.href = '../index.html';
+  } else {
+    var backHomeLink = document.getElementById('backHomeLink');
+    backHomeLink.href = '../index.html?pw=' + encodeURIComponent(auth.token);
+
+    var links = document.querySelectorAll('a[href]');
+    for (var i = 0; i < links.length; i++) {
+      var a = links[i];
+      if (a.id === 'backHomeLink') continue;
+      var href = a.getAttribute('href');
+      if (!href) continue;
+      if (href.charAt(0) === '#' || href.indexOf('javascript:') === 0) continue;
+      if (href.indexOf('pw=') !== -1) continue;
+      var sep = href.indexOf('?') === -1 ? '?' : '&';
+      a.setAttribute('href', href + sep + 'pw=' + encodeURIComponent(auth.token));
+    }
+  }
+
+  document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+
+  document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' ||
+        (e.ctrlKey && e.key === 'u') ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J'))) {
+      e.preventDefault();
+      return false;
+    }
+  });
+</script>
 </body>
 </html>
