@@ -111,6 +111,9 @@
     .story-content p {
       margin-bottom: 14px;
     }
+    .story-content a{
+        text-decoration: none;
+    }
     .nav-area {
       display: flex;
       justify-content: space-between;
@@ -271,7 +274,7 @@
 </head>
 <body>
   <div class="top-right-btn">
-    <a href="https://aiyou945.github.io/18z/diaries-public/list/" class="btn">📋 进入列表</a>
+    <a href="./list/index.html" class="btn" id="listBtn">📋 进入列表</a>
   </div>
 <div class="container">
   <div class="header">
@@ -287,12 +290,73 @@
     </div>
   </div>
   <div class="back-home">
-    <a href="/18z/" class="btn btn-outline">🏠 返回首页</a>
+    <a href="../index.html" class="btn btn-outline" id="backHomeLink">🏠 返回首页</a>
   </div>
 </div>
 <script>
   var SUPABASE_URL = 'https://vrmxttqpaaodgqjlwfwq.supabase.co';
   var SUPABASE_KEY = 'sb_publishable_IZEstYDnwdE2-EonDD_uhg_rhq314BL';
+  var TOKEN_SALT = 'sbz_secret_salt_2025';
+
+  function hashToken(username, password, dateObj) {
+    var y = dateObj.getFullYear();
+    var m = ('0' + (dateObj.getMonth() + 1)).slice(-2);
+    var d = ('0' + dateObj.getDate()).slice(-2);
+    var h = ('0' + dateObj.getHours()).slice(-2);
+    var raw = y + m + d + h + username + password + TOKEN_SALT;
+    var hash = 0;
+    for (var i = 0; i < raw.length; i++) {
+      hash = ((hash << 5) - hash) + raw.charCodeAt(i);
+      hash |= 0;
+    }
+    return (hash >>> 0).toString(16);
+  }
+
+  function verifyToken(token, username, password) {
+    if (!token || !username || !password) return false;
+    var now = new Date();
+    var prev = new Date(now.getTime() - 3600 * 1000);
+    if (hashToken(username, password, now) === token) return true;
+    if (hashToken(username, password, prev) === token) return true;
+    return false;
+  }
+
+  function getLoginState(pw) {
+    var raw = localStorage.getItem('sbz_auth');
+    if (!raw) return null;
+    try {
+      var obj = JSON.parse(raw);
+      if (!obj.username || !obj.token || !obj.psw) {
+        localStorage.removeItem('sbz_auth');
+        return null;
+      }
+      if (!pw || pw !== obj.token) {
+        localStorage.removeItem('sbz_auth');
+        return null;
+      }
+      if (!verifyToken(obj.token, obj.username, obj.psw)) {
+        localStorage.removeItem('sbz_auth');
+        return null;
+      }
+      return obj;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  var pageParams = new URLSearchParams(window.location.search);
+  var pwParam = pageParams.get('pw');
+  var authState = getLoginState(pwParam);
+
+  if (!authState) {
+    window.location.href = '../index.html';
+  } else {
+    var tokenEnc = encodeURIComponent(authState.token);
+    var listBtn = document.getElementById('listBtn');
+    listBtn.href = './list/index.html?pw=' + tokenEnc;
+    var backHomeLink = document.getElementById('backHomeLink');
+    backHomeLink.href = '../index.html?pw=' + tokenEnc;
+  }
 
   function getStoryId() {
     var params = new URLSearchParams(window.location.search);
@@ -434,10 +498,12 @@
       `;
     }
 
+    var tokenEnc = encodeURIComponent(authState.token);
+
     html += `<div class="nav-area">`;
 
     if (prevDiary) {
-      html += `<a href="?id=${prevDiary.id}" class="btn btn-outline">⬅ 上一篇：${displayTitle(prevDiary)}</a>`;
+      html += `<a href="?id=${prevDiary.id}&pw=${tokenEnc}" class="btn btn-outline">⬅ 上一篇：${displayTitle(prevDiary)}</a>`;
     } else {
       html += `<span class="btn btn-disabled">⬅ 已是第一篇</span>`;
     }
@@ -447,7 +513,7 @@
     html += `<span class="nav-info">📖 ${position} / ${stories.length}</span>`;
 
     if (nextDiary) {
-      html += `<a href="?id=${nextDiary.id}" class="btn btn-outline">下一篇：${displayTitle(nextDiary)} ➡</a>`;
+      html += `<a href="?id=${nextDiary.id}&pw=${tokenEnc}" class="btn btn-outline">下一篇：${displayTitle(nextDiary)} ➡</a>`;
     } else {
       html += `<span class="btn btn-disabled">已是最后一篇 ➡</span>`;
     }
@@ -456,19 +522,21 @@
     container.innerHTML = html;
   }
 
-  var storyId = getStoryId();
-  loadStories(function(err, stories) {
-    if (err) {
-      document.getElementById('storyContent').innerHTML = `
-        <div style="text-align:center;padding:40px;color:#c0392b;">
-          <p style="font-size:1.2rem;">❌ 加载失败</p>
-          <p style="margin-top:12px;">请检查网络连接后刷新重试</p>
-        </div>
-      `;
-      return;
-    }
-    renderStory(stories, storyId);
-  });
+  if (authState) {
+    var storyId = getStoryId();
+    loadStories(function(err, stories) {
+      if (err) {
+        document.getElementById('storyContent').innerHTML = `
+          <div style="text-align:center;padding:40px;color:#c0392b;">
+            <p style="font-size:1.2rem;">❌ 加载失败</p>
+            <p style="margin-top:12px;">请检查网络连接后刷新重试</p>
+          </div>
+        `;
+        return;
+      }
+      renderStory(stories, storyId);
+    });
+  }
 
   document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
   document.addEventListener('keydown', function(e) {
