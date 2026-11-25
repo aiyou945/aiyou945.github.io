@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"规则之地" - The School Rooms</title>
+    <link rel="icon" href="../loading/index_icon.png" type="image/png">
+    <link rel="stylesheet" href="../loading/1.css">
+    <link rel="stylesheet" href="../loading/font1.css">
+    <link rel="stylesheet" href="../loading/font2.css">
+    <style>
+        :root {
+            --pale-gray-monochrome: 18, 18, 20;
+            --gray-monochrome: 36, 34, 38;
+            --black-monochrome: 8, 8, 10;
+            --white-monochrome: 170, 166, 162;
+            --link-color: 175, 22, 45;
+            --dark-accent: 90, 88, 86;
+            --blood-red: 110, 10, 22;
+            --dim-glow: 70, 12, 20;
+        }
+        body {
+            background-color: rgb(var(--pale-gray-monochrome));
+            font-family: Inter, "Noto Sans SC", Arimo, Verdana, Geneva, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: opacity 1.8s ease;
+            color: rgb(var(--white-monochrome));
+            background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.08), rgba(0,0,0,0.08) 1px, transparent 1px, transparent 3px);
+        }
+        body.fade-out {
+            opacity: 0;
+        }
+        .doc-content a:link,
+        .doc-content a:visited,
+        .author-list a:link,
+        .author-list a:visited {
+            color: rgb(var(--link-color));
+            text-decoration: none;
+        }
+        .doc-content a:hover,
+        .author-list a:hover {
+            color: rgb(210, 25, 55);
+            filter: brightness(1.15);
+            text-shadow: 0 0 6px rgba(var(--link-color),0.6);
+        }
+        .doc-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: transparent;
+            border: none;
+            padding: 2em;
+            box-sizing: border-box;
+        }
+        #header {
+            background-color: rgb(var(--gray-monochrome));
+            color: rgb(var(--white-monochrome));
+            text-align: center;
+            padding: 3rem 1rem;
+            width: 100%;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(var(--blood-red),0.35);
+        }
+        #header::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://backrooms-wiki-cn.wdfiles.com/local--files/backrooms-wiki-cn/logo.png");
+            background-size: auto 16rem;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+        #top-bar {
+            display: flex;
+            justify-content: center;
+            background-color: rgb(var(--black-monochrome));
+            width: 100%;
+            border-bottom: 2px solid rgba(var(--blood-red),0.4);
+        }
+        #top-bar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+        }
+        #top-bar ul li {
+            position: relative;
+        }
+        #top-bar ul li > a,
+        #top-bar ul li {
+            display: block;
+            padding: 1rem 2.4rem;
+            color: rgb(var(--white-monochrome));
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 150ms;
+        }
+        #top-bar ul li:hover {
+            background-color: rgba(var(--blood-red), 0.2);
+        }
+        #top-bar ul li ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(8, 8, 10, 0.92);
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            min-width: 220px;
+            width: auto;
+            z-index: 100;
+            box-shadow: 0 0 14px rgba(var(--blood-red),0.25);
+        }
+        #top-bar ul li:hover > ul {
+            display: block;
+        }
+        #top-bar ul li ul li {
+            padding: 0;
+            margin: 0;
+        }
+        #top-bar ul li ul li a {
+            display: block;
+            padding: 0.75rem 1.4rem;
+            font-size: 1rem;
+            font-weight: 400;
+            text-align: left;
+            color: rgb(var(--white-monochrome));
+            text-decoration: none;
+            transition: background-color 150ms;
+        }
+        #top-bar ul li ul li a:hover {
+            background-color: rgba(var(--blood-red),0.22);
+        }
+        .page-title {
+            font-size: 1.5em;
+            font-weight: 400;
+            color: rgb(var(--white-monochrome));
+            margin-bottom: 1rem;
+            border-bottom: none;
+        }
+        .rate-box {
+            float: right;
+            font-size: 1em;
+            font-weight: 400;
+            color: rgb(var(--white-monochrome));
+            margin-top: 0.5rem;
+        }
+        .clear-float {
+            clear: both;
+        }
+        .intro-quote {
+            background-color: rgba(36, 34, 38,0.6);
+            border: 0.15rem solid rgba(var(--blood-red),0.4);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-style: italic;
+            line-height: 1.8;
+            color: rgb(var(--white-monochrome));
+        }
+        .image-survival-box {
+            width: 110%;
+            max-width: 800px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+        .image-survival-box img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: brightness(0.75) contrast(1.1);
+        }
+        .doc-content p {
+            margin: 1em 0;
+            line-height: 1.8;
+            font-size: 1em;
+            font-weight: 400;
+        }
+        .scp-image-block {
+            float: right;
+            width: 300px;
+            margin: 0 0 1rem 1.5rem;
+            background-color: rgb(var(--gray-monochrome));
+            border: 0.1rem solid rgba(var(--blood-red),0.35);
+            padding: 0.3rem;
+        }
+        .scp-image-block img {
+            width: 100%;
+            display: block;
+            border: none;
+            filter: brightness(0.7);
+        }
+        .scp-image-caption {
+            text-align: center;
+            font-size: 0.9em;
+            padding: 0.5rem;
+            color: rgb(var(--white-monochrome));
+        }
+        .author-float {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            z-index: 999;
+            max-width: 260px;
+        }
+        .author-float details {
+            background-color: rgb(var(--gray-monochrome));
+            border: 0.15rem solid rgba(var(--blood-red),0.4);
+            border-radius: 4px;
+        }
+        .author-float summary {
+            padding: 0.5rem 0.8rem;
+            cursor: pointer;
+            color: rgb(var(--link-color));
+            font-weight: bold;
+            list-style: none;
+        }
+        .author-float summary::-webkit-details-marker {
+            display: none;
+        }
+        .author-float .author-list {
+            padding: 0 0.8rem 0.8rem;
+            color: rgb(var(--white-monochrome));
+        }
+        .author-float .author-list ul {
+            margin: 0.4rem 0 0;
+            padding-left: 1.2rem;
+        }
+        .fade-trigger {
+            animation: textFade 0.8s ease-in-out;
+        }
+        @keyframes textFade {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+        @keyframes flyAway {
+            0% {
+                transform: translate(0,0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) rotate(var(--rot));
+                opacity: 0;
+            }
+        }
+        @keyframes glitchLinkAnim {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px,1px); }
+            40% { transform: translate(2px,-1px); }
+            60% { transform: translate(-1px,-2px); }
+            80% { transform: translate(1px,2px); }
+            100% { transform: translate(0); }
+        }
+        .glitch-link {
+            animation: glitchLinkAnim 0.15s infinite;
+            display: inline-block;
+            text-shadow: 0 0 7px rgba(var(--link-color),0.7);
+        }
+        .fly-text {
+            animation: flyAway 1.2s ease-out forwards;
+        }
+        .level-img-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+        }
+        .level-img-mask.show {
+            opacity: 1;
+        }
+        .level-img-mask.hide-now {
+            opacity: 0;
+            pointer-events:none;
+        }
+        .scroll-text-wrap {
+            position: absolute;
+            bottom: -100%;
+            width: 100%;
+            color: #bbbbbb;
+            font-family: monospace;
+            font-size: 1.2rem;
+            white-space: pre;
+            text-align: center;
+            transition: bottom 6s linear;
+        }
+        .scroll-text-wrap.run {
+            bottom: 100%;
+        }
+        .scroll-text-wrap img{
+            max-width:85%;
+            max-height:85vh;
+            border:2px solid rgba(var(--blood-red),0.5);
+            opacity:0;
+            transition:opacity 1.5s ease;
+            display:block;
+            margin:0 auto 2rem;
+            filter:brightness(0.6);
+        }
+        .scroll-text-wrap img.final-show{
+            opacity:1;
+        }
+        .final-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            pointer-events:none;
+        }
+        .final-overlay.show {
+            opacity: 1;
+            pointer-events:auto;
+        }
+        .final-overlay-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url("../image_files_levels/Level 3.1.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 2s ease;
+            filter: brightness(0.4);
+        }
+        .final-overlay-bg.show {
+            opacity: 1;
+        }
+        .final-btn {
+            position: relative;
+            z-index: 2;
+            font-family: monospace;
+            font-size: 1.1rem;
+            padding: 0.6rem 1.6rem;
+            color: #b8b8b8;
+            background-color: rgba(20,20,22,0.7);
+            border: 1px solid #555555;
+            border-radius: 0;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+            animation: none;
+            box-shadow: none;
+        }
+        .final-btn:hover {
+            background-color: rgba(40,18,22,0.6);
+            border-color: #772228;
+            color: #dd777f;
+        }
+        .note-kai-red {
+            font-family: "KaiTi", "楷体", serif;
+            color: rgb(var(--link-color));
+            font-size: 0.85rem;
+            line-height: 1.6;
+         }
+         .paper-container {
+   	     max-width: 820px;
+   	     margin: 3rem auto;
+   	     padding: 2.5rem 3rem;
+    	     background-color: rgb(var(--gray-monochrome));
+    	     border: 1px solid rgba(var(--blood-red), 0.35);
+    	     box-shadow:
+        	     0 0 0 4px rgba(var(--black-monochrome), 0.8),
+        	     0 0 0 5px rgba(var(--blood-red), 0.25),
+        	     0 12px 40px rgba(0, 0, 0, 0.5);
+    	     position: relative;
+	 }
+         .paper-container p {
+             margin: 0.8rem 0;
+         }
+         .paper-container::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                radial-gradient(rgba(0, 0, 0, 0.18) 1px, transparent 1px);
+            background-size: 3px 3px, 5px 5px;
+            background-position: 0 0, 1px 2px;
+            mix-blend-mode: overlay;
+            opacity: 0.35;
+        }
+        .paper-container::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.06) 0px,
+                rgba(0, 0, 0, 0.06) 1px,
+            transparent 1px,
+                transparent 4px
+            );
+            opacity: 0.25;
+        }
+    </style>
+</head>
+<body>
+    <div id="top-bar">
+        <ul>
+            <li>返回
+                <ul>
+                    <li><a href="..">首页</a></li>
+                    <li><a href="../normal-levels-i">层级列表</a></li>
+                </ul>
+            </li>
+            <li>图书馆
+                <ul>
+                    <li><a href="../normal-levels-i">层级</a></li>
+                    <li><a href="../objects">物品</a></li>
+                    <li><a href="../entities">实体</a></li>
+                    <li><a href="../hide-levels-i">隐秘层级</a></li>
+                    <li><a href="../team">组织</a></li>
+                </ul>
+            </li>
+            <li>指导
+                <ul>
+                    <li><a href="../study/levels">如何撰写一篇层级？</a></li>
+                    <li><a href="../study/objects">如何撰写一篇物品？</a></li>
+                    <li><a href="../study/entities">如何撰写一篇实体？</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="doc-container">
+        <h1>"<font color="red">规</font><font color="yellow">则</font><font color="cyan">之</font><font color="green">地</font>"</h1>
+        <div class="clear-float"></div>
+        <div class="image-survival-box">
+            <img src="./3.1-gz.png" alt="生存难度">
+        </div>
+        <div class="doc-content">
+            <h1>描述：</h1>
+            <p><i><strong>Level 3.1</strong> 是规则之地，其外观展现为一个由规则拼成的~%?…︿★记忆碎片。<br>
+在此层级中游荡是违反规则的，在此层级中??是与规则对抗的。流浪者不应该离开，遵守规则，和我们一起，遵守规则，</i></p>
+            <p><font  size="4">遵守规则，</font></p>
+            <p><font  size="5">遵守规则，</font></p>
+            <p><font  size="6">遵守规则，</font></p>
+            <p><strong><font  size="7">遵守规则！！！</font></strong></p>
+            <p>@#Q%[failed]123%07</p>
+            <h1><del>实体</del>规则</h1>
+            <p>亲爱的流浪者，欢迎来到规则之地，这里没有任何实体，只是规则的海洋。<br>
+（你的面前摊开一张泛黄的纸，上面用油墨印着一句句话，你似乎觉得这些字很美，像一只只飞舞的蝴蝶。你阅读着：）</p>
+            <div class="paper-container">
+    <p>1.“规则之地”的窗外不存在任何实体。流浪者看到的任何实体的影像都是虚假的，若看到窗外的实体，请立刻坐正，不要把视线移到它们的方向。</p>
+    <p class="note-kai-red">（你疑惑地坐在位置上，坦白讲你根本不知道自己为什么要坐在这里，突然，你的直觉告诉你，你此时正在被什么东西监视着。你好奇地想转身，呼吸变得急促，视线似乎快要与什么东西撞上……那种感觉突然消失了，呼，或许只是错觉吧……）</p>
+
+    <p>2.如果听到讲台上传来“老师”授课的声音，请认真听讲，禁止将视线移到除了讲台的任何位置，禁止在授课时打断课堂。“规则之地”不会放任这种行为。</p>
+    <p class="note-kai-red">（这个声音，是……“老师”！你猛然一惊，连忙将视线转移到讲台上。“奇怪，没有人啊……”“都安静！已经上课了！不想学的给我出去！”你只好将双手平放在桌上，不自觉拿起了笔，即使你的脑子里依旧是一团浆糊。“xxx，给我站起来！”声音再次响起，比原来音量高了许多，震耳欲聋。你不自觉看向站起来的那个“倒霉的人”。“奇怪，大家怎么都……没有反应呢？”）</p>
+
+    <p>3.不要试图在“实体”的目光下和你身边的同学交流，他们早已是[can not understand]，请立即回到课堂。</p>
+    <p class="note-kai-red">（“同桌？同桌？”你开始试图呼唤身边的每一个人，但没有任何人回应你。正当你失望之时，却发现你的同桌用怪异的目光瞥了你一眼，你有些迟疑，突然感觉教室里的温度降至了冰点。“难道是？？？”你心里嘀咕了一句，轻轻抬起头，正对上一道视线……“你，给我站起来！”“完了！”）</p>
+
+    <p>4.“规则之地”的空间有限，请不要试图自行离开“规则之地”。你无处可逃，你也无需逃跑。这里很好，不是吗？</p>
+    <p class="note-kai-red">（你和你的同桌逐渐熟悉起来，你们很快发明出了一种新的交流方式“传纸条”。通过与她的对话，你对这里的情况更加了解，也对那所谓的“规则”更加言听计从了。）</p>
+
+    <p>5.“规则之地”会感应你的一举一动，请注意你的言行。“规则之地”无任何监控和录音装置，请放心行事。</p>
+    <p class="note-kai-red">（台上的“老师”似乎走了，教室里的其他人似乎都放松了警惕，一片喧闹，也让提着心的你松了一口气。在这里呆了许久，你也逐渐了解了教室的情况。你注意到，教室的后面似乎闪着红光。“难道是……监控摄像头？那现在……”你突然想到了什么，还没来得及阻止其他的人，却听教室门“砰”一声被撞开。）</p>
+    <p class="note-kai-red">（十分钟后，教室里似乎少了大半的人。）</p>
+
+    <p>6.“规则之地”追求“学思结合”，在认真听课的同时，可能发生各种突发事件：</p>
+    <p>【提问】由台上的“老师”发动，提问对象为任意一名学生。</p>
+    <p class="note-kai-red">（经过前几次“考验”，你对这里的情况愈发熟悉，你的同桌成为了你最好的搭档。正当你还想继续与她“传纸条”时，台上“老师”的声音突然传来：<br>
+    “xxx”，你来回答一下这个问题！<br>
+    你猛地一惊，因为点到的，正是你的名字。<br>
+    “呃……”你缓缓站起身，整个教室一片寂静，你不敢与“老师”的目光碰上。<br>
+    “刚刚没有认真听是吗？”<br>
+    你身上瞬间冒出汗珠，身体止不住地发抖，你知道如果这次失败了会发生什么事，你绝对不希望这种事的发生。你的脑子里就像放电影一样，不断重复着刚才呈现的内容，但不知为何……<br>
+    “选B！”你高喊道。<br>
+    又是一片寂静。<br>
+    最后，“老师”缓缓点了点头，你坐下了。<br>
+    “谢谢你啊，同桌！”你在纸条上写道。）</p>
+
+    <p>【班会】由“老师”组织开展的会议，具体内容不多赘述。</p>
+    <p class="note-kai-red">（教室里不知为何，又少了大半同学。）</p>
+
+    <p>【小测】由台上的“老师”发动，让全体学生对学习的知识进行查缺补漏，小测的成绩直接影响你的xxx。</p>
+    <p class="note-kai-red">（一张空白的草稿纸，以及一个空白的小测本。<br>
+    你止不住地将视线投向同桌的方向，同桌也心有灵犀似的将草稿本往你的方向透露。<br>
+    你们观察着“老师”的动向，你心里很庆幸，有一个这么好的同桌。<br>
+    突然，你想起了众多规则中的一句话，这句话放在现在有多么“刺眼”，这句话的内容似乎是：<br>
+    听到后，同桌不由得一惊，猛地再次回头，而你们不知道的是……）</p>
+
+    <p>7.[未知错误，“规则之地”S.M.E.G 正在重写文档]</p>
+    <p class="note-kai-red">（？？？）</p>
+
+    <p>8. 45分钟后，“规则之地”将会为你敞开离开的大门。</p>
+    <p class="note-kai-red">（你不想走？没关系的，你可以永远留在这里，规则之地的大门永远为你敞开。<br>
+    我刚在说什么……等等，明明xk了，凭什么不让我离开？？？<br>
+    为什么？？？）</p>
+
+    <p>9.[未知错误，xxx0x3f3f3f3f]</p>
+    <p class="note-kai-red">（？？？）</p>
+
+    <p>10.没有人能从规则之地幸存。</p>
+    <p class="note-kai-red">（我们是规则的一员，“规则之地”永远与你相伴，请遵守规则，请遵守规则）</p>
+
+    <p>~%?…,# *'☆&℃$︿★?……</p>
+    <p><i><font color="red">你</font><font color="orange">终</font><font color="yellow">将</font><font color="green">会</font><font color="cyan">坠</font><font color="blue">入</font><font color="purple">这</font><font color="darkblue">里</font>。
+        </i></p>
+        <p><strong><i><font color="green">和</font><font color="blue">我</font><font color="darkblue">们</font><font color="purple">一</font><font color="red">起。</font></i></strong></p>
+    </div>
+            <p><i>[图片已损坏，“规则之地”正在为您修复中]</i></p>
+            <h1>入口和出口：</h1>
+            <i><p>入口：“<font color="red">规</font><font color="orange">则</font><font color="yellow">之</font><font color="lightgreen">地</font>”的大门永远为您敞开…………………………</p>
+            <p>出口：你不是第一个客人，也不是最后一个客人。<br>
+等待那“悦耳”的铃声送你离开吧，规则之地随时欢迎你的再次光临，这不会是你最后一次来到这里。。。<br>
+在“规则之地”<a href="../level-3-s1-norm">深陷于数学世界中</a>，会让你进入<a href="../level-3-s1-norm">任意实数</a>中。<br>
+“同桌，这题的答案……完了！！！！！”……</p></i>
+            <h1>紧急公告：</h1>
+            <p><del>上述公告存在疑似 [???]，“规则之地”文档已被 [???]，请立即点击以下链接阅读备用文档，【不要***】的流浪者将会[转译错误]，请立即执行</del></p>
+            <p><i>请点击下方链接，规则之地的大门为你敞开：<br>
+加载更多内容……</i></p>
+            <a href="#" class="glitch-link" id="secret-trigger"><i>加载更多内容</i></a>
+        </div>
+    </div>
+    <div class="author-float">
+        <details>
+            <summary>作者信息</summary>
+            <div class="author-list">
+                <p><i>我们随时欢迎你的到来</i></p>
+                <ul>
+                    <li>等待着你的：<a href="https://www.luogu.com.cn/user/13541336">a?~%?…,i#铐yo%x3u</a></li>
+                </ul>
+                <p style="margin:0.5rem 0 0;font-size:0.9em;color:rgb(var(--dark-accent))"><i>^v^</i></p>
+            </div>
+        </details>
+    </div>
+    <font color="gray">最近更新日期：2026-11-25</font>
+
+    <div class="level-img-mask" id="black-mask">
+        <div class="scroll-text-wrap">
+            <img src="../image_files_levels/Level 3.1.png" alt="error">
+淡出，入海，<a href="../../hide-levels-i/level-14514">Level ***</a>，你的到来，你的归宿
+沉睡，规则无处不在，消逝，沉寂，无人到来
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+[3.10*3.0 error 2.874 3^2 &&rule]
+。。。。。。。。。。。。。。。。。。。。
+@@@@@@@@@@
+^v^v^v^v^v^
+[目标：流浪者已***]
+[目标：流浪者已***]
+[目标：流浪者已***]
+**********
+            </div>
+    </div>
+
+    <div class="final-overlay" id="final-overlay">
+        <div class="final-overlay-bg" id="final-bg"></div>
+        <button class="final-btn" id="final-button">加入规则之地</button>
+        <button class="final-btn" id="broken-button">Level xxx：档案损坏？？？</button>
+    </div>
+
+<script>
+    const glitchLink = document.querySelector('.glitch-link');
+    const mask = document.querySelector('.level-img-mask');
+    const scrollWrap = mask.querySelector('.scroll-text-wrap');
+    const maskImg = scrollWrap.querySelector('img');
+    const finalOverlay = document.getElementById('final-overlay');
+    const finalBg = document.getElementById('final-bg');
+    const finalButton = document.getElementById('final-button');
+    const brokenButton = document.getElementById('broken-button');
+    let triggered = false;
+
+    glitchLink.addEventListener('mouseenter', () => {
+        if (triggered) return;
+        triggered = true;
+        glitchLink.style.display = 'none';
+
+        document.querySelectorAll('.doc-container h1, .doc-container p, .doc-container img, .author-float, font[color=gray], #secret-trigger').forEach(el => {
+            const tx = (Math.random() - 0.5) * 800 + 'px';
+            const ty = (Math.random() - 0.5) * 800 - 200 + 'px';
+            const rot = (Math.random() - 0.5) * 720 + 'deg';
+            el.style.setProperty('--tx', tx);
+            el.style.setProperty('--ty', ty);
+            el.style.setProperty('--rot', rot);
+            el.classList.add('fly-text');
+        });
+
+        setTimeout(() => {
+            mask.classList.add('show');
+            scrollWrap.classList.remove('run');
+            maskImg.style.opacity = 0;
+
+            setTimeout(()=>{
+                maskImg.classList.add('final-show');
+            },400);
+
+            setTimeout(() => {
+                scrollWrap.classList.add('run');
+                setTimeout(() => {
+                    mask.classList.add('hide-now');
+                    finalOverlay.classList.add('show');
+                    finalBg.classList.add('show');
+                }, 6000);
+            }, 500);
+        }, 1200);
+    });
+    glitchLink.addEventListener('mouseleave', () => {});
+    finalButton.addEventListener('click', () => {
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+            window.location.href = '..';
+        }, 1800);
+    });
+    brokenButton.addEventListener('click', () => {
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+            window.location.href = '../../hide-levels-i/level-14514';
+        }, 1800);
+    });
+</script>
+</body>
+</html>
