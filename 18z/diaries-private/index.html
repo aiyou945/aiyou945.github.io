@@ -242,7 +242,8 @@
 </head>
 <body>
   <div class="top-right-btn">
-    <a href="https://aiyou945.github.io/18z/diaries-private/list/" class="btn">📋 进入列表</a>
+    <a href="https://aiyou945.github.io/18z/diaries/autumn-vacation/" class="btn" target="_blank">📋 挑战系列</a>
+    <a href="./list/index.html" class="btn">📋 进入列表</a>
   </div>
 <div class="container">
   <div class="header">
@@ -258,7 +259,7 @@
     </div>
   </div>
   <div class="back-home">
-    <a href="/18z/" class="btn btn-outline">🏠 返回首页</a>
+    <a href="../index.html" class="btn btn-outline">🏠 返回首页</a>
   </div>
 </div>
 <script>
@@ -299,7 +300,6 @@
       `;
       return;
     }
-    // 【已修复】这里改成 var diaries
     var diaries = stories.find(function(s) { return s.id === id; });
     if (!diaries) {
       container.innerHTML = `
